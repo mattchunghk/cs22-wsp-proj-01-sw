@@ -23,7 +23,7 @@ create TABLE events(
     is_sporty boolean,
     is_luxury boolean,
     is_relax boolean,
-    is_countryside boolean,
+    is_countryside boolean
 );
 create TABLE messages(
     id SERIAL PRIMARY KEY,
