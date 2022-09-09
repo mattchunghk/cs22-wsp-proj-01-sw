@@ -1,5 +1,5 @@
 ::placeholder {
-    color: #FA4A60 !important;
+    color: #fa4a5e !important;
 }
 
 ::selection {
@@ -39,6 +39,7 @@
 .dropdown-toggle {
     color: #FA4A60;
     border: solid 1px #FA4A60;
+    z-index: 0 !important;
 }
 
 .dropdown-toggle:focus,
@@ -63,7 +64,7 @@
     color: #FA4A60;
     margin: 20px 0 20px 0;
     border: solid 1px #FA4A60;
-    z-index: -1;
+    z-index: -100;
 }
 
 .form-control-text:focus,
@@ -74,13 +75,13 @@
     box-shadow: 1px 1px 12px 1px#FA4A60;
 }
 
-.btn-primary {
+.btn-submit {
     margin: 20px 0 20px 0;
     background-color: #FA4A60;
     border: none;
 }
 
-.btn-primary:hover {
+.btn-submit:hover {
     color: white;
     background-color: #fd263f;
     border: none;
@@ -93,6 +94,15 @@
 
 input[type="file"] {
     display: none;
+}
+
+.form-check-input {
+    border: solid 1px #FA4A60;
+    color: #FA4A60;
+}
+
+.form-check-input-checked-color {
+    color: #FA4A60;
 }
 
 .custom-file-upload {
@@ -115,4 +125,36 @@ input[type="file"] {
     cursor: pointer;
     margin: 5px 0px;
     border-radius: 10px;
+}
+
+.form-check-label {
+    color: #FA4A60;
+}
+
+.form-switch .form-check-input {
+    height: 24px;
+    width: 48px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(250, 74, 96)'/></svg>");
+}
+
+.form-switch .form-check-input:focus {
+    border-color: #FA4A60;
+    outline: 0;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(250, 74, 96)'/></svg>");
+}
+
+.form-switch .form-check-input:checked {
+    background-color: #FA4A60;
+    border-color: #FA4A60;
+    border: none;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(255,255,255,1.0)'/></svg>");
+}
+
+.select-icons {
+    color: #FA4A60;
+    margin: 15px 20px 0 20px;
+    margin-left: 20px;
 }
