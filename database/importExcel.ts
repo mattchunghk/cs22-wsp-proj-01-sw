@@ -46,7 +46,7 @@ async function main() {
   console.log(users);
   for (let user of users) {
     await client.query(
-      "INSERT INTO users (usernames,password,is_admin) VALUES ($1,$2,$3)",
+      "INSERT INTO users (username,password,is_admin) VALUES ($1,$2,$3)",
       [user.username, user.password, user.is_admin]
     );
   }
@@ -54,14 +54,12 @@ async function main() {
 
   for (let event of events) {
     await client.query(
-      "INSERT INTO events (user_id,title,country,city,created_at,updated_at,introduction,budget,start_date,end_date,people_quota,is_sporty,is_luxury,is_relax,is_countryside) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)",
+      "INSERT INTO events (user_id,title,country,city,introduction,budget,start_date,end_date,people_quota,is_sporty,is_luxury,is_relax,is_countryside) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)",
       [
         event.user_id,
         event.title,
         event.country,
         event.city,
-        "Now()",
-        "Now()",
         event.introduction,
         event.budget,
         event.start_date,
