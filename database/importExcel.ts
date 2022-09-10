@@ -34,14 +34,24 @@ interface User {
   password: string;
   is_admin: boolean;
 }
+
+interface Messages {
+  comment: string;
+  user_id: string;
+  event_id: boolean;
+}
 async function main() {
   await client.connect();
 
   await client.query(` truncate USERS  restart identity CASCADE`);
   await client.query(` truncate EVENTS  restart identity CASCADE`);
+  await client.query(` truncate MESSAGES restart identity CASCADE`);
   let workbook = XLSX.readFile("./database/data-demo.xlsx");
   let events: Event[] = XLSX.utils.sheet_to_json(workbook.Sheets["events"]);
   let users: User[] = XLSX.utils.sheet_to_json(workbook.Sheets["users"]);
+  let messages: Messages[] = XLSX.utils.sheet_to_json(
+    workbook.Sheets["messages"]
+  );
 
   console.log(users);
   for (let user of users) {
@@ -70,6 +80,15 @@ async function main() {
         event.is_relax,
         event.is_countryside,
       ]
+    );
+  }
+
+  console.log(messages);
+
+  for (let message of messages) {
+    await client.query(
+      "INSERT INTO messages (comment,user_id,event_id) VALUES ($1,$2,$3)",
+      [message.comment, message.user_id, message.event_id]
     );
   }
 
