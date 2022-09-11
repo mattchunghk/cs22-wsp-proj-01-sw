@@ -5,6 +5,9 @@ import { submitRoute } from "./routes/submitRoute";
 
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.get("/", startTest);
 app.use("/submit", submitRoute);
 
@@ -15,6 +18,8 @@ function startTest(req: Request, res: Response) {
     res.send(error);
   }
 }
+
+app.use("/submit", express.static("eventsForm"));
 
 const PORT = 8080;
 app.listen(PORT, () => {

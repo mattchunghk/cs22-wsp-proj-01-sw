@@ -36,6 +36,19 @@
     border-radius: 10px;
 }
 
+.input-group-text,
+.form-control {
+    color: #FA4A60;
+    border: solid 1px #FA4A60;
+    background-color: white;
+}
+
+.form-control:focus,
+.form-control:hover {
+    border: solid 1px #FA4A60;
+    box-shadow: 1px 1px 12px 1px#FA4A60;
+}
+
 .dropdown-toggle {
     color: #FA4A60;
     border: solid 1px #FA4A60;
