@@ -32,9 +32,11 @@
   margin: 0px;
   height: 80vh;
 }
-img {
-  width: 100% !important;
-  height: 75vh;
+
+.carousel-inner > .carousel-item > img {
+  /* width: 100% !important; */
+  /* height: 80vh; */
+  height: 590px !important;
 }
 .search-bar {
   width: 200px;
@@ -49,7 +51,7 @@ img {
   justify-content: center;
 }
 .card {
-  border-color: #fa4a60;
+  border-color: #f86c7c;
   margin: 10px;
 }
 .card > img {
@@ -58,4 +60,10 @@ img {
 .btn-primary {
   background-color: #fa4a60;
   border: none;
+  transition: 0.5s all;
+}
+.btn-primary:hover {
+  background-color: #f98c98;
+  border: none;
+  transform: scale(1.1);
 }
