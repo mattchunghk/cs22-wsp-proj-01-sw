@@ -37,6 +37,7 @@
   /* width: 100% !important; */
   /* height: 80vh; */
   height: 590px !important;
+  object-fit: cover;
 }
 .search-bar {
   width: 200px;
@@ -52,7 +53,7 @@
 }
 .card {
   border-color: #f86c7c;
-  margin: 10px;
+  margin: 30px;
 }
 .card > img {
   height: 12rem;
