@@ -24,12 +24,12 @@ app.use("/index", indexRoute);
 
 function startTest(req: Request, res: Response) {
   try {
-    res.send("homepage get success");
+    res.redirect("index.html");
   } catch (error) {
     res.send(error);
   }
 }
-
+app.use("/", express.static("public"));
 app.use("/submit", express.static("eventsForm"));
 app.use("/detail", express.static("detailPage"));
 
