@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "ts-node-dev app.ts",
-        "excel": "ts-node-dev ./database/importExcel.ts",
+        "excel": "ts-node ./database/importExcel.ts",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {

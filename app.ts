@@ -2,14 +2,24 @@ import express from "express";
 import { Request, Response } from "express";
 import expressSession from "express-session";
 import { submitRoute } from "./routes/submitRoute";
+import { detailRoute } from "./routes/detailRoute";
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(
+  expressSession({
+    secret: "Tecky Academy teaches typescript",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
 app.get("/", startTest);
 app.use("/submit", submitRoute);
+app.use("/detail", detailRoute);
 
 function startTest(req: Request, res: Response) {
   try {
@@ -20,6 +30,7 @@ function startTest(req: Request, res: Response) {
 }
 
 app.use("/submit", express.static("eventsForm"));
+app.use("/detail", express.static("detailPage"));
 
 const PORT = 8080;
 app.listen(PORT, () => {

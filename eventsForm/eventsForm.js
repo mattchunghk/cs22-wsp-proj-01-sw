@@ -10,8 +10,9 @@ function init() {
 
 
 async function createEvents(e) {
+    console.log("createEvents called");
     e.preventDefault()
-        // const form = e.target
+    const form = e.target
         // const title = form.tripTitle.value
         // const file = form.eventFile.files[0]
         // const formData = new FormData()
@@ -20,15 +21,18 @@ async function createEvents(e) {
         // console.log('socket = ', socket)
 
     // formData.append('fromSocketId', socket.id)
-    const res = await fetch('/submit/formidable', {
-        method: 'POST',
-        body: formData
-    })
+
+    const res = await fetch("/submit/formidable"); // Fetch from the correct url
+
+    // const res = await fetch('/submit/formidable', {
+    //     method: 'POST',
+    //     body: formData
+    // })
 
 
 
     if (res.ok) {
         form.reset()
-        res.send("Upload successful");
+            // res.send("Upload successful");
     }
 }
