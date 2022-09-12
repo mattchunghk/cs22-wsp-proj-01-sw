@@ -27,10 +27,12 @@
   flex-direction: row;
   justify-content: center;
 }
+.nav-link {
+  margin-right: 20px;
+}
 #carouselExampleFade {
   padding: 0px 30px 0px 30px;
   margin: 0px;
-  height: 80vh;
 }
 
 .carousel-inner > .carousel-item > img {
@@ -44,7 +46,7 @@
   height: 40x;
 }
 .event-container {
-  padding: 0px 30px 0px 30px;
+  padding: 20px 30px 0px 30px;
 
   display: flex !important;
   flex-direction: row !important;
@@ -53,7 +55,13 @@
 }
 .card {
   border-color: #f86c7c;
-  margin: 30px;
+  margin: 10px 20px 10px 0px;
+  transition: 0.5s all;
+}
+
+.card:hover {
+  box-shadow: 10px 10px 10px 5px rgba(54, 53, 53, 0.2);
+  margin-top: 5px !important;
 }
 .card > img {
   height: 12rem;
@@ -61,7 +69,7 @@
 .btn-primary {
   background-color: #fa4a60;
   border: none;
-  transition: 0.5s all;
+  transition: 0.3s all;
 }
 .btn-primary:hover {
   background-color: #f98c98;
