@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import expressSession from "express-session";
 import { submitRoute } from "./routes/submitRoute";
 import { detailRoute } from "./routes/detailRoute";
-
+import { indexRoute } from "./routes/indexRoute";
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -20,6 +20,7 @@ app.use(
 app.get("/", startTest);
 app.use("/submit", submitRoute);
 app.use("/detail", detailRoute);
+app.use("/index", indexRoute);
 
 function startTest(req: Request, res: Response) {
   try {
