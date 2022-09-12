@@ -22,6 +22,11 @@
     display: flex;
 }
 
+.eventsTitle {
+    font-family: 'Baloo 2', cursive;
+    margin-top: 10px;
+}
+
 #googleMap {
     margin: 20px 0;
     margin-bottom: 30px;
@@ -99,6 +104,10 @@
     background-color: #FA4A60;
     border: solid 1px #FA4A60;
     box-shadow: 1px 1px 12px 1px#FA4A60;
+}
+
+.detail-introduction {
+    margin-left: 20px;
 }
 
 .budget,
@@ -181,28 +190,6 @@ input[type="file"] {
 
 .form-check-label {
     color: #FA4A60;
-}
-
-.form-switch .form-check-input {
-    height: 24px;
-    width: 48px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(250, 74, 96)'/></svg>");
-}
-
-.form-switch .form-check-input:focus {
-    border-color: #FA4A60;
-    outline: 0;
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(250, 74, 96)'/></svg>");
-}
-
-.form-switch .form-check-input:checked {
-    background-color: #FA4A60;
-    border-color: #FA4A60;
-    border: none;
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(255,255,255,1.0)'/></svg>");
 }
 
 .select-icons {

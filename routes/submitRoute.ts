@@ -23,11 +23,6 @@ async function getSubmitData(req: Request, res: Response) {
   try {
     console.log("post- formidable");
 
-    const events = await client.query(
-      "select * from events order by created_at DESC;"
-    );
-
-    res.status(200).json(events.rows);
     // const {
     //   filename: images,
     //   text: title,
@@ -39,7 +34,7 @@ async function getSubmitData(req: Request, res: Response) {
     // res.json({
     //   message: "Upload successful",
     // });
-    // res.send("Upload successful");
+    res.status(200).end("Upload successful");
   } catch (error) {
     res.status(404).send(error);
   }
