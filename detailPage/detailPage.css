@@ -28,7 +28,7 @@
 }
 
 #googleMap {
-    margin: 20px 0;
+    margin-top: 3000px;
     margin-bottom: 30px;
 }
 
@@ -60,7 +60,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 800px;
+    max-width: 1000px;
     margin-top: 120px;
     border-radius: 10px;
 }
