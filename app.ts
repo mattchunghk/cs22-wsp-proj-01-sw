@@ -30,6 +30,7 @@ function startTest(req: Request, res: Response) {
   }
 }
 app.use("/", express.static("public"));
+app.use("/asset", express.static("asset"));
 app.use("/submit", express.static("eventsForm"));
 app.use("/detail", express.static("detailPage"));
 
