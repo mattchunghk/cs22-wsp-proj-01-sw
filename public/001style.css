@@ -58,6 +58,7 @@
   margin: 10px 20px 10px 0px;
   height: 380px;
   transition: 0.5s all;
+  position: relative;
 }
 .card-body > .card-text {
   /* white-space: nowrap;
@@ -90,10 +91,25 @@
 .card > img {
   height: 12rem;
 }
+.icon-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  position: absolute;
+
+  top: 300px;
+}
+.icon-col {
+  margin-right: 7px;
+  color: #fa4a60;
+}
 .btn-primary {
   background-color: #fa4a60;
   border: none;
   transition: 0.3s all;
+  position: absolute;
+  left: 10px;
+  top: 330px;
 }
 .btn-primary:hover {
   background-color: #f98c98;
