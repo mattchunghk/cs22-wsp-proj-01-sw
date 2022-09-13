@@ -29,8 +29,12 @@
     <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <script>
         $(function() {
-            $("#datepicker-start").datepicker();
-            $("#datepicker-end").datepicker();
+            $("#datepicker-start").datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
+            $("#datepicker-end").datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
         });
     </script>
     <title>Events form</title>
@@ -57,27 +61,33 @@
 
             <input name="tripTitle" placeholder="Your trip title" class="form-control
                     form-control-text" type="text" aria-label="trip-title">
-            <input placeholder="Your trip start date" type="text" id="datepicker-start" class="form-control
+            <input name="datepickerStart" placeholder="Your trip start date" type="text" id="datepicker-start" class="form-control
                     form-control-text">
-            <input placeholder="Your trip end date" type="text" id="datepicker-end" class="form-control form-control-text">
-            <select class="form-select" aria-label="country-option">
+            <input name="datepickerEnd" placeholder="Your trip end date" type="text" id="datepicker-end" class="form-control
+                    form-control-text">
+            <select name="country" class="form-select" aria-label="country-option">
                     <option selected>Country</option>
-                    <option value="1">New Zealand</option>
+                    <option value="Indonesia">Indonesia</option>
                 </select>
-            <select class="form-select" aria-label="country-option">
-                    <option selected>City</option>
-                    <option value="1">Auckland</option>
+            <select name="place" class="form-select" aria-label="country-option">
+                    <option selected>Place</option>
+                    <option value="Pink Beach">Pink Beach</option>
                 </select>
 
 
 
 
-            <input placeholder="How many people in your trip" aria-label="trip-title" class="form-control
-                    form-control-text" type="text">
+            <input name="ppl" placeholder="How many people in your trip" aria-label="trip-title" class="form-control
+                    form-control-text" type="text" pattern="[0-9]+">
             <div class="input-group mb-3">
                 <span class="input-group-text">$USD</span>
-                <input placeholder="Each person budget" type="text" class="form-control" aria-label="budget-form">
+                <input name="budget" placeholder="Each person budget" type="text" class="form-control" aria-label="budget-form" pattern="[0-9]+">
 
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label"></label>
+                <textarea placeholder="Introduction of your trip" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
             <!-- <div class="input-group mb-3">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">$USD</button>
@@ -133,14 +143,15 @@
                         custom-file-upload">
                         <i class="fa fa-cloud-upload"></i> Image Upload
                     </label>
-                <input id="file-upload" type="file" name="eventFile" />
+                <input id="file-upload" type="file" name="eventFile" multiple/>
             </div>
 
 
 
             <div class="d-grid gap-2 ">
-                <button class="btn btn-primary btn-submit" id="btn-submit" type="button">Submit</button>
+                <button class="btn btn-primary btn-submit" id="btn-submit">Submit</button>
             </div>
+
 
 
 

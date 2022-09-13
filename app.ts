@@ -4,6 +4,8 @@ import expressSession from "express-session";
 import { submitRoute } from "./routes/submitRoute";
 import { detailRoute } from "./routes/detailRoute";
 import { indexRoute } from "./routes/indexRoute";
+import { uploadDir } from "./utils/upload";
+import fs from "fs";
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -21,6 +23,8 @@ app.get("/", startTest);
 app.use("/submit", submitRoute);
 app.use("/detail", detailRoute);
 app.use("/index", indexRoute);
+
+fs.mkdirSync(uploadDir, { recursive: true });
 
 function startTest(req: Request, res: Response) {
   try {

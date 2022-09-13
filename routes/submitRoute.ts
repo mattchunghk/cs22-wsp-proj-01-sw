@@ -6,10 +6,11 @@ import crypto from "crypto";
 import { logger } from "../utils/logger";
 import { formParse } from "../utils/upload";
 
+//! "/submit"
 export const submitRoute = express.Router();
 
 submitRoute.get("/", submitGet);
-submitRoute.post("/formidable", getSubmitData);
+submitRoute.post("/formidable/", getSubmitData);
 
 function submitGet(req: Request, res: Response) {
   try {
@@ -23,18 +24,21 @@ async function getSubmitData(req: Request, res: Response) {
   try {
     console.log("post- formidable");
 
-    // const {
-    //   filename: images,
-    //   text: title,
-    //   // fromSocketId
-    // } = await formParse(req);
+    const {
+      filename1: images1,
+      filename2: images2,
+      filename3: images3,
+      title: title,
+      startDate: startDate,
+      endDate: endDate,
+      // fromSocketId
+    } = await formParse(req);
 
-    // console.log(images, title);
+    console.log(images1, images2, images3, title, startDate, endDate);
 
-    // res.json({
-    //   message: "Upload successful",
-    // });
-    res.status(200).end("Upload successful");
+    res.json({
+      message: "Upload successful",
+    });
   } catch (error) {
     res.status(404).send(error);
   }
