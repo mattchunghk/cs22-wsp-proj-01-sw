@@ -56,7 +56,31 @@
 .card {
   border-color: #f86c7c;
   margin: 10px 20px 10px 0px;
+  height: 380px;
   transition: 0.5s all;
+}
+.card-body > .card-text {
+  /* white-space: nowrap;
+  overflow: hidden;
+  text-overflow: "----"; */
+  /* display: block;
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis; */
+  /* line-height: 1.5em;
+  height: 4.5em; /* height is 2x line-height, so two lines will display */
+  /*overflow: hidden; prevents extra lines from being visible */
+
+  /* white-space: nowrap;
+  text-overflow: ellipsis; 
+  width: 100%; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-height: 1.5em; /* fallback */
+  max-height: 4.5em; /* fallback */
 }
 
 .card:hover {
