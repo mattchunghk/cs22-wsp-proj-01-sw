@@ -54,40 +54,40 @@
 
     <div class="container">
 
-        <img src="./pink-beach-komodo-1920.jpg" class="d-block w-100
-                form-photo" alt="form-photo">
-
+        <!-- <img src="./pink-beach-komodo-1920.jpg" class="d-block w-100
+                form-photo" alt="form-photo"> -->
         <form method="POST" action="submit/formidable" enctype="multipart/form-data" id="event-form">
 
             <input name="tripTitle" placeholder="Your trip title" class="form-control
-                    form-control-text" type="text" aria-label="trip-title">
+                    form-control-text" type="text" aria-label="trip-title" required>
             <input name="datepickerStart" placeholder="Your trip start date" type="text" id="datepicker-start" class="form-control
-                    form-control-text">
+                    form-control-text" required>
             <input name="datepickerEnd" placeholder="Your trip end date" type="text" id="datepicker-end" class="form-control
-                    form-control-text">
-            <select name="country" class="form-select" aria-label="country-option">
+                    form-control-text" required>
+
+            <select name="country" class="form-select" id="country-selection" aria-label="country-option" required>
                     <option selected>Country</option>
-                    <option value="Indonesia">Indonesia</option>
+
                 </select>
-            <select name="place" class="form-select" aria-label="country-option">
+            <input name="place" placeholder="Your place" class="form-control
+                    form-control-text" type="text" aria-label="country-option" required>
+
+
+            <!-- 
+            <select name="place" class="form-select" aria-label="country-option" required>
                     <option selected>Place</option>
                     <option value="Pink Beach">Pink Beach</option>
-                </select>
-
-
-
-
+                </select> -->
             <input name="ppl" placeholder="How many people in your trip" aria-label="trip-title" class="form-control
-                    form-control-text" type="text" pattern="[0-9]+">
+                    form-control-text" type="text" pattern="[0-9]+" required>
             <div class="input-group mb-3">
                 <span class="input-group-text">$USD</span>
-                <input name="budget" placeholder="Each person budget" type="text" class="form-control" aria-label="budget-form" pattern="[0-9]+">
-
+                <input name="budget" placeholder="Each person budget" type="text" class="form-control" aria-label="budget-form" pattern="[0-9]+" required>
             </div>
 
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label"></label>
-                <textarea placeholder="Introduction of your trip" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea placeholder="Introduction of your trip" name="intro" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
             </div>
             <!-- <div class="input-group mb-3">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">$USD</button>
@@ -102,7 +102,7 @@
                 <div class="col-md-6">
 
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <input name="sporty" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="true">
                         <label class="form-check-label" for="flexSwitchCheckDefault"><i class="fa-solid
                                     fa-person-skiing select-icons"></i>Sport
                                 activities</label>
@@ -111,7 +111,7 @@
                 <div class="col-md-6">
 
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <input name="luxury" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="true">
                         <label class="form-check-label" for="flexSwitchCheckDefault"><i class="fa-solid
                                     fa-dollar-sign select-icons"></i>Luxury</label>
                     </div>
@@ -119,7 +119,7 @@
                 <div class="col-md-6">
 
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <input name="relaxed" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="true">
                         <label class="form-check-label" for="flexSwitchCheckDefault"><i class="fa-solid
                                     fa-spa select-icons"></i>Relax</label>
                     </div>
@@ -127,7 +127,7 @@
                 <div class="col-md-6">
 
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <input name="countrySide" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="true">
                         <label class="form-check-label" for="flexSwitchCheckDefault"><i class="fa-solid
                                     fa-mountain-sun select-icons"></i>Country
                                 Side activities</label>
@@ -142,8 +142,9 @@
                 <label for="file-upload" class=" form-control
                         custom-file-upload">
                         <i class="fa fa-cloud-upload"></i> Image Upload
+                        (required) (Maximum 3)
                     </label>
-                <input id="file-upload" type="file" name="eventFile" multiple/>
+                <input id="file-upload" type="file" name="eventFile" multiple required/>
             </div>
 
 
@@ -162,10 +163,18 @@
 
     </div>
 
-
-
-
-
+    <!-- 
+    <script>
+        $('.form-check-input').bootstrapSwitch('state');
+        $('.form-check-input').on('switchChange.bootstrapSwitch', function() {
+            var check = $('.bootstrap-switch-on');
+            if (check.length > 0) {
+                console.log('ON')
+            } else {
+                console.log('OFF')
+            }
+        });
+    </script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     <script src="eventsForm.js"></script>
 </body>

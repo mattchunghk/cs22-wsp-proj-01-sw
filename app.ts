@@ -45,6 +45,7 @@ app.use("/", express.static("public"));
 app.use("/asset", express.static("asset"));
 app.use("/submit", express.static("eventsForm"));
 app.use("/detail", express.static("detailPage"));
+app.use(express.static("uploads"));
 
 const PORT = 8080;
 app.listen(PORT, () => {
