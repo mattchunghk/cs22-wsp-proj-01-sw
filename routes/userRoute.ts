@@ -22,6 +22,10 @@ userRoutes.post('/register', async (req, res) => {
 			return
 		}
 
+		//check duplicates
+		//let xxx = await xxx
+		//use dbeaver to check
+
 		let hashedPassword = await hashPassword(password)
 		await client.query(
 			`insert into users (username, password) values ($1, $2)`,
