@@ -20,3 +20,14 @@ async function getDetail(req: Request, res: Response) {
     res.status(404).send(error);
   }
 }
+
+detailRoute.post("/love", isLoggedin, async (req, res) => {
+  try {
+    res.status(200).json({});
+    return;
+  } catch (err: any) {
+    logger.error(err);
+    res.status(400).send(err.message);
+    return;
+  }
+});

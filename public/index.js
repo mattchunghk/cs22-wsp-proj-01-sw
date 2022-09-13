@@ -76,7 +76,7 @@ function loadEventListenerOnEvent() {
     const eventIndex = element.getAttribute("data-index");
 
     const res = await fetch("/detail/love", {
-      method: "Get",
+      method: "POST",
       body: JSON.stringify({
         eventIndex: eventIndex,
       }),
