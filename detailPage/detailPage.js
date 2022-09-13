@@ -11,22 +11,41 @@ function init() {
 
 async function loadEvents() {
     console.log("loadEvents called");
+    const pathnames = (window.location.pathname).split('/');
+    const pageId = pathnames[pathnames.length - 1]
+    console.log(pageId)
 
 
-
-    const res = await fetch("/detail/event_id/1"); // Fetch from the correct url
+    const res = await fetch(`/detail/event_id/${pageId}`); // Fetch from the correct url
     const event = await res.json();
-    console.log(event.title);
 
     if (res.ok) {
         let detailContainer = document.querySelector('#main-container')
-        detailContainer.innerHTML = `<div class="img-container">
-        <img src="./pink-beach-komodo-1920.jpg" class="d-block w-100
-                form-photo" alt="form-photo">
-    </div>
+
+
+
+        detailContainer.innerHTML = `
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
 
     <div class="row detail-content-row">
-        <div class="col-md-8 detail-content">
+        <div class="col-lg-8 col-md-12 detail-content">
             <div class="row detail-detail">
                 <h1 class="eventsTitle">${event[0].title}</h1>
                 <div class="col-xxl-6 col-lg-6 col-md-6 col-sm-6">
@@ -75,6 +94,7 @@ async function loadEvents() {
                         select-icons"></i>Sport activities
             </div>
         </div>`:""}
+
         ${event[0].is_luxury?`<div class="col-xl-3 col-md-6 col-6 icon-col">
         <div><i class="fa-solid fa-dollar-sign
                     select-icons"></i>Luxury</div>
@@ -97,14 +117,37 @@ ${event[0].is_countryside?`<div class="col-xl-3 col-md-6 col-6 icon-col">
 
             </div>
         </div>
-        <div class="col-md-4 map">
+        <div class="col-lg-4 col-md-12 map">
             <iframe width="100%" height="400" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDgzJsIne7hMjjk8yGSPloiQ_FYdNr-g-&q=${event[0].city.trim().split(' ').join('+')}"></iframe>
             <div class="d-grid gap-2 ">
                 <button class="btn btn-primary btn-submit" type="button">Join</button>
             </div>
         </div>
     </div>`
+    
+    let imgInner = document.querySelector('.carousel-inner')
+    imgInner.innerHTML = ""
+    for (let i = 0; i < event.length; i++) {
+         
+            if(i == 0){
+                imgInner.innerHTML += ` <div class="carousel-item active">
+                <img src="../../../${event[i].filename}" class="d-block w-100" alt="...">
+              </div>`
+
+            }else{
+                imgInner.innerHTML += `<div class="carousel-item">
+        
+                <img src="../../../${event[i].filename}" class="d-block w-100 form-photo" alt="">
+              </div>`
+
+            }
+      
+
     }
 
-    res.redirect("/detail/detailPage.html")
+
+
+}
+
+
 }

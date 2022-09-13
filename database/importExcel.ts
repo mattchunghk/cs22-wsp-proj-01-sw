@@ -4,6 +4,7 @@ dotenv.config({
   path: "./.env",
 });
 import XLSX from "xlsx";
+import { hashPassword } from "../utils/hash";
 // import { hashPassword } from '../utils/hash'
 
 const client = new pg.Client({
@@ -55,9 +56,10 @@ async function main() {
 
   console.log(users);
   for (let user of users) {
+    let hashedPassword = await hashPassword(user.password);
     await client.query(
       "INSERT INTO users (username,password,is_admin) VALUES ($1,$2,$3)",
-      [user.username, user.password, user.is_admin]
+      [user.username, hashedPassword, user.is_admin]
     );
   }
   console.log(events);

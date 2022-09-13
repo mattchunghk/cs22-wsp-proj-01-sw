@@ -29,9 +29,13 @@ export const formParse = (req: express.Request) => {
         const place = fields.place;
         const ppl = fields.ppl;
         const budget = fields.budget;
+        const intro = fields.intro;
+        const sporty = fields.sporty;
+        const luxury = fields.luxury;
+        const relaxed = fields.relaxed;
+        const countrySide = fields.countrySide;
 
         // const fromSocketId = fields.fromSocketId;
-        console.log(files);
 
         let file1 = Array.isArray(files.image1)
           ? files.image1[0]
@@ -62,6 +66,11 @@ export const formParse = (req: express.Request) => {
           place,
           ppl,
           budget,
+          intro,
+          sporty,
+          luxury,
+          relaxed,
+          countrySide,
 
           //   fromSocketId,
         });
