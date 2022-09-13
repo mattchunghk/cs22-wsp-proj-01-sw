@@ -5,7 +5,7 @@ async function loadIndexEvents() {
 
   if (res.ok) {
     let indexHtml = "";
-
+    //let index = 0;
     console.log(eventData);
     //<img src="${event.image[0]}" class="card-img-top" alt="...">//
     //<h5 class="card-title">${event[0].title}</h5>
@@ -55,39 +55,73 @@ async function loadIndexEvents() {
           </div>
          
           
-          <a href="#" class="btn btn-primary">Join Me!</a>
+          <a href="#" class="btn btn-primary" data_index="${
+            event.id
+          }">Join Me!</a>
         </div>
-        <div class="like-container">
-          <i class="fa-solid fa-heart-circle-plus"></i>
+        <div class="love-container" data_index="${event.id}">
+          <i class="fa-solid fa-heart-circle-plus" data_index="${event.id}"></i>
         </div>
       </div>`;
+      //index = event.id;
     }
     const eventContainer = document.querySelector(".event-container");
     eventContainer.innerHTML = indexHtml;
+
+    const cardContainer = document.querySelectorAll(".card");
+    for (card in cardContainer) {
+      const cardDiv = cardContainer[card];
+
+      const loveBtn = cardDiv.querySelector(".love-container");
+
+      loveBtn.addEventListener("click", async (e) => {
+        const element = e.target;
+
+        const eventIndex = element.getAttribute("data_index");
+        console.log("clicked, index=" + eventIndex);
+        const res = await fetch("/detail/love", {
+          method: "POST",
+          body: JSON.stringify({
+            eventIndex: eventIndex,
+          }),
+          headers: {
+            "content-type": "application/json; charset=utf-8",
+          },
+        });
+        if (res.ok) {
+          loadIndexEvents();
+        }
+      });
+
+      console.log("you get interested in this event!");
+    }
   }
 }
 loadIndexEvents();
 
-function loadEventListenerOnEvent() {
-  const loveBtn = document.querySelector.apply("fa-heart-circle-plus");
+// function loadEventListenerOnEvent() {
+//   const loveBtn = document.querySelector(".fa-heart-circle-plus");
+//   console.log("loadEventListenerOnEvent");
+//   loveBtn.addEventListener("click", async (e) => {
+//     console.log("clicked");
+//     const element = e.target;
 
-  loveBtn.addEventListener("click", async (e) => {
-    const element = e.target;
-    const eventIndex = element.getAttribute("data-index");
+//     const eventIndex = element.getAttribute("data-index");
 
-    const res = await fetch("/detail/love", {
-      method: "POST",
-      body: JSON.stringify({
-        eventIndex: eventIndex,
-      }),
-      headers: {
-        "content-type": "application/json; charset=utf-8",
-      },
-    });
-    if (res.ok) {
-      console.log("ok"); //// loadIndexEvents();
-    }
-  });
+//     const res = await fetch("/detail/love", {
+//       method: "POST",
+//       body: JSON.stringify({
+//         eventIndex: eventIndex,
+//       }),
+//       headers: {
+//         "content-type": "application/json; charset=utf-8",
+//       },
+//     });
+//     if (res.ok) {
+//       console.log("ok"); //// loadIndexEvents();
+//     }
+//   });
 
-  console.log("you get interested in this event!");
-}
+//   console.log("you get interested in this event!");
+// }
+// loadEventListenerOnEvent();

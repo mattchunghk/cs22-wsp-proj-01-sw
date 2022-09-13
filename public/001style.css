@@ -83,6 +83,12 @@
   line-height: 1.5em; /* fallback */
   max-height: 4.5em; /* fallback */
 }
+.fa-heart-circle-plus {
+  position: absolute;
+  left: 230px;
+  top: 340px;
+  font-size: 20px;
+}
 
 .card:hover {
   box-shadow: 10px 10px 10px 5px rgba(54, 53, 53, 0.2);
