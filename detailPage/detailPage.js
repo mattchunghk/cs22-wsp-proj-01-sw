@@ -22,8 +22,6 @@ async function loadEvents() {
     if (res.ok) {
         let detailContainer = document.querySelector('#main-container')
 
-
-
         detailContainer.innerHTML = `
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
         <div class="carousel-indicators">
@@ -109,12 +107,6 @@ ${event[0].is_countryside?`<div class="col-xl-3 col-md-6 col-6 icon-col">
 <div><i class="fa-solid fa-mountain-sun
             select-icons"></i>Country Side</div>
 </div>`:""}
-        
-            
-                
-            
-   
-
             </div>
         </div>
         <div class="col-lg-4 col-md-12 map">
@@ -128,7 +120,9 @@ ${event[0].is_countryside?`<div class="col-xl-3 col-md-6 col-6 icon-col">
     let imgInner = document.querySelector('.carousel-inner')
     imgInner.innerHTML = ""
     for (let i = 0; i < event.length; i++) {
-         
+        if (event[i].filename == null){
+            imgInner.innerHTML += ""
+        }else{   
             if(i == 0){
                 imgInner.innerHTML += ` <div class="carousel-item active">
                 <img src="../../../${event[i].filename}" class="d-block w-100" alt="...">
@@ -139,15 +133,9 @@ ${event[0].is_countryside?`<div class="col-xl-3 col-md-6 col-6 icon-col">
         
                 <img src="../../../${event[i].filename}" class="d-block w-100 form-photo" alt="">
               </div>`
-
             }
-      
-
+        }
     }
-
-
-
 }
-
 
 }

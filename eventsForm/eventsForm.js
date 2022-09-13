@@ -10,8 +10,6 @@ function init() {
 }
 
 
-
-
 async function loadCountryFunction() {
     let countrySelectDiv = document.querySelector('#country-selection')
     const res = await fetch(`https://restcountries.com/v3.1/all`); // Fetch from the correct url
@@ -24,7 +22,6 @@ async function loadCountryFunction() {
 
 
 }
-
 
 
 
@@ -85,6 +82,7 @@ async function createEvents(e) {
 
     if (res.ok) {
         form.reset()
-            // res.send("Upload successful");
+        document.location.href = "/";
+
     }
 }

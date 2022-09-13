@@ -38,7 +38,7 @@ async function getDetail(req: Request, res: Response) {
   }
 }
 
-detailRoute.post("/love", isLoggedin, async (req, res) => {
+detailRoute.post("/love", async (req, res) => {
   try {
     res.status(200).json({});
     return;

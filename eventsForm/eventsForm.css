@@ -6,6 +6,20 @@
     background-color: #FA4A60 !important;
 }
 
+#events-thanks-container {
+    width: 85vw;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.thank-header {
+    margin-top: 220px;
+    color: #FA4A60;
+    text-align: center;
+}
+
 .createForm-header {
     background-color: #FA4A60;
     height: 100px;
