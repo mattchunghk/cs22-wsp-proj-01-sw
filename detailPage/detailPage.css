@@ -157,10 +157,17 @@
     border: none;
 }
 
-.btn-submit:hover {
+.btn-submit:hover,
+.btn-submit:focus {
     color: white;
     background-color: #fd263f;
     border: none;
+    box-shadow: 1px 1px 12px 1px#FA4A60;
+}
+
+.btn-submit:disabled {
+    color: white;
+    background-color: #ff6879;
 }
 
 .form-control-file {

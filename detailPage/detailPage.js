@@ -13,7 +13,6 @@ async function loadEvents() {
     console.log("loadEvents called");
     const pathnames = (window.location.pathname).split('/');
     const pageId = pathnames[pathnames.length - 1]
-    console.log(pageId)
 
 
     const res = await fetch(`/detail/event_id/${pageId}`); // Fetch from the correct url
@@ -60,7 +59,7 @@ async function loadEvents() {
                 </div>
                 <div class="col-xxl-6 col-lg-6 col-md-6 col-sm-6">
                     <div class="detail-detail-content-element"> <i class="fa-solid fa-users"></i>
-                        <span class="icon-text" id="icon-raking">8/${event[0].people_quota}</span>
+                        <span class="icon-text" id="icon-raking"></span>
                     </div>
                 </div>
                 <div class="col-xxl-6 col-lg-6 col-md-6 col-sm-6">
@@ -110,7 +109,7 @@ ${event[0].is_countryside?`<div class="col-xl-3 col-md-6 col-6 icon-col">
         <div class="col-lg-4 col-md-12 map">
             <iframe width="100%" height="400" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDgzJsIne7hMjjk8yGSPloiQ_FYdNr-g-&q=${event[0].city.trim().split(' ').join('+')}"></iframe>
             <div class="d-grid gap-2 ">
-                <button class="btn btn-primary btn-submit" type="button">Join</button>
+                <button class="btn btn-primary btn-submit" id="join-btn">Join</button>
             </div>
         </div>
     </div>`
@@ -123,19 +122,75 @@ ${event[0].is_countryside?`<div class="col-xl-3 col-md-6 col-6 icon-col">
             imgInner.innerHTML += ""
         }else{   
             if(i == 0){
-                
                 imgInner.innerHTML += ` <div class="carousel-item active">
                 <img src="../../../${event[i].filename}" class="d-block w-100" alt="...">
               </div>`
 
             }else{
-                imgDot.innerHTML `<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" aria-label="Slide ${i}"></button>`
+                imgDot.innerHTML += `<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" aria-label="Slide ${i}"></button>`
                 imgInner.innerHTML += `<div class="carousel-item">
                 <img src="../../../${event[i].filename}" class="d-block w-100 form-photo" alt="">
               </div>`
             }
         }
     }
+    let joinBtnDiv =document.querySelector('#join-btn');
+    let joinedPplSpan = document.querySelector('#icon-raking');
+ 
+
+    async function joinCount(){
+        const res = await fetch(`/detail/joinCount/?eventId=${pageId}`)
+        const joinCount = await res.json();
+        if (res.ok){
+            joinedPplSpan.innerHTML = `${joinCount[1].count}/${event[0].people_quota}`
+
+            if (joinCount[0].count == 1){
+                if (joinCount[0].count == 1){
+                    joinBtnDiv.innerHTML = 'leave'
+                }else{
+                    joinBtnDiv.innerHTML = 'Join'
+                }
+            }else{
+                if(joinCount[1].count>=event[0].people_quota){
+                    joinBtnDiv.innerHTML = 'Full'
+                    joinBtnDiv.disabled = true
+                }else{
+                    joinBtnDiv.innerHTML = 'Join'
+                }
+            }
+        }
+    }
+    joinCount()
+
+
+
+
+
+  
+    joinBtnDiv.addEventListener('click',async function(event) {
+    const res = await fetch(`/detail/join/?eventId=${pageId}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    
+    if (res.ok) {
+        joinCount()
+        // if (joined.count == 0){
+        //     joinBtnDiv.innerHTML = 'Joined!'
+        // }else{
+        //     joinBtnDiv.innerHTML = 'Leave'
+        // }
+        }
+        
+    })
+
+
+
+
+
+
 }
 
 }
