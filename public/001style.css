@@ -83,13 +83,22 @@
   line-height: 1.5em; /* fallback */
   max-height: 4.5em; /* fallback */
 }
+
+.admin-corner {
+  position: absolute;
+  left: 195px;
+  top: 335px;
+  font-size: 20px;
+}
 .fa-heart-circle-plus {
   position: absolute;
-  left: 230px;
+  left: 240px;
   top: 340px;
   font-size: 20px;
 }
-
+.fa-trash {
+  margin-right: 5px;
+}
 .card:hover {
   box-shadow: 10px 10px 10px 5px rgba(54, 53, 53, 0.2);
   margin-top: 5px !important;
