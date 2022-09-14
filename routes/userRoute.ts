@@ -11,7 +11,14 @@ userRoutes.get("/", async (req, res) => {
   res.sendFile(dir);
 });
 
+userRoutes.get("/registerPage", async (req, res) => {
+  // res.json(userResult.rows);
+  const dir = path.resolve("./signup/signup.html");
+  res.sendFile(dir);
+});
+
 userRoutes.post("/register", async (req, res) => {
+  console.log(req.body)
   try {
     const username = req.body.username;
     const password = req.body.password;
