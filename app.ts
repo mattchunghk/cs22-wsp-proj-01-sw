@@ -31,7 +31,7 @@ declare module "express-session" {
   interface SessionData {
     name?: string;
     isloggedin?: boolean;
-    userId?: number;
+    userId?: number | any;
     isAdmin?: boolean;
   }
 }

@@ -50,7 +50,6 @@ userRoutes.post("/login", async (req, res) => {
   console.log("userRoutes - [/login]");
   const username = req.body.username;
   const password = req.body.password;
-  console.log(username, password);
 
   if (!username || !password) {
     res.status(400).json({
@@ -86,7 +85,7 @@ userRoutes.post("/login", async (req, res) => {
   req.session["name"] = username;
   req.session["userId"] = dbuser.id;
   req.session["isAdmin"] = dbuser.is_admin;
-  console.log("login");
+  console.log("Login successful");
   res.status(200).json({
     message: "Success login",
   });
