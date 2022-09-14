@@ -9,7 +9,6 @@ function init() {
     document.querySelector('#event-form').addEventListener('submit', createEvents)
 }
 
-
 async function loadCountryFunction() {
     let countrySelectDiv = document.querySelector('#country-selection')
     const res = await fetch(`https://restcountries.com/v3.1/all`); // Fetch from the correct url

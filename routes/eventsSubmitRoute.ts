@@ -7,10 +7,10 @@ import { logger } from "../utils/logger";
 import { formParse } from "../utils/upload";
 
 //! "/submit"
-export const submitRoute = express.Router();
+export const eventsSubmitRoute = express.Router();
 
-submitRoute.get("/", submitGet);
-submitRoute.post("/formidable/", getSubmitData);
+eventsSubmitRoute.get("/", submitGet);
+eventsSubmitRoute.post("/formidable/", getSubmitData);
 
 function submitGet(req: Request, res: Response) {
   try {

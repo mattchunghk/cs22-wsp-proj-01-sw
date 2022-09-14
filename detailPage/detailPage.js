@@ -26,8 +26,6 @@ async function loadEvents() {
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
 
@@ -118,19 +116,21 @@ ${event[0].is_countryside?`<div class="col-xl-3 col-md-6 col-6 icon-col">
     </div>`
     
     let imgInner = document.querySelector('.carousel-inner')
+    let imgDot = document.querySelector('.carousel-indicators')
     imgInner.innerHTML = ""
     for (let i = 0; i < event.length; i++) {
         if (event[i].filename == null){
             imgInner.innerHTML += ""
         }else{   
             if(i == 0){
+                
                 imgInner.innerHTML += ` <div class="carousel-item active">
                 <img src="../../../${event[i].filename}" class="d-block w-100" alt="...">
               </div>`
 
             }else{
+                imgDot.innerHTML `<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" aria-label="Slide ${i}"></button>`
                 imgInner.innerHTML += `<div class="carousel-item">
-        
                 <img src="../../../${event[i].filename}" class="d-block w-100 form-photo" alt="">
               </div>`
             }

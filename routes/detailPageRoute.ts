@@ -7,9 +7,9 @@ import { logger } from "../utils/logger";
 import { formParse } from "../utils/upload";
 import path from "path";
 
-export const detailRoute = express.Router();
+export const detailPageRoute = express.Router();
 
-detailRoute.get("/event_id/:id", getDetail);
+detailPageRoute.get("/event_id/:id", getDetail);
 
 // Query
 //localhost:8080/detail/detailPage.html?id=2
@@ -18,7 +18,7 @@ detailRoute.get("/event_id/:id", getDetail);
 //localhost:8080/detail/detailPage/2
 
 // Params
-detailRoute.get("/detailPage/id/:id", (req, res) => {
+detailPageRoute.get("/detailPage/id/:id", (req, res) => {
   const dir = path.resolve("./detailPage/detailPage.html");
   res.sendFile(dir);
 });
@@ -38,7 +38,7 @@ async function getDetail(req: Request, res: Response) {
   }
 }
 
-detailRoute.post("/love", async (req, res) => {
+detailPageRoute.post("/love", async (req, res) => {
   try {
     res.status(200).json({});
     return;

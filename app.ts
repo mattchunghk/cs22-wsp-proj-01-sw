@@ -1,8 +1,8 @@
 import express from "express";
 import { Request, Response } from "express";
 import expressSession from "express-session";
-import { submitRoute } from "./routes/submitRoute";
-import { detailRoute } from "./routes/detailRoute";
+import { eventsSubmitRoute } from "./routes/eventsSubmitRoute";
+import { detailPageRoute } from "./routes/detailPageRoute";
 import { indexRoute } from "./routes/indexRoute";
 import { uploadDir } from "./utils/upload";
 import fs from "fs";
@@ -22,15 +22,15 @@ app.use(
 
 app.get("/", startTest);
 app.use("/user", userRoutes);
-app.use("/submit", submitRoute);
-app.use("/detail", detailRoute);
+app.use("/submit", eventsSubmitRoute);
+app.use("/detail", detailPageRoute);
 app.use("/index", indexRoute);
 
 fs.mkdirSync(uploadDir, { recursive: true });
-declare module 'express-session' {
+declare module "express-session" {
   interface SessionData {
-    name?: string
-    isloggedin?: boolean
+    name?: string;
+    isloggedin?: boolean;
   }
 }
 
