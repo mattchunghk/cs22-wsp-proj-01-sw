@@ -31,7 +31,7 @@ declare module "express-session" {
   interface SessionData {
     name?: string;
     isloggedin?: boolean;
-    userId?: number;
+    userId?: number | any;
     isAdmin?: boolean;
   }
 }
@@ -48,6 +48,7 @@ app.use("/asset", express.static("asset"));
 app.use("/submit", express.static("eventsForm"));
 app.use("/detail", express.static("detailPage"));
 app.use("/user", express.static("loginPage"));
+app.use("/user", express.static("signup"));
 app.use(express.static("uploads"));
 
 const PORT = 8080;

@@ -30,6 +30,7 @@ async function login(event) {
     if (res.ok) {
         loginText.innerHTML = "Login successful!"
         setTimeout(() => document.location.href = "/", 1000)
+        loginText.style.fontSize = "1.3rem";
 
     } else {
         loginText.innerHTML = "Invalid username or password"
