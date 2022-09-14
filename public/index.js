@@ -55,10 +55,11 @@ async function loadIndexEvents() {
           </div>
          
           
-          <a href="#" class="btn btn-primary" data_index="${
-            event.id
-          }">Join Me!</a>
+          <a href="#" class="btn btn-primary" data_index="${event.id}">GO!</a>
         </div>
+        <div class="admin-corner" data_index="${
+          event.id
+        }"><i class="fa-solid fa-trash"></i><i class="fa-solid fa-pen-to-square"></i></div>
         <div class="love-container" data_index="${event.id}">
           <i class="fa-solid fa-heart-circle-plus" data_index="${event.id}"></i>
         </div>
@@ -69,10 +70,12 @@ async function loadIndexEvents() {
     eventContainer.innerHTML = indexHtml;
 
     const cardContainer = document.querySelectorAll(".card");
+
     for (card in cardContainer) {
       const cardDiv = cardContainer[card];
-
+      const goBtn = cardDiv.querySelector(".btn-primary");
       const loveBtn = cardDiv.querySelector(".love-container");
+      console.log(cardDiv);
 
       loveBtn.addEventListener("click", async (e) => {
         const element = e.target;
@@ -91,6 +94,12 @@ async function loadIndexEvents() {
         if (res.ok) {
           loadIndexEvents();
         }
+      });
+
+      goBtn.addEventListener("click", async (e) => {
+        const element = e.target;
+        const eventIndex = element.getAttribute("data_index");
+        document.location.href = `/detail/detailPage/id/${eventIndex}`;
       });
 
       console.log("you get interested in this event!");
