@@ -27,6 +27,7 @@ async function goDetailPage(req: Request, res: Response) {
 
 async function getDetail(req: Request, res: Response) {
   const id = req.params.id;
+  console.log("event_id= ", id);
   try {
     const events = await client.query(
       `select * from event_images INNER JOIN events ON event_images.event_id = events.id where events.id = ${id};`

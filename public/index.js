@@ -1,3 +1,5 @@
+function login() {}
+
 async function loadIndexEvents() {
   console.log("loadIndexEvents called");
   const res = await fetch("/index");
@@ -9,6 +11,8 @@ async function loadIndexEvents() {
     console.log(eventData);
     //<img src="${event.image[0]}" class="card-img-top" alt="...">//
     //<h5 class="card-title">${event[0].title}</h5>
+
+    //../upload/{asjdfkwjelkjrwkljerkwer.jpg}
     for (let event of eventData) {
       indexHtml += `<div class="card" style="width: 18rem;" data_index="${
         event.id
