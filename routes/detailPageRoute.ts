@@ -104,16 +104,16 @@ async function joinCount(req: Request, res: Response) {
 //       );
 //     }
 
-//     // let eventLikeStatus = await client.query(
-//     //   `Select * FROM favorite_events WHERE event_id=$1`,
-//     //   [eventID]
-//     // );
+// let eventLikeStatus = await client.query(
+//   `Select * FROM favorite_events WHERE event_id=$1`,
+//   [eventID]
+// );
 
-//     // await client.query(
-//     //   /*sql*/ `Update favorite_events set count=($1) WHERE id=($2)`,
-//     //   [eventLikeStatus.rowCount, eventID]
-//     // );
-//     // console.log(eventLikeStatus);
+// await client.query(
+//   /*sql*/ `Update favorite_events set count=($1) WHERE id=($2)`,
+//   [eventLikeStatus.rowCount, eventID]
+// );
+// console.log(eventLikeStatus);
 //     res.status(200).json({});
 //     return;
 //   } catch (err: any) {
