@@ -34,6 +34,9 @@
   cursor: pointer;
   display: block;
 }
+.admin-container {
+  display: none;
+}
 .nav {
   display: flex;
   flex-direction: row;
@@ -52,6 +55,16 @@
   right: 45%;
   z-index: 10;
 }
+#show-more {
+  position: fixed !important;
+  bottom: 3% !important;
+  right: 56% !important;
+  z-index: 10;
+  height: 40px;
+  width: 120px;
+  background-color: aquamarine;
+}
+
 .roundedFixedBtn {
   height: 40px;
   /* line-height: 80px; */

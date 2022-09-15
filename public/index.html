@@ -56,7 +56,13 @@
             </form>
             <!-- Login -->
             <div class="login-in" style="display:block" onclick="window.location.href ='/user/login.html' ">Login <i class="fa-solid fa-fingerprint"></i></div>
-            <div class="logged-in-okay">Logged as <span class="show-username"></span></div>
+            <div class="logged-in-okay"> <span class="show-username"></span></div>
+            <div class="function-div admin-container" id="admin-container">
+              <i class="fa-solid fa-unlock function-icon"></i>
+              <div class="function-name">admin</div>
+            </div>
+   
+          </div>
           </div>
         </div>
     </div>
@@ -111,6 +117,7 @@
     <div class="create-button" onclick="window.location.href ='/submit/eventsForm.html'">
       <div class="roundedFixedBtn">Create your trip<i class="fa-solid fa-umbrella-beach"></i></div>
    </div>
+   <button type="button" class="btn  " id="show-more">Show more</button>
    <!-- event container -->
     <div class="event-container">
         <!-- <div class="card" style="width: 18rem;" data_index="${memo.id}">

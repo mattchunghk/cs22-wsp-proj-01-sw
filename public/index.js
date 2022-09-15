@@ -1,3 +1,34 @@
+window.onload = () => {
+  loadIndexEvents();
+  loadLoginStatus();
+};
+async function loadLoginStatus() {
+  const userRes = await fetch(`/user/loginStatus`);
+
+  const userInfo = await userRes.json();
+  console.log(userInfo);
+  if (userRes.ok) {
+    if (userInfo.hasOwnProperty("userId")) {
+      document.querySelector(
+        ".show-username"
+      ).innerHTML = `Hi, ${userInfo.name}`;
+      console.log(userInfo.name);
+      document.querySelector(".login-in").style.display = "none";
+      document.querySelector(".logged-in-okay").style.display = "flex";
+      console.log("you are logged in");
+      // if (userInfo.isAdmin) {
+      //   document.querySelector(".admin-container").style.display = "flex";
+      // } else if (userInfo.isAdmin == null || userInfo.isAdmin == false) {
+      //   document.querySelector(".admin-container").style.display = "none";
+      // }
+    } else {
+      document.querySelector(".show-username").innerHTML = "";
+      // document.querySelector("#admin-container").style.display = "none";
+      document.querySelector(".login-in").style.display = "flex";
+      document.querySelector(".logged-in-okay").style.display = "none";
+    }
+  }
+}
 async function loadIndexEvents() {
   console.log("loadIndexEvents called");
 
@@ -120,7 +151,6 @@ async function loadIndexEvents() {
     }
   }
 }
-loadIndexEvents();
 
 // function loadEventListenerOnEvent() {
 //   const loveBtn = document.querySelector(".fa-heart-circle-plus");
