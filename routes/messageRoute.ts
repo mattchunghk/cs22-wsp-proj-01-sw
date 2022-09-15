@@ -6,15 +6,17 @@ import { client } from "../utils/db";
 
 export const messageRoutes = express.Router();
 //寫留言
-messageRoutes.post("/messages/create", (req: Request, res: Response) => {
+messageRoutes.post("/create/:id", (req: Request, res: Response) => {
+  const id = req.params.id;
+  console.log(id);
   try {
     form.parse(req, async (err, fields, files) => {
       let imageName: any = null;
       let messageHeading: any = fields.messages_heading;
       let messageContent: any = fields.messages_comment;
       const messages_comment_result = await client.query(
-        /*sql*/ `INSERT INTO messages (heading,comment) VALUES ($1,$2) RETURNING id`,
-        [messageHeading, messageContent]
+        /*sql*/ `INSERT INTO messages (heading,comment,user_id,event_id) VALUES ($1,$2,$3,$4) RETURNING id`,
+        [messageHeading, messageContent, req.session.userId, id]
       );
       console.log(messages_comment_result);
       const messagesId = messages_comment_result.rows[0].id;
@@ -59,7 +61,8 @@ messageRoutes.post("/messages/create", (req: Request, res: Response) => {
   }
 });
 //拎 messages
-messageRoutes.get("/messages/get", async (req, res) => {
+messageRoutes.get("/get/:id", async (req, res) => {
+  const id = req.params.id;
   try {
     //拎 messages 加photos 加 like 3個table合併
     const messages_comment_result =
@@ -67,8 +70,10 @@ messageRoutes.get("/messages/get", async (req, res) => {
         select messages.*, favorite_count.favorite_count, message_images.filename from messages 
         left join favorite_count on messages.id = favorite_count.id
         left join message_images on messages.id = message_images.message_id
+        where event_id = ${id}
         order by id desc;`);
     const messages = messages_comment_result.rows;
+    console.log(messages_comment_result.rows);
     // console.log(messages_comment_result);
     //拎 messages 加photos 兩個table合併
     // const messages_comment_result = await client.query(/*sql*/'SELECT messages.*, message_images.filename from messages left join message_images on messages.id = message_images.message_id ORDER BY messages.id desc');
@@ -134,7 +139,7 @@ messageRoutes.get("/message_like/get", async (req, res) => {
 });
 
 //update message
-messageRoutes.put("/message/update", async (req, res) => {
+messageRoutes.put("/update", async (req, res) => {
   try {
     const messageCommentUpdata = req.body.messages_comment;
     // console.log(messageCommentUpdata);
@@ -161,7 +166,7 @@ messageRoutes.put("/message/update", async (req, res) => {
 });
 
 //Delete message
-messageRoutes.delete("/message/update", async (req, res) => {
+messageRoutes.delete("/update", async (req, res) => {
   try {
     let index = req.body.index;
     // console.log(index);
@@ -189,7 +194,7 @@ messageRoutes.delete("/message/update", async (req, res) => {
 });
 
 //like message
-messageRoutes.post("/message/like", async (req, res) => {
+messageRoutes.post("/like", async (req, res) => {
   try {
     let index = req.body.index;
     console.log(index);

@@ -239,14 +239,15 @@
     border: solid 1px #FA4A60;
 }
 
-input[type="file"] {
+
+/* input[type="file"] {
     display: none;
 }
 
 .form-check-input {
     border: solid 1px #FA4A60;
     color: #FA4A60;
-}
+} */
 
 .form-check-input-checked-color {
     color: #FA4A60;

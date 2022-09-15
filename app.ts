@@ -31,7 +31,7 @@ app.use(
   })
 );
 
-app.use("/", messageRoutes);
+app.use("/messages", messageRoutes);
 app.use("/user", userRoutes);
 app.use("/submit", eventsSubmitRoute);
 app.use("/detail", detailPageRoute);
