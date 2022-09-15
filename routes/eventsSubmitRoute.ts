@@ -65,7 +65,7 @@ async function getSubmitData(req: Request, res: Response) {
     let eventId = await client.query(
       "INSERT INTO events (user_id,title,country,city,introduction,budget,start_date,end_date,people_quota,is_sporty,is_luxury,is_relax,is_countryside) VALUES  ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING ID",
       [
-        "1",
+        req.session.userId,
         title,
         country,
         place,

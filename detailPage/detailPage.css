@@ -8,11 +8,16 @@
 
 .createForm-header {
     background-color: #FA4A60;
-    height: 100px;
     width: 100vw;
     position: fixed;
     top: 0;
     z-index: 3 !important;
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 .fa-solid.fa-umbrella-beach {
@@ -21,6 +26,43 @@
 
 .logo-container {
     display: flex;
+}
+
+.function-icon {
+    color: white !important;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.function-name {
+    margin-right: 10px;
+}
+
+.function-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 10px 15px 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .function-container,
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.function-div {
+    color: white;
+    font-size: 1.2rem;
+    display: flex;
+    margin-right: 15px;
+    cursor: pointer
+}
+
+.function-div:hover {
+    color: #fca0ab;
 }
 
 .eventsTitle {
@@ -64,6 +106,16 @@
     margin-top: 120px;
     z-index: 0 !important;
     border-radius: 10px;
+}
+
+.carousel-inner {
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .carousel-inner {
+        margin-top: 160px;
+    }
 }
 
 .carousel-item>img {

@@ -64,16 +64,22 @@ async function joinEvent(req: Request, res: Response) {
 
 async function joinCount(req: Request, res: Response) {
   const eventId: any = req.query.eventId;
-  // const userId: any = req.query.userId;
-  try {
-    const userJoined = await client.query(
-      `SELECT count(*) FROM event_participants WHERE event_id=${eventId} and user_id = ${req.session.userId};`
-    );
-    const eventJoinCounts = await client.query(
-      `SELECT count(*) FROM event_participants WHERE event_id=${eventId};`
-    );
 
-    res.status(200).json([userJoined.rows[0], eventJoinCounts.rows[0]]);
+  try {
+    if (req.session.userId != undefined) {
+      const userJoined = await client.query(
+        `SELECT count(*) FROM event_participants WHERE event_id=${eventId} and user_id = ${req.session.userId};`
+      );
+      const eventJoinCounts = await client.query(
+        `SELECT count(*) FROM event_participants WHERE event_id=${eventId};`
+      );
+      res.status(200).json([userJoined.rows[0], eventJoinCounts.rows[0]]);
+    } else {
+      const eventJoinCounts = await client.query(
+        `SELECT count(*) FROM event_participants WHERE event_id=${eventId};`
+      );
+      res.status(200).json([false, eventJoinCounts.rows[0]]);
+    }
   } catch (error) {
     res.status(404).send(error);
   }
