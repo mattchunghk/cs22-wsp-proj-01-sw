@@ -7,6 +7,8 @@ import { indexRoute } from "./routes/indexRoute";
 import { uploadDir } from "./utils/upload";
 import fs from "fs";
 import { userRoutes } from "./routes/userRoute";
+import dotenv from "dotenv";
+import grant from "grant";
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -20,7 +22,6 @@ app.use(
   })
 );
 
-app.get("/", startTest);
 app.use("/user", userRoutes);
 app.use("/submit", eventsSubmitRoute);
 app.use("/detail", detailPageRoute);
@@ -33,16 +34,28 @@ declare module "express-session" {
     isloggedin?: boolean;
     userId?: number | any;
     isAdmin?: boolean;
+    grant?: any;
+    user: any;
   }
 }
+dotenv.config();
 
-function startTest(req: Request, res: Response) {
-  try {
-    res.redirect("index.html");
-  } catch (error) {
-    res.send(error);
-  }
-}
+const grantExpress = grant.express({
+  defaults: {
+    origin: "http://localhost:8080",
+    transport: "session",
+    state: true,
+  },
+  google: {
+    key: process.env.GOOGLE_CLIENT_ID || "",
+    secret: process.env.GOOGLE_CLIENT_SECRET || "",
+    scope: ["profile", "email"],
+    callback: "/user/login/google",
+  },
+});
+
+app.use(grantExpress as express.RequestHandler);
+
 app.use("/", express.static("public"));
 app.use("/asset", express.static("asset"));
 app.use("/submit", express.static("eventsForm"));

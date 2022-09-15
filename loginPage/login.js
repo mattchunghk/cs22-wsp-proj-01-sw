@@ -5,10 +5,9 @@ window.onload = () => {
 };
 
 function init() {
-    document.querySelector(".login-form").addEventListener("submit", login)
-    document.querySelector(".back-home-form").addEventListener('click', backHome)
+    document.querySelector(".login-form").addEventListener("submit", login);
+    document.querySelector(".back-home-form").addEventListener("click", backHome);
 }
-
 
 async function login(event) {
     event.preventDefault();
@@ -28,16 +27,15 @@ async function login(event) {
     });
 
     if (res.ok) {
-        loginText.innerHTML = "Login successful!"
-        setTimeout(() => document.location.href = "/", 1000)
+        loginText.innerHTML = "Login successful!";
+        setTimeout(() => window.history.back(), 1000);
         loginText.style.fontSize = "1.3rem";
-
     } else {
-        loginText.innerHTML = "Invalid username or password"
+        loginText.innerHTML = "Invalid username or password";
         loginText.style.fontSize = "1.3rem";
     }
 }
 
 function backHome() {
-    document.location.href = "/"
+    window.location.href = "/";
 }

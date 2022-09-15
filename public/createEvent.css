@@ -1,0 +1,141 @@
+body {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+::placeholder {
+    color: #fa4a5e !important;
+}
+
+
+
+.heading-input {
+    background-color: #fa4a5e;
+    color: white;
+}
+
+.input-group-text,
+.messages-heading,
+.setting-input,
+.message-input,
+.messages_file,
+.heading-input {
+    border: solid 1px #FA4A60
+}
+
+.choose-file-input {
+    margin-top: 10px;
+}
+
+.messageAllDivs {
+    margin: 10px 0;
+}
+
+
+
+.box1 {
+    /* background-color: #f5e37b;
+    width: 180px;
+    height: 180px; */
+    position: relative;
+
+}
+
+.heading-setting {
+    font-size: 1rem;
+    font-weight: bolder;
+    color: rgb(144, 127, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-input {
+    width: 100%;
+    height: 100%;
+}
+
+/* 改 .carousel image size */
+.carousel .carousel-item {
+    height: 300px;
+    background-color: #777;
+}
+
+.carousel-inner>.carousel-item>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 300px;
+}
+
+@media screen and (max-width: 767px) {
+    .carousel-inner {
+        margin: 20px 0px;
+    }
+
+    .carousel .carousel-item {
+        height: 250px;
+        background-color: #777;
+    }
+
+    .carousel-inner>.carousel-item>img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-width: 100%;
+        height: 250px;
+    }
+}
+
+
+.button-div {
+    margin-bottom: 10px;
+}
+
+
+.delete-btn {
+    background-color: rgba(45, 40, 43, 0.772);
+    color: rgb(110, 205, 246);
+    position: absolute;
+    border-radius: 50%;
+    bottom: -15px;
+    right: 50px;
+
+}
+
+.edit-btn {
+    background-color: rgba(45, 40, 43, 0.772);
+    color: rgb(196, 110, 246);
+    position: absolute;
+    border-radius: 50%;
+    bottom: -15px;
+    right: 0px;
+}
+
+.angry-btn {
+    background-color: rgba(229, 18, 49, 0.88);
+    position: absolute;
+    border-radius: 50px;
+    bottom: -15px;
+    left: 80px;
+
+}
+
+
+.like-btn {
+    background-color: rgba(233, 103, 168, 0.772);
+    position: absolute;
+    border-radius: 50px;
+    bottom: -15px;
+    left: 2px;
+}
+
+.readtext {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
