@@ -13,6 +13,7 @@ detailPageRoute.get("/event_id/:id", getDetail);
 detailPageRoute.get("/detailPage/id/:id", goDetailPage);
 detailPageRoute.post("/join", joinEvent);
 detailPageRoute.get("/joinCount", joinCount);
+detailPageRoute.delete("/delete", deleteEvents);
 // Query
 //localhost:8080/detail/detailPage.html?id=2
 
@@ -84,6 +85,10 @@ async function joinCount(req: Request, res: Response) {
   } catch (error) {
     res.status(404).send(error);
   }
+}
+
+async function deleteEvents(req: Request, res: Response) {
+  const id = req.params.id;
 }
 
 // detailPageRoute.post("/love", async (req, res) => {
