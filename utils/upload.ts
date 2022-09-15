@@ -2,7 +2,7 @@ import formidable, { Files } from "formidable";
 export const uploadDir = "uploads";
 import express from "express";
 
-const form = formidable({
+export const form = formidable({
   uploadDir,
   keepExtensions: true,
   maxFiles: 5,

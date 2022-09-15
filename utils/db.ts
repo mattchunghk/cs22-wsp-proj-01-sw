@@ -1,4 +1,5 @@
 import { Client } from "pg";
+import dotenv from "dotenv";
 import { env } from "./env";
 
 export const client = new Client({

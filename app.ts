@@ -9,7 +9,16 @@ import fs from "fs";
 import { userRoutes } from "./routes/userRoute";
 import dotenv from "dotenv";
 import grant from "grant";
+import http from "http";
+import { Server as SocketIO } from "socket.io";
+import { format, fromUnixTime } from "date-fns";
+import { Server } from "http";
+import { messageRoutes } from "./routes/messageRoute";
+dotenv.config();
+
 const app = express();
+const server = new http.Server(app);
+export const io = new SocketIO(server);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -22,6 +31,7 @@ app.use(
   })
 );
 
+app.use("/", messageRoutes);
 app.use("/user", userRoutes);
 app.use("/submit", eventsSubmitRoute);
 app.use("/detail", detailPageRoute);
@@ -38,7 +48,6 @@ declare module "express-session" {
     user: any;
   }
 }
-dotenv.config();
 
 const grantExpress = grant.express({
   defaults: {
@@ -63,8 +72,13 @@ app.use("/detail", express.static("detailPage"));
 app.use("/user", express.static("loginPage"));
 app.use("/user", express.static("register"));
 app.use(express.static("uploads"));
+app.use(express.static("error"));
+
+io.on("connection", function (socket) {
+  console.log("new socket");
+});
 
 const PORT = 8080;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Listening at http://localhost:${PORT}/`);
 });
