@@ -16,8 +16,14 @@ function init() {
 }
 
 async function getFunctionBar() {
+    const pathnames = window.location.pathname.split("/");
+    const pageId = pathnames[pathnames.length - 1];
+
+    const res2 = await fetch(`/detail/event_id/${pageId}`); // Fetch from the correct url
+    const event = await res2.json();
     const res = await fetch(`/user/loginStatus`);
     const userInfo = await res.json();
+
     if (res.ok) {
         if (userInfo.hasOwnProperty("userId")) {
             document.querySelector(
@@ -26,14 +32,21 @@ async function getFunctionBar() {
             document.querySelector("#log-in-container").style.display = "none";
             document.querySelector("#log-out-container").style.display = "flex";
 
+            if (event[0].user_id == userInfo.userId) {
+                document.querySelector(".delete-container").style.display = "flex";
+            } else {
+                document.querySelector(".delete-container").style.display = "none";
+            }
             if (userInfo.isAdmin) {
                 document.querySelector("#admin-container").style.display = "flex";
+                document.querySelector(".delete-container").style.display = "flex";
             } else if (userInfo.isAdmin == null || userInfo.isAdmin == false) {
                 document.querySelector("#admin-container").style.display = "none";
             }
         } else {
             document.querySelector("#greeting-text").innerHTML = "";
             document.querySelector("#admin-container").style.display = "none";
+            document.querySelector(".delete-container").style.display = "none";
             document.querySelector(".log-in-container").style.display = "flex";
             document.querySelector(".log-out-container").style.display = "none";
         }

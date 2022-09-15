@@ -29,7 +29,7 @@ async function login(event) {
 
     if (res.ok) {
         loginText.innerHTML = "Login successful!";
-        setTimeout(() => window.history.back(), 1000);
+        setTimeout(() => (window.location = document.referrer), 1000);
         loginText.style.fontSize = "1.3rem";
     } else {
         loginText.innerHTML = "Invalid username or password";

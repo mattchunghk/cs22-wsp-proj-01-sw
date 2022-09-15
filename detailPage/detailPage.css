@@ -53,6 +53,18 @@
     }
 }
 
+.greeting-container {
+    cursor: default !important;
+}
+
+.greeting-container:hover {
+    color: white !important;
+}
+
+.fa-pen-to-square {
+    color: white;
+}
+
 .function-div {
     color: white;
     font-size: 1.2rem;
