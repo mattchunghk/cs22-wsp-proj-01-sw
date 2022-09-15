@@ -5,21 +5,22 @@ window.onload = () => {
 };
 
 function init() {
-    document.querySelector(".login-form").addEventListener("submit", login);
+    document.querySelector(".login-form").addEventListener("submit", register);
     document.querySelector(".back-home-form").addEventListener("click", backHome);
-    document.querySelector("#register-btn").addEventListener("click", goSignUp);
 }
 
-async function login(event) {
+async function register(event) {
     event.preventDefault();
 
     // Serialize the Form afterwards
     const form = event.target;
+
     const formObject = {};
     const loginText = document.querySelector(".login-text");
     formObject["username"] = form.username.value;
     formObject["password"] = form.password.value;
-    const res = await fetch("/user/login", {
+    formObject["checkPassword"] = form.checkPassword.value;
+    const res = await fetch("/user/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -28,19 +29,15 @@ async function login(event) {
     });
 
     if (res.ok) {
-        loginText.innerHTML = "Login successful!";
-        setTimeout(() => window.history.back(), 1000);
+        loginText.innerHTML = "Sign-up successful!";
+        setTimeout(() => (window.location.href = "/"), 1000);
         loginText.style.fontSize = "1.3rem";
     } else {
         loginText.innerHTML = "Invalid username or password";
         loginText.style.fontSize = "1.3rem";
-        setTimeout(() => (loginText.innerHTML = "Please Login"), 1000);
-        setTimeout(() => (loginText.style.fontSize = "1.3rem"), 1000);
+        setTimeout(() => (loginText.style.fontSize = "1.5rem"), 1000);
+        setTimeout(() => (loginText.innerHTML = "Sign Up"), 1000);
     }
-}
-
-function goSignUp() {
-    window.location.href = "/user/register.html";
 }
 
 function backHome() {

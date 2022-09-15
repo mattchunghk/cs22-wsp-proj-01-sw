@@ -14,6 +14,7 @@ function init() {
         .querySelector(".log-in-container")
         .addEventListener("click", loginPage);
 }
+
 async function getFunctionBar() {
     const res = await fetch(`/user/loginStatus`);
     const userInfo = await res.json();

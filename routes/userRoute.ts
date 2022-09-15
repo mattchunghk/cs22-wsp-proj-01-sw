@@ -10,6 +10,7 @@ userRoutes.get("/", goLoginPage);
 userRoutes.post("/login", login);
 userRoutes.get("/logout", logout);
 userRoutes.get("/login/google", loginGoogle);
+userRoutes.get("/registerPage", registerPage);
 userRoutes.post("/register", register);
 userRoutes.get("/loginStatus", loginStatus);
 
@@ -19,25 +20,42 @@ async function goLoginPage(req: express.Request, res: express.Response) {
   res.sendFile(dir);
 }
 
-<<<<<<< HEAD
-async function register(req: express.Request, res: express.Response) {
-=======
-userRoutes.get("/registerPage", async (req, res) => {
-  // res.json(userResult.rows);
-  const dir = path.resolve("./signup/signup.html");
+async function registerPage(req: express.Request, res: express.Response) {
+  const dir = path.resolve("./registerPage/register.html");
   res.sendFile(dir);
-});
+}
 
-userRoutes.post("/register", async (req, res) => {
-  console.log(req.body)
->>>>>>> c06daa183a79293ec850208b1b553c217928fa16
+async function register(req: express.Request, res: express.Response) {
+  console.log(req.body);
   try {
     const username = req.body.username;
     const password = req.body.password;
+    const checkPassword = req.body.checkPassword;
 
     if (!username || !password) {
       res.status(400).json({
         message: "Invalid username or password",
+      });
+      return;
+    }
+
+    if (password !== checkPassword) {
+      res.status(400).json({
+        message: "password check failed",
+      });
+      return;
+    }
+
+    let userResult = await client.query(
+      `select * from users where username = $1`,
+      [username]
+    );
+    let dbuser = userResult.rows[0];
+    console.log("dbuser =", dbuser);
+
+    if (dbuser) {
+      res.status(400).json({
+        message: "Duplicate username",
       });
       return;
     }
@@ -48,8 +66,8 @@ userRoutes.post("/register", async (req, res) => {
 
     let hashedPassword = await hashPassword(password);
     await client.query(
-      `insert into users (username, password) values ($1, $2)`,
-      [username, hashedPassword]
+      `insert into users (username,password,is_admin) values ($1, $2, $3)`,
+      [username, hashedPassword, false]
     );
     res.json({ message: "User created" });
   } catch (error) {
@@ -117,7 +135,6 @@ async function loginGoogle(req: express.Request, res: express.Response) {
     );
 
     const result = await fetchRes.json();
-    console.log(result);
 
     const users = (
       await client.query(`SELECT * FROM users WHERE users.username = $1`, [
@@ -133,19 +150,19 @@ async function loginGoogle(req: express.Request, res: express.Response) {
       console.log(password);
       user = (
         await client.query(
-          `INSERT INTO users (username,password)
-	            VALUES ($1,$2) RETURNING *`,
-          [result.email, password]
+          `INSERT INTO users (username,password,is_admin)
+	            VALUES ($1,$2,$3) RETURNING *`,
+          [result.email, password, false]
         )
       ).rows[0];
     }
     if (req.session) {
-      req.session.name = user.username;
+      req.session["user"] = result;
+      req.session.name = result.name;
       req.session.isloggedin = true;
       req.session.userId = user.id;
-      req.session["user"] = result;
     }
-    return res.redirect("/");
+    return res.redirect("back");
   } catch (error) {
     res.status(401).send("Invalid credentials");
   }
