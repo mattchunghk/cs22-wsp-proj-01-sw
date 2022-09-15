@@ -1,6 +1,11 @@
+function login() {}
+
 async function loadIndexEvents() {
   console.log("loadIndexEvents called");
   const res = await fetch("/index");
+  const pathnames = window.location.pathname.split("/");
+  const pageId = pathnames[pathnames.length - 1];
+  const imageRes = await fetch(`/detail/event_id/${pageId}`);
   const eventData = await res.json();
 
   if (res.ok) {
@@ -9,11 +14,13 @@ async function loadIndexEvents() {
     console.log(eventData);
     //<img src="${event.image[0]}" class="card-img-top" alt="...">//
     //<h5 class="card-title">${event[0].title}</h5>
+
+    //../upload/{asjdfkwjelkjrwkljerkwer.jpg}
     for (let event of eventData) {
       indexHtml += `<div class="card" style="width: 18rem;" data_index="${
         event.id
       }">
-        <img src="../asset/02event.jpg" class="card-img-top" alt="...">
+        <img src="../../../${event[0].filename}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">${event.title}</h5>
           <p class="card-text">${event.introduction} </p>

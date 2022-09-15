@@ -1,0 +1,82 @@
+::selection {
+    background-color: #FA4A60 !important;
+}
+
+.createForm-header {
+    background-color: #FA4A60;
+    height: 100px;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+}
+
+.logo-container {
+    display: flex;
+}
+
+.fa-umbrella-beach {
+    color: white;
+    font-size: 4rem;
+    margin: 20px 10px 20px 20px;
+}
+
+.form-control {
+    border: 1px solid #FA4A60;
+    margin-bottom: 10px;
+}
+
+.logo-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 4rem;
+    color: white;
+    margin-top: 10px;
+}
+
+.admin-text {
+    color: white;
+    text-align: center;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-form-div {
+    background-color: #FA4A60;
+    width: 300px;
+    height: 350px;
+    margin-top: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #FA4A60;
+    border-radius: 10px;
+}
+
+.login-btn,
+.btn-success {
+    margin-top: 20px;
+    background-color: white;
+    color: #FA4A60;
+    border: 1px solid #FA4A60;
+    width: 280px;
+}
+
+.btn-success {
+    position: relative;
+}
+
+.login-btn:hover,
+.btn-success:hover {
+    color: #FA4A60;
+    background-color: #ffc6cd;
+    border: 1px solid #FA4A60;
+}
+
+.bi-google {
+    position: absolute;
+    left: 15px
+}

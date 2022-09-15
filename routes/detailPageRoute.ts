@@ -27,6 +27,7 @@ async function goDetailPage(req: Request, res: Response) {
 
 async function getDetail(req: Request, res: Response) {
   const id = req.params.id;
+  console.log("event_id= ", id);
   try {
     const events = await client.query(
       `select * from event_images INNER JOIN events ON event_images.event_id = events.id where events.id = ${id};`
@@ -109,16 +110,16 @@ async function joinCount(req: Request, res: Response) {
 //       );
 //     }
 
-//     // let eventLikeStatus = await client.query(
-//     //   `Select * FROM favorite_events WHERE event_id=$1`,
-//     //   [eventID]
-//     // );
+// let eventLikeStatus = await client.query(
+//   `Select * FROM favorite_events WHERE event_id=$1`,
+//   [eventID]
+// );
 
-//     // await client.query(
-//     //   /*sql*/ `Update favorite_events set count=($1) WHERE id=($2)`,
-//     //   [eventLikeStatus.rowCount, eventID]
-//     // );
-//     // console.log(eventLikeStatus);
+// await client.query(
+//   /*sql*/ `Update favorite_events set count=($1) WHERE id=($2)`,
+//   [eventLikeStatus.rowCount, eventID]
+// );
+// console.log(eventLikeStatus);
 //     res.status(200).json({});
 //     return;
 //   } catch (err: any) {

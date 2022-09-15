@@ -19,7 +19,18 @@ async function goLoginPage(req: express.Request, res: express.Response) {
   res.sendFile(dir);
 }
 
+<<<<<<< HEAD
 async function register(req: express.Request, res: express.Response) {
+=======
+userRoutes.get("/registerPage", async (req, res) => {
+  // res.json(userResult.rows);
+  const dir = path.resolve("./signup/signup.html");
+  res.sendFile(dir);
+});
+
+userRoutes.post("/register", async (req, res) => {
+  console.log(req.body)
+>>>>>>> c06daa183a79293ec850208b1b553c217928fa16
   try {
     const username = req.body.username;
     const password = req.body.password;
