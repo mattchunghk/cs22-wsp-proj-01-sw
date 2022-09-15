@@ -27,6 +27,7 @@ create TABLE events(
 );
 create TABLE messages(
     id SERIAL PRIMARY KEY,
+    heading text not null,
     comment text not null,
     user_id integer,
     Foreign Key (user_id) references users(id),

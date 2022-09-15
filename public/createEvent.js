@@ -152,7 +152,7 @@ async function loadMessages() {
                             <div class="col-md-3">
                                 <button class='like-btn' index="${message.id}">
                                     <i class="bi bi-emoji-heart-eyes" index="${message.id}"></i>
-                                    <span class="likeview" id="like_value" index="${message.id}">${message.favorite_count}</span>
+                                    <span class="likeview" id="like_value" index="${message.id}">${message.favorite_count - 1}</span>
                                 </button>
                             </div>
                         </div>
