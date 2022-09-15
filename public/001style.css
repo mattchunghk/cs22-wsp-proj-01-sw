@@ -20,6 +20,7 @@
 .logged-in-okay {
   font-size: 26px;
   margin: 2px;
+  display: none;
 }
 .login-in {
   margin-left: 20px;
@@ -31,6 +32,7 @@
   font-size: 16px;
   color: rgb(111, 110, 110);
   cursor: pointer;
+  display: block;
 }
 .nav {
   display: flex;
