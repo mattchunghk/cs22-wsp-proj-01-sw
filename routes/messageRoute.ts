@@ -146,6 +146,8 @@ messageRoutes.put("/message/update", async (req, res) => {
 
         await client.query(`update messages set comment = $1 where id = $2`, [messageCommentUpdata, Number(index)])
         res.status(200).send("success")
+
+        io.emit("new-message-update", { message: "New message update" });
         return
     } catch (err: any) {
         console.log(err.message)
@@ -168,6 +170,7 @@ messageRoutes.delete("/message/update", async (req, res) => {
         await client.query('delete from messages where id = $1', [Number(index)])
 
         res.status(200).send("success")
+        io.emit("message-delete", { message: "Message delete" });
         return
     } catch (err: any) {
         console.log(err.message)

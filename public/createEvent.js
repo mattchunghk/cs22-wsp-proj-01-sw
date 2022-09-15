@@ -9,6 +9,14 @@ socket.on("new-message", (data) => {
     console.log(data);
     loadMessages()
 })
+socket.on("new-message-update", (data) => {
+    console.log(data);
+    loadMessages()
+})
+socket.on("message-delete", (data) => {
+    console.log(data);
+    loadMessages()
+})
 
 //寫留言
 
@@ -170,7 +178,7 @@ async function loadMessages() {
 
             const messageEdit = messagesDivs.querySelector('.message-input').value
             // console.log(messagesDivs.querySelector('.message-input').disabled);
-            // messagesDivs.querySelector('.message-input').classList.toggle('readtext');
+            // messagesDivs.querySelector('.message-input').classList.toggle('readonly');
 
             console.log(messageEdit);
             const editIndex = event.currentTarget.getAttribute('index')
