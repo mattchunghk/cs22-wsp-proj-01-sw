@@ -1,26 +1,32 @@
-function login() {}
-
 async function loadIndexEvents() {
   console.log("loadIndexEvents called");
+
+  // const pathnames = window.location.pathname.split("/");
+  // const pageId = pathnames[pathnames.length - 1];
+  // console.log("pageID= " + pageId);
+
   const res = await fetch("/index");
-  const pathnames = window.location.pathname.split("/");
-  const pageId = pathnames[pathnames.length - 1];
-  const imageRes = await fetch(`/detail/event_id/${pageId}`);
   const eventData = await res.json();
 
   if (res.ok) {
     let indexHtml = "";
     //let index = 0;
-    console.log(eventData);
+    console.log(eventData[0].id);
     //<img src="${event.image[0]}" class="card-img-top" alt="...">//
     //<h5 class="card-title">${event[0].title}</h5>
-
-    //../upload/{asjdfkwjelkjrwkljerkwer.jpg}
+    //../../../${event[0].filename}
     for (let event of eventData) {
+      const imageRes = await fetch(`/detail/event_id/${event.id}`);
+      console.log(`/detail/event_id/${event.id}`);
+      // console.log(imageRes);
+      const imageData = await imageRes.json();
+      console.log(imageData);
       indexHtml += `<div class="card" style="width: 18rem;" data_index="${
         event.id
       }">
-        <img src="../../../${event[0].filename}" class="card-img-top" alt="...">
+        <img src="../../../${
+          imageData[0].filename
+        }" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">${event.title}</h5>
           <p class="card-text">${event.introduction} </p>
@@ -82,6 +88,7 @@ async function loadIndexEvents() {
       const cardDiv = cardContainer[card];
       const goBtn = cardDiv.querySelector(".btn-primary");
       const loveBtn = cardDiv.querySelector(".love-container");
+
       console.log(cardDiv);
 
       loveBtn.addEventListener("click", async (e) => {

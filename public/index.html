@@ -38,6 +38,7 @@
   </head>
   
   <body>
+    <!-- header -->
     <div class="header">
         <div class="header-container">
           <div class="logo-container">
@@ -53,11 +54,13 @@
                 aria-label="Search"
               />
             </form>
-            <div class="login-in" style="display:block">Login <i class="fa-solid fa-fingerprint"></i></div>
-            <div class="logged-in-okay" style="display: none;"><i class="bi bi-android2"></i></div>
+            <!-- Login -->
+            <div class="login-in" style="display:block" onclick="window.location.href ='/user/login.html' ">Login <i class="fa-solid fa-fingerprint"></i></div>
+            <div class="logged-in-okay" style="display: none;">Logged as <span class="username"></span></div>
           </div>
         </div>
     </div>
+    <!-- navigation bar -->
     <div class="navbar">
         <ul
           class="nav col-12 col-lg-aut  o me-lg-auto mb-2 justify-content-center mb-md-0"
@@ -104,6 +107,11 @@
         </button>
       </div>
     </div>
+    <!-- create event button -->
+    <div class="create-button" onclick="window.location.href ='/submit/eventsForm.html'">
+      <div class="roundedFixedBtn">Create your trip<i class="fa-solid fa-umbrella-beach"></i></div>
+   </div>
+   <!-- event container -->
     <div class="event-container">
         <!-- <div class="card" style="width: 18rem;" data_index="${memo.id}">
             <img src="../asset/isfahan.jpg" class="card-img-top" alt="...">
