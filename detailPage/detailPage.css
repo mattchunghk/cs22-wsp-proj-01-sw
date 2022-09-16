@@ -6,6 +6,10 @@
     background-color: #FA4A60 !important;
 }
 
+body {
+    padding-bottom: 30px;
+}
+
 .createForm-header {
     background-color: #FA4A60;
     width: 100vw;
@@ -26,6 +30,7 @@
 
 .logo-container {
     display: flex;
+    cursor: pointer;
 }
 
 .function-icon {
@@ -120,22 +125,23 @@
     border-radius: 10px;
 }
 
-.carousel-inner {
+.detail-carousel {
     border-radius: 10px;
 }
 
 @media screen and (max-width: 768px) {
-    .carousel-inner {
+    .detail-carousel {
         margin-top: 160px;
     }
 }
 
-.carousel-item>img {
+#detail-photo,
+#detail-photo-main {
     height: 500px !important;
     object-fit: cover;
 }
 
-.slide {
+.detail-slide {
     margin-top: 110px;
     margin-bottom: 20px;
 }
@@ -283,4 +289,9 @@
     color: #FA4A60;
     margin: 15px 20px 0 20px;
     margin-left: 20px;
+}
+
+.like-btn:disabled {
+    color: white;
+    background-color: #ff6879;
 }

@@ -1,4 +1,4 @@
-body {
+/* body {
     margin: 0;
     box-sizing: border-box;
 }
@@ -6,8 +6,6 @@ body {
 ::placeholder {
     color: #fa4a5e !important;
 }
-
-
 
 .heading-input {
     background-color: #fa4a5e;
@@ -31,14 +29,8 @@ body {
     margin: 10px 0;
 }
 
-
-
 .box1 {
-    /* background-color: #f5e37b;
-    width: 180px;
-    height: 180px; */
     position: relative;
-
 }
 
 .heading-setting {
@@ -55,44 +47,40 @@ body {
     height: 100%;
 }
 
-/* 改 .carousel image size */
-.carousel .carousel-item {
+
+
+
+.msg-item-div {
     height: 300px;
     background-color: #777;
 }
 
-.carousel-inner>.carousel-item>img {
+.msg-img {
     position: absolute;
     top: 0;
     left: 0;
-    min-width: 100%;
-    height: 300px;
+    object-fit: cover;
 }
 
 @media screen and (max-width: 767px) {
     .carousel-inner {
         margin: 20px 0px;
     }
-
-    .carousel .carousel-item {
+    .msg-item-div {
         height: 250px;
         background-color: #777;
     }
-
-    .carousel-inner>.carousel-item>img {
+    .msg-img {
         position: absolute;
         top: 0;
         left: 0;
-        min-width: 100%;
-        height: 250px;
+        object-fit: cover;
     }
 }
-
 
 .button-div {
     margin-bottom: 10px;
 }
-
 
 .delete-btn {
     background-color: rgba(45, 40, 43, 0.772);
@@ -101,7 +89,6 @@ body {
     border-radius: 50%;
     bottom: -15px;
     right: 50px;
-
 }
 
 .edit-btn {
@@ -119,9 +106,7 @@ body {
     border-radius: 50px;
     bottom: -15px;
     left: 80px;
-
 }
-
 
 .like-btn {
     background-color: rgba(233, 103, 168, 0.772);
@@ -138,4 +123,66 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+} */
+
+.messages-form-container {
+    margin-top: 100px;
+}
+
+.messages-heading {
+    margin-bottom: 0 !important;
+}
+
+.heading-setting {
+    text-align: center;
+    ;
+}
+
+.setting-input {
+    margin-top: -15px !important;
+}
+
+.messages-container {
+    margin-bottom: 20px;
+}
+
+.msg-row {
+    border: 2px solid #FA4A60;
+    padding: 15px;
+}
+
+.msg-carousel-inner {
+    height: 210px;
+}
+
+.msg-img {
+    height: 180px !important;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.message-input {
+    margin-top: 0px !important;
+    border: 1px solid #FA4A60;
+    border-radius: 10px;
+    height: 150px;
+}
+
+.msg-header {
+    font-size: 1.5rem;
+    color: #FA4A60;
+}
+
+.msg-btn {
+    margin-top: 10px;
+    border: 1px solid #FA4A60;
+    color: white;
+    border-radius: 10px;
+    background-color: #FA4A60;
+    width: 100%;
+}
+
+.like-btn:disabled {
+    color: white;
+    background-color: #ff6879;
 }

@@ -66,12 +66,13 @@ messageRoutes.get("/get/:id", async (req, res) => {
   try {
     //拎 messages 加photos 加 like 3個table合併
     const messages_comment_result =
-      await client.query(/*sql*/ `with favorite_count as ( select messages.id, count('messages.id') as favorite_count from messages left join user_favorite_messages on messages.id = user_favorite_messages.message_id group by messages.id ) 
-        select messages.*, favorite_count.favorite_count, message_images.filename from messages 
-        left join favorite_count on messages.id = favorite_count.id
-        left join message_images on messages.id = message_images.message_id
-        where event_id = ${id}
-        order by id desc;`);
+      await client.query(/*sql*/ `with favorite_count as ( select messages.id, count('messages.id') as favorite_count from messages left join user_favorite_messages on messages.id = user_favorite_messages.message_id  where user_favorite_messages is not null group by messages.id ) 
+      select messages.*, favorite_count.favorite_count, message_images.filename, users.username from messages 
+      left join favorite_count on messages.id = favorite_count.id
+      left join message_images on messages.id = message_images.message_id
+      left join  users on messages.user_id = users.id
+      where event_id = ${id}
+      order by id desc;`);
     const messages = messages_comment_result.rows;
     console.log(messages_comment_result.rows);
     // console.log(messages_comment_result);
@@ -166,9 +167,10 @@ messageRoutes.put("/update", async (req, res) => {
 });
 
 //Delete message
-messageRoutes.delete("/update", async (req, res) => {
+messageRoutes.delete("/delete", async (req, res) => {
+  let index = req.body.index;
+  console.log("delete" + index);
   try {
-    let index = req.body.index;
     // console.log(index);
     // check index 有冇野
     if (!index || !Number(index)) {
@@ -197,8 +199,6 @@ messageRoutes.delete("/update", async (req, res) => {
 messageRoutes.post("/like", async (req, res) => {
   try {
     let index = req.body.index;
-    console.log(index);
-    console.log("1");
 
     let userId;
     // check index 有冇野
@@ -206,32 +206,31 @@ messageRoutes.post("/like", async (req, res) => {
       res.status(400).json({ message: "index is not a number" });
       return;
     }
-    //check login
-    // if (req.session.user) {
-    //     userId = req.session.user.userId
-    // } else {
-    //     return res.status(400).json({ Message: "Please login first" })
-    // }
+    // check login
+    if (req.session.userId) {
+      userId = req.session.userId;
+    } else {
+      return res.status(400).json({ Message: "Please login first" });
+    }
 
     let checkLikeResult = await client.query(
-      /*sql*/ `SELECT * FROM user_favorite_messages WHERE message_id=($1)`,
-      [Number(index)]
+      /*sql*/ `SELECT * FROM user_favorite_messages WHERE message_id=($1) and user_id=($2)`,
+      [Number(index), userId]
     );
-    console.log(checkLikeResult.rowCount);
-    console.log("1");
+
     // let like_result = await client.query(/*sql*/`INSERT INTO user_favorite_messages (user_id,message_id) VALUES ($1,$2) RETURNING id`, [null, Number(index)]);
     // // console.log(like_result.rowCount);
     // let delete_like = await client.query('delete from user_favorite_messages where message_id = $1', [Number(index)]);
 
     if (checkLikeResult.rowCount > 0) {
       await client.query(
-        /*sql*/ `delete from user_favorite_messages where message_id = $1`,
-        [Number(index)]
+        /*sql*/ `delete from user_favorite_messages where message_id = ($1) and user_id=($2)`,
+        [Number(index), userId]
       );
     } else {
       await client.query(
-        /*sql*/ `INSERT INTO user_favorite_messages (message_id) VALUES ($1) RETURNING id`,
-        [Number(index)]
+        /*sql*/ `INSERT INTO user_favorite_messages (message_id,user_id) VALUES ($1,$2)  RETURNING id`,
+        [Number(index), userId]
       );
     }
 
@@ -239,6 +238,19 @@ messageRoutes.post("/like", async (req, res) => {
     return;
   } catch (err: any) {
     console.log(err.message);
+    return;
+  }
+});
+
+messageRoutes.get("/messageUser/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    let userInfo = await client.query(
+      /*sql*/ `select * from users where id = ${id}`
+    );
+    res.json(userInfo.rows[0]);
+  } catch (error) {
+    console.log(error.message);
     return;
   }
 });
