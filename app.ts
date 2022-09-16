@@ -14,6 +14,7 @@ import { Server as SocketIO } from "socket.io";
 import { format, fromUnixTime } from "date-fns";
 import { Server } from "http";
 import { messageRoutes } from "./routes/messageRoute";
+import { adminPageRoutes } from "./routes/adminPage";
 dotenv.config();
 
 const app = express();
@@ -36,6 +37,7 @@ app.use("/user", userRoutes);
 app.use("/submit", eventsSubmitRoute);
 app.use("/detail", detailPageRoute);
 app.use("/index", indexRoute);
+app.use("/", adminPageRoutes)
 
 fs.mkdirSync(uploadDir, { recursive: true });
 declare module "express-session" {
@@ -73,6 +75,7 @@ app.use("/user", express.static("loginPage"));
 app.use("/user", express.static("register"));
 app.use(express.static("uploads"));
 app.use(express.static("error"));
+
 
 io.on("connection", function (socket) {
   console.log("new socket");
