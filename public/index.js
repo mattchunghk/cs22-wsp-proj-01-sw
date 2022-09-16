@@ -1,6 +1,12 @@
 window.onload = () => {
   loadIndexEvents();
   loadLoginStatus();
+  document
+    .querySelector(".log-out-container")
+    .addEventListener("click", logout);
+  document
+    .querySelector(".log-in-container")
+    .addEventListener("click", loginPage);
 };
 async function loadLoginStatus() {
   const userRes = await fetch(`/user/loginStatus`);
@@ -10,48 +16,52 @@ async function loadLoginStatus() {
   if (userRes.ok) {
     if (userInfo.hasOwnProperty("userId")) {
       document.querySelector(
-        ".show-username"
+        "#greeting-text"
       ).innerHTML = `Hi, ${userInfo.name}`;
-      console.log(userInfo.name);
-      document.querySelector(".login-in").style.display = "none";
-      document.querySelector(".logged-in-okay").style.display = "flex";
+      // console.log(userInfo.name);
+      document.querySelector(".log-in-container").style.display = "none";
+      document.querySelector(".log-out-container").style.display = "flex";
       console.log("you are logged in");
-      // if (userInfo.isAdmin) {
-      //   document.querySelector(".admin-container").style.display = "flex";
-      // } else if (userInfo.isAdmin == null || userInfo.isAdmin == false) {
-      //   document.querySelector(".admin-container").style.display = "none";
-      // }
+      if (userInfo.isAdmin) {
+        document.querySelector(".admin-container").style.display = "flex";
+      } else if (userInfo.isAdmin == null || userInfo.isAdmin == false) {
+        document.querySelector(".admin-container").style.display = "none";
+      }
     } else {
-      document.querySelector(".show-username").innerHTML = "";
-      // document.querySelector("#admin-container").style.display = "none";
-      document.querySelector(".login-in").style.display = "flex";
-      document.querySelector(".logged-in-okay").style.display = "none";
+      document.querySelector(".greeting-text").innerHTML = "";
+      document.querySelector("#admin-container").style.display = "none";
+      document.querySelector(".log-in-container").style.display = "flex";
+      document.querySelector(".log-out-container").style.display = "none";
     }
   }
 }
 async function loadIndexEvents() {
   console.log("loadIndexEvents called");
 
-  // const pathnames = window.location.pathname.split("/");
-  // const pageId = pathnames[pathnames.length - 1];
-  // console.log("pageID= " + pageId);
-
   const res = await fetch("/index");
   const eventData = await res.json();
 
+  // console.log(loveData);
   if (res.ok) {
     let indexHtml = "";
     //let index = 0;
-    console.log(eventData[0].id);
+    // console.log(eventData[0].id);
     //<img src="${event.image[0]}" class="card-img-top" alt="...">//
     //<h5 class="card-title">${event[0].title}</h5>
     //../../../${event[0].filename}
     for (let event of eventData) {
       const imageRes = await fetch(`/detail/event_id/${event.id}`);
-      console.log(`/detail/event_id/${event.id}`);
-      // console.log(imageRes);
-      const imageData = await imageRes.json();
+      const loveRes = await fetch(`/detail/event_id/${event.id}/count`);
+
+      // console.log(`/detail/event_id/${event.id}`);
+      // console.log(loveRes);
+      const imageData = (await imageRes.json()).data;
+      const loveData = (await loveRes.json()).data;
       console.log(imageData);
+      console.log(loveData);
+      // const loveData = await loveRes.json();
+      // console.log("loveData=" + loveData);
+      // console.log("l==" + loveData);
       indexHtml += `<div class="card" style="width: 18rem;" data_index="${
         event.id
       }">
@@ -99,14 +109,21 @@ async function loadIndexEvents() {
           </div>
          
           
-          <a href="#" class="btn btn-primary" data_index="${event.id}">GO!</a>
+          <a class="btn btn-primary" data_index="${event.id}">GO!</a>
         </div>
         <div class="admin-corner" data_index="${
           event.id
         }"><i class="fa-solid fa-trash"></i><i class="fa-solid fa-pen-to-square"></i></div>
-        <div class="love-container" data_index="${event.id}">
+        ${
+          loveData == 0
+            ? `<div class="love-container" data_index="${event.id}">
           <i class="fa-solid fa-heart-circle-plus" data_index="${event.id}"></i>
-        </div>
+        </div>`
+            : `<div class="love-container" data_index="${event.id}" >
+            <i class="fa-solid fa-heart heart-red-solid" data_index="${event.id}"></i>
+          
+        </div>`
+        }
       </div>`;
       //index = event.id;
     }
@@ -120,7 +137,9 @@ async function loadIndexEvents() {
       const goBtn = cardDiv.querySelector(".btn-primary");
       const loveBtn = cardDiv.querySelector(".love-container");
 
-      console.log(cardDiv);
+      // console.log(cardDiv);
+      // console.log("===" + goBtn);
+      // console.log("===" + loveBtn);
 
       loveBtn.addEventListener("click", async (e) => {
         const element = e.target;
@@ -136,7 +155,11 @@ async function loadIndexEvents() {
             "content-type": "application/json; charset=utf-8",
           },
         });
+
         if (res.ok) {
+          let abc = res.json();
+          console.log("you get interested in this event!");
+          console.log(abc);
           loadIndexEvents();
         }
       });
@@ -146,8 +169,6 @@ async function loadIndexEvents() {
         const eventIndex = element.getAttribute("data_index");
         document.location.href = `/detail/detailPage/id/${eventIndex}`;
       });
-
-      console.log("you get interested in this event!");
     }
   }
 }
@@ -178,3 +199,19 @@ async function loadIndexEvents() {
 //   console.log("you get interested in this event!");
 // }
 // loadEventListenerOnEvent();
+
+async function loginPage() {
+  window.location.href = "/user/login.html";
+}
+
+async function logout() {
+  const res = await fetch(`/user/logout`);
+  if (res.ok) {
+    // document.querySelector("#greeting-text").innerHTML = "Logout successful";
+    // setTimeout(() => {
+    //   document.querySelector(".show-username").innerHTML = "";
+    //   loadLoginStatus();
+    // }, 1000);
+    loadLoginStatus();
+  }
+}

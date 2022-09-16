@@ -6,6 +6,7 @@ import crypto from "crypto";
 import { logger } from "../utils/logger";
 import { formParse } from "../utils/upload";
 import path from "path";
+import { isLoggedIn } from "../utils/isLoggedIn";
 
 export const detailPageRoute = express.Router();
 
@@ -33,8 +34,9 @@ async function getDetail(req: Request, res: Response) {
     const events = await client.query(
       `select * from event_images INNER JOIN events ON event_images.event_id = events.id where events.id = ${id};`
     );
-
-    res.status(200).json(events.rows);
+    // console.log("events= ", events.rows);
+    res.status(200).json({ data: events.rows });
+    // res.status(200).json(events.rows);
   } catch (error) {
     res.status(404).send(error);
   }
@@ -91,45 +93,60 @@ async function deleteEvents(req: Request, res: Response) {
   const id = req.params.id;
 }
 
-// detailPageRoute.post("/love", async (req, res) => {
-//   req.session["userID"] || "";
-//   const eventID = req.body.eventIndex;
-//   console.log("EventIndex= " + eventID);
-//   try {
-//     let userLIkeStatus = await client.query(
-//       `Select * FROM favorite_events
-//       where user_id =($1) and event_id=($2)`,
-//       [userID, eventID]
-//     );
-//     console.log(userLIkeStatus);
-//     if (userLIkeStatus.rowCount > 0) {
-//       await client.query(
-//         /*sql*/ `DELETE FROM favorite_events
-//     where user_id =($1) and event_id=($2)`,
-//         [userID, eventID]
-//       );
-//     } else {
-//       await client.query(
-//         `INSERT INTO favorite_events (user_id, event_id) VALUES ($1,$2)`,
-//         [userID, eventID]
-//       );
-//     }
+detailPageRoute.post("/love", isLoggedIn, async (req, res) => {
+  const userID = req.session["userId"] || "";
+  const eventID = req.body.eventIndex;
+  console.log("EventIndex= " + eventID);
+  try {
+    let userLIkeStatus = await client.query(
+      `Select * FROM favorite_events
+      where user_id =($1) and event_id=($2)`,
+      [userID, eventID]
+    );
+    console.log(userLIkeStatus);
+    if (userLIkeStatus.rowCount > 0) {
+      await client.query(
+        /*sql*/ `DELETE FROM favorite_events
+    where user_id =($1) and event_id=($2)`,
+        [userID, eventID]
+      );
+    } else {
+      await client.query(
+        `INSERT INTO favorite_events (user_id, event_id) VALUES ($1,$2)`,
+        [userID, eventID]
+      );
+    }
+    res.status(200).send("success");
+    return;
+  } catch (err: any) {
+    logger.error(err);
+    res.status(400).send(err.message);
+    return;
+  }
+});
 
-// let eventLikeStatus = await client.query(
-//   `Select * FROM favorite_events WHERE event_id=$1`,
-//   [eventID]
-// );
+detailPageRoute.get("/event_id/:eventId/count", async (req, res) => {
+  const userId = req.session?.userId || "1";
+  const eventId = req.params.eventId;
+  console.log({ userId });
+  console.log({ eventId });
 
-// await client.query(
-//   /*sql*/ `Update favorite_events set count=($1) WHERE id=($2)`,
-//   [eventLikeStatus.rowCount, eventID]
-// );
-// console.log(eventLikeStatus);
-//     res.status(200).json({});
-//     return;
-//   } catch (err: any) {
-//     logger.error(err);
-//     res.status(400).send(err.message);
-//     return;
-//   }
-// });
+  try {
+    let eventLovedbyUser = await client.query(
+      `SELECT count(*) FROM favorite_events WHERE event_id=${eventId} and user_id=${userId};`
+    );
+    const count = eventLovedbyUser.rows[0].count;
+    // await client.query(
+    //   /*sql*/ `Update favorite_events set count=($1) WHERE id=($2)`,
+    //   [eventLikeStatus.rowCount, eventID]
+    // );
+    console.log(eventLovedbyUser);
+
+    res.status(200).json({
+      data: count,
+    });
+    return;
+  } catch (err: any) {
+    res.status(400).send(err.message);
+  }
+});
