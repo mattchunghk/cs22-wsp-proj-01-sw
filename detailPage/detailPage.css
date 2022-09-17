@@ -161,13 +161,22 @@ body {
     font-size: 1.3rem;
 }
 
+.fa-heart {
+    cursor: pointer;
+}
+
 .fa-sack-dollar,
 .fa-users,
 .fa-heart,
-.fa-plane-departure,
+.bi-heart-fill .fa-plane-departure,
 .fa-plane-arrival,
 .fa-location-dot {
     margin-right: 20px;
+}
+
+.detail-like-text {
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .detail-date-box {
@@ -298,4 +307,9 @@ body {
 .like-btn:disabled {
     color: white;
     background-color: #ff6879;
+}
+
+
+.message-input[disabled] {
+    background-color: white;
 }

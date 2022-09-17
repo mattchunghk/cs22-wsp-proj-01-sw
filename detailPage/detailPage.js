@@ -23,6 +23,7 @@ function init() {
   document
     .querySelector(".delete-confirm")
     .addEventListener("click", deleteEvent);
+
   // document.querySelector(".loadMore").addEventListener("submit", loadMore);
 }
 let loadMoreCount = 1;
@@ -41,9 +42,7 @@ socket.on("message-delete", (data) => {
   loadMessages();
 });
 
-async function goHomePage() {
-  window.location.href = "/";
-}
+//? init function
 async function getFunctionBar() {
   const pathnames = window.location.pathname.split("/");
   const pageId = pathnames[pathnames.length - 1];
@@ -83,34 +82,21 @@ async function getFunctionBar() {
     }
   }
 }
-
-async function loginPage() {
-  window.location.href = "/user/login.html";
-}
-
-async function logout() {
-  const res = await fetch(`/user/logout`);
-  if (res.ok) {
-    document.querySelector("#greeting-text").innerHTML = "Logout successful";
-    setTimeout(() => {
-      document.querySelector("#greeting-text").innerHTML = "";
-    }, 2000);
-    loadMessages();
-    getFunctionBar();
-    joinCount();
-  }
-}
-
 async function loadEvents() {
   console.log("loadEvents called");
   const pathnames = window.location.pathname.split("/");
   const pageId = pathnames[pathnames.length - 1];
 
-  const res = await fetch(`/detail/event_id/${pageId}`); // Fetch from the correct url
-  const event = (await res.json()).data;
-  console.log(event);
+  const eventsRes = await fetch(`/detail/event_id/${pageId}`);
+  const event = (await eventsRes.json()).data;
 
-  if (res.ok) {
+  const totalLoveRes = await fetch(`/detail/totalLoveCount/${pageId}`);
+  const totalLoveResult = await totalLoveRes.json();
+
+  const eventLovedByRes = await fetch(`/detail/event_id/${pageId}/count`);
+  const eventLovedByUser = (await eventLovedByRes.json()).data;
+
+  if (eventsRes.ok) {
     let detailContainer = document.querySelector("#main-container");
 
     detailContainer.innerHTML = `
@@ -137,9 +123,10 @@ async function loadEvents() {
                 <h1 class="eventsTitle">${event[0].title}</h1>
                 <div class="col-xxl-6 col-lg-6 col-md-6 col-sm-6">
                     <div class="detail-detail-content">
-                        <div class="detail-detail-content-element"><i class="fa-regular fa-heart"></i>
-                            <spain>11 interested
-                            </spain>
+                        <div class="detail-detail-content-element" id="love-box">
+
+                      
+
                         </div>
                     </div>
                 </div>
@@ -188,7 +175,7 @@ async function loadEvents() {
               event[0].is_sporty
                 ? `<div class="col-xl-3 col-md-6 col-6 icon-col">
             <div><i class="fa-solid fa-person-skiing
-                        select-icons"></i>Sport activities
+                        select-icons"></i>Sporty
             </div>
         </div>`
                 : ""
@@ -261,6 +248,7 @@ ${
     let joinBtnDiv = document.querySelector("#join-btn");
 
     joinCount();
+    loadHeat();
 
     joinBtnDiv.addEventListener("click", async function (event) {
       const res = await fetch(`/detail/join/?eventId=${pageId}`, {
@@ -277,61 +265,6 @@ ${
   }
 }
 
-async function joinCount() {
-  const pathnames = window.location.pathname.split("/");
-  const pageId = pathnames[pathnames.length - 1];
-  const res = await fetch(`/detail/joinCount/?eventId=${pageId}`);
-  const joinCount = await res.json();
-
-  const res2 = await fetch(`/detail/event_id/${pageId}`); // Fetch from the correct url
-  const event = (await res2.json()).data;
-
-  let joinBtnDiv = document.querySelector("#join-btn");
-  let joinedPplSpan = document.querySelector("#icon-raking");
-
-  if (res.ok) {
-    joinedPplSpan.innerHTML = `${joinCount[1].count}/${event[0].people_quota}`;
-    if (joinCount[0] == false) {
-      joinBtnDiv.innerHTML = "Please Login first";
-      joinBtnDiv.disabled = true;
-    } else {
-      if (joinCount[0].count == 1) {
-        if (joinCount[0].count == 1) {
-          joinBtnDiv.innerHTML = "leave";
-        } else {
-          joinBtnDiv.innerHTML = "Join";
-        }
-      } else {
-        if (joinCount[1].count >= event[0].people_quota) {
-          joinBtnDiv.innerHTML = "Full";
-          joinBtnDiv.disabled = true;
-        } else {
-          joinBtnDiv.innerHTML = "Join";
-        }
-      }
-    }
-  }
-}
-
-async function createMessages(event) {
-  event.preventDefault();
-  const pathnames = window.location.pathname.split("/");
-  const pageId = pathnames[pathnames.length - 1];
-  const messageData = new FormData(event.currentTarget);
-  console.log(messageData);
-
-  const res = await fetch(`/messages/create/${pageId}`, {
-    method: "POST",
-    body: messageData,
-  });
-  const result = await res.text();
-  if (res.status === 200) {
-    event.target.reset();
-    console.log(result);
-  }
-}
-
-//拎messages & images
 async function loadMessages() {
   const pathnames = window.location.pathname.split("/");
   const pageId = pathnames[pathnames.length - 1];
@@ -408,8 +341,13 @@ async function loadMessages() {
 
 
                     <div class="col-md-8 box1">
-                        <textarea class="form-control message-input readtext" id="exampleFormControlTextarea1" placeholder="输入文字"
-                            cols="110" rows="10"  >${message.comment}</textarea>
+                        <textarea class="form-control message-input readtext" id="exampleFormControlTextarea1" placeholder=""
+                            cols="110" rows="10"  ${
+                              loginStatusJson.isAdmin ||
+                              loginStatusJson.userId == message.user_id
+                                ? ""
+                                : "disabled"
+                            } >${message.comment}</textarea>
                         <div class="row button-div">
                         
                             <div class="col-md-4">
@@ -497,8 +435,13 @@ async function loadMessages() {
 
 
                   <div class="col-md-12 box1">
-                      <textarea class="form-control message-input readtext" id="exampleFormControlTextarea1" placeholder="输入文字"
-                          cols="110" rows="10"  >${message.comment}</textarea>
+                      <textarea class="form-control message-input readtext" id="exampleFormControlTextarea1" placeholder=""
+                          cols="110" rows="10" ${
+                            loginStatusJson.isAdmin ||
+                            loginStatusJson.userId == message.user_id
+                              ? ""
+                              : "disabled"
+                          } >${message.comment}</textarea>
                       <div class="row button-div">
                       
                           <div class="col-md-4">
@@ -630,6 +573,11 @@ async function loadMessages() {
     });
   }
 }
+
+//? addEventListener function
+async function goHomePage() {
+  window.location.href = "/";
+}
 async function deleteEvent() {
   const pathnames = window.location.pathname.split("/");
   const pageId = pathnames[pathnames.length - 1];
@@ -646,6 +594,114 @@ async function deleteEvent() {
     console.log("Error deleting");
   }
 }
+async function detailLove() {
+  const pathnames = window.location.pathname.split("/");
+  const pageId = pathnames[pathnames.length - 1];
+  const res = await fetch(`/detail/love`, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ eventIndex: pageId }),
+  });
+  if (res.ok) {
+    // loadEvents();
+    loadHeat();
+  }
+}
+
+async function logout() {
+  const res = await fetch(`/user/logout`);
+  if (res.ok) {
+    document.querySelector("#greeting-text").innerHTML = "Logout successful";
+    setTimeout(() => {
+      document.querySelector("#greeting-text").innerHTML = "";
+    }, 2000);
+    loadMessages();
+    getFunctionBar();
+    joinCount();
+  }
+}
+
+async function createMessages(event) {
+  event.preventDefault();
+  const pathnames = window.location.pathname.split("/");
+  const pageId = pathnames[pathnames.length - 1];
+  const messageData = new FormData(event.currentTarget);
+  console.log(messageData);
+
+  const res = await fetch(`/messages/create/${pageId}`, {
+    method: "POST",
+    body: messageData,
+  });
+  const result = await res.text();
+  if (res.status === 200) {
+    event.target.reset();
+    console.log(result);
+  }
+}
+async function joinCount() {
+  const pathnames = window.location.pathname.split("/");
+  const pageId = pathnames[pathnames.length - 1];
+  const res = await fetch(`/detail/joinCount/?eventId=${pageId}`);
+  const joinCount = await res.json();
+
+  const res2 = await fetch(`/detail/event_id/${pageId}`); // Fetch from the correct url
+  const event = (await res2.json()).data;
+
+  let joinBtnDiv = document.querySelector("#join-btn");
+  let joinedPplSpan = document.querySelector("#icon-raking");
+
+  if (res.ok) {
+    joinedPplSpan.innerHTML = `${joinCount[1].count}/${event[0].people_quota}`;
+    if (joinCount[0] == false) {
+      joinBtnDiv.innerHTML = "Please Login first";
+      joinBtnDiv.disabled = true;
+    } else {
+      if (joinCount[0].count == 1) {
+        if (joinCount[0].count == 1) {
+          joinBtnDiv.innerHTML = "leave";
+        } else {
+          joinBtnDiv.innerHTML = "Join";
+        }
+      } else {
+        if (joinCount[1].count >= event[0].people_quota) {
+          joinBtnDiv.innerHTML = "Full";
+          joinBtnDiv.disabled = true;
+        } else {
+          joinBtnDiv.innerHTML = "Join";
+        }
+      }
+    }
+  }
+}
+
+//? general function
+async function loginPage() {
+  window.location.href = "/user/login.html";
+}
+async function loadHeat() {
+  const pathnames = window.location.pathname.split("/");
+  const pageId = pathnames[pathnames.length - 1];
+
+  const eventLovedByRes = await fetch(`/detail/event_id/${pageId}/count`);
+  const eventLovedByUser = (await eventLovedByRes.json()).data;
+
+  const totalLoveRes = await fetch(`/detail/totalLoveCount/${pageId}`);
+  const totalLoveResult = await totalLoveRes.json();
+
+  let heatBox = document.querySelector("#love-box");
+
+  if (eventLovedByUser == 1) {
+    heatBox.innerHTML = '<i class="fa-solid fa-heart"></i>';
+  } else {
+    heatBox.innerHTML = '<i class="fa-regular fa-heart"></i>';
+  }
+  heatBox.innerHTML += `<spain class="detail-like-text">${totalLoveResult.count} interested</spain>`;
+
+  document.querySelector("#love-box").addEventListener("click", detailLove);
+}
+
 // async function loadMore() {
 //   loadMoreCount += 1;
 //   loadMessages();

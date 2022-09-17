@@ -14,9 +14,10 @@ export const detailPageRoute = express.Router();
 //? /detail
 detailPageRoute.get("/event_id/:id", getDetail);
 detailPageRoute.get("/detailPage/id/:id", goDetailPage);
-detailPageRoute.post("/join", joinEvent);
+detailPageRoute.post("/join", isLoggedIn, joinEvent);
 detailPageRoute.get("/joinCount", joinCount);
-detailPageRoute.delete("/delete/:id", deleteEvents);
+detailPageRoute.get("/totalLoveCount/:id", totalLoveCount);
+detailPageRoute.delete("/delete/:id", isLoggedIn, deleteEvents);
 // Query
 //localhost:8080/detail/detailPage.html?id=2
 
@@ -105,6 +106,18 @@ async function deleteEvents(req: Request, res: Response) {
     DELETE FROM events WHERE id = ${id};
     `);
     res.status(200).json({ message: "Delete Events successfully" });
+  } catch (error) {
+    res.status(404).send(error);
+  }
+}
+
+async function totalLoveCount(req: Request, res: Response) {
+  const id = req.params.id;
+  try {
+    let totalLoveResult = await client.query(`
+    SELECT count(*) FROM favorite_events WHERE event_id = ${id};
+    `);
+    res.status(200).json(totalLoveResult.rows[0]);
   } catch (error) {
     res.status(404).send(error);
   }
