@@ -11,7 +11,7 @@ body {
 }
 
 .createForm-header {
-    background-color: #FA4A60;
+    background-color: #fa4a5efe;
     width: 100vw;
     position: fixed;
     top: 0;
@@ -50,6 +50,7 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+
     .function-container,
     .logo-container {
         display: flex;
@@ -221,12 +222,15 @@ body {
     box-shadow: 1px 1px 12px 1px#FA4A60;
 }
 
+.delete-confirm,
 .btn-submit {
     margin: 20px 0 20px 0;
     background-color: #FA4A60;
     border: none;
 }
 
+.delete-confirm:focus,
+.delete-confirm:hover,
 .btn-submit:hover,
 .btn-submit:focus {
     color: white;

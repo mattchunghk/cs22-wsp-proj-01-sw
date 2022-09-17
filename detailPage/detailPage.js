@@ -20,7 +20,12 @@ function init() {
   document
     .querySelector("#messages-form")
     .addEventListener("submit", createMessages);
+  document
+    .querySelector(".delete-confirm")
+    .addEventListener("click", deleteEvent);
+  // document.querySelector(".loadMore").addEventListener("submit", loadMore);
 }
+let loadMoreCount = 1;
 
 const socket = io.connect();
 socket.on("new-message", (data) => {
@@ -44,7 +49,7 @@ async function getFunctionBar() {
   const pageId = pathnames[pathnames.length - 1];
 
   const res2 = await fetch(`/detail/event_id/${pageId}`); // Fetch from the correct url
-  const event = await res2.json();
+  const event = (await res2.json()).data;
   const res = await fetch(`/user/loginStatus`);
   const userInfo = await res.json();
 
@@ -102,7 +107,8 @@ async function loadEvents() {
   const pageId = pathnames[pathnames.length - 1];
 
   const res = await fetch(`/detail/event_id/${pageId}`); // Fetch from the correct url
-  const event = await res.json();
+  const event = (await res.json()).data;
+  console.log(event);
 
   if (res.ok) {
     let detailContainer = document.querySelector("#main-container");
@@ -278,7 +284,7 @@ async function joinCount() {
   const joinCount = await res.json();
 
   const res2 = await fetch(`/detail/event_id/${pageId}`); // Fetch from the correct url
-  const event = await res2.json();
+  const event = (await res2.json()).data;
 
   let joinBtnDiv = document.querySelector("#join-btn");
   let joinedPplSpan = document.querySelector("#icon-raking");
@@ -307,8 +313,6 @@ async function joinCount() {
   }
 }
 
-//寫留言
-
 async function createMessages(event) {
   event.preventDefault();
   const pathnames = window.location.pathname.split("/");
@@ -322,6 +326,7 @@ async function createMessages(event) {
   });
   const result = await res.text();
   if (res.status === 200) {
+    event.target.reset();
     console.log(result);
   }
 }
@@ -340,7 +345,7 @@ async function loadMessages() {
   const messagesContainer = document.querySelector("#messages_container");
   messagesContainer.innerHTML = "";
   // ${memo.image ? `<img src="http://localhost:8080/uploads/${memo.image}" alt="Image" /> ` : ""}
-
+  // for (let i = 0; i < 1 + loadMoreCount; i++) {
   for (let message of messagesJson) {
     let imageHtml = "";
     // console.log(message.images);
@@ -625,3 +630,23 @@ async function loadMessages() {
     });
   }
 }
+async function deleteEvent() {
+  const pathnames = window.location.pathname.split("/");
+  const pageId = pathnames[pathnames.length - 1];
+  const res = await fetch(`/detail/delete/${pageId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (res.ok) {
+    goHomePage();
+  } else {
+    console.log("Error deleting");
+  }
+}
+// async function loadMore() {
+//   loadMoreCount += 1;
+//   loadMessages();
+// }

@@ -5,16 +5,18 @@ import fetch from "cross-fetch";
 import crypto from "crypto";
 import { logger } from "../utils/logger";
 import { formParse } from "../utils/upload";
-import path from "path";
+import path, { resolve } from "path";
 import { isLoggedIn } from "../utils/isLoggedIn";
+import { request } from "http";
 
 export const detailPageRoute = express.Router();
 
+//? /detail
 detailPageRoute.get("/event_id/:id", getDetail);
 detailPageRoute.get("/detailPage/id/:id", goDetailPage);
 detailPageRoute.post("/join", joinEvent);
 detailPageRoute.get("/joinCount", joinCount);
-detailPageRoute.delete("/delete", deleteEvents);
+detailPageRoute.delete("/delete/:id", deleteEvents);
 // Query
 //localhost:8080/detail/detailPage.html?id=2
 
@@ -91,6 +93,21 @@ async function joinCount(req: Request, res: Response) {
 
 async function deleteEvents(req: Request, res: Response) {
   const id = req.params.id;
+  console.log(`deleting ${id}`);
+  try {
+    await client.query(`
+    DELETE FROM user_favorite_messages WHERE message_id in (select id from messages WHERE event_id = ${id});
+    DELETE FROM message_images WHERE message_id in (select id from messages WHERE event_id = ${id});
+    DELETE FROM messages WHERE event_id = ${id};
+    DELETE FROM event_images WHERE event_id = ${id};
+    DELETE FROM event_participants WHERE event_id = ${id};
+    DELETE FROM favorite_events WHERE event_id = ${id};
+    DELETE FROM events WHERE id = ${id};
+    `);
+    res.status(200).json({ message: "Delete Events successfully" });
+  } catch (error) {
+    res.status(404).send(error);
+  }
 }
 
 detailPageRoute.post("/love", isLoggedIn, async (req, res) => {
