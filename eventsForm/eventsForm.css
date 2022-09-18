@@ -6,30 +6,87 @@
     background-color: #FA4A60 !important;
 }
 
-#events-thanks-container {
-    width: 85vw;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.thank-header {
-    margin-top: 220px;
-    color: #FA4A60;
-    text-align: center;
-}
+/* ? header start */
 
 .createForm-header {
-    background-color: #FA4A60;
-    height: 100px;
+    background-color: #fa4a5efe;
     width: 100vw;
     position: fixed;
     top: 0;
+    z-index: 3 !important;
+}
+
+
+.logo-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 4rem;
+    color: white;
+    margin-top: 10px;
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.fa-solid.fa-umbrella-beach {
+    color: white;
 }
 
 .logo-container {
     display: flex;
+    cursor: pointer;
+}
+
+.function-icon {
+    color: white !important;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.function-name {
+    margin-right: 10px;
+}
+
+.function-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 10px 15px 10px;
+}
+
+@media screen and (max-width: 768px) {
+
+    .function-container,
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.greeting-container {
+    cursor: default !important;
+}
+
+.greeting-container:hover {
+    color: white !important;
+}
+
+.fa-pen-to-square {
+    color: white;
+}
+
+.function-div {
+    color: white;
+    font-size: 1.2rem;
+    display: flex;
+    margin-right: 15px;
+    cursor: pointer
+}
+
+.function-div:hover {
+    color: #fca0ab;
 }
 
 .fa-umbrella-beach {
@@ -44,6 +101,9 @@
     color: white;
     margin-top: 10px;
 }
+
+
+/* ? header end */
 
 .form-photo {
     margin-top: 120px;
@@ -188,4 +248,11 @@ input[type="file"] {
     color: #FA4A60;
     margin: 15px 20px 0 20px;
     margin-left: 20px;
+}
+
+.btn-submit:disabled {
+    background-color: #FA4A60;
+    border: solid 1px #FA4A60;
+    box-shadow: 1px 1px 12px 1px#FA4A60;
+
 }

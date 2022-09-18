@@ -226,7 +226,10 @@ ${
             <iframe width="100%" height="400" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDgzJsIne7hMjjk8yGSPloiQ_FYdNr-g-&q=${event[0].city
               .trim()
               .split(" ")
-              .join("+")}"></iframe>
+              .join("+")},${event[0].country
+      .trim()
+      .split(" ")
+      .join("+")}"></iframe>
             <div class="d-grid gap-2 ">
                 <button class="btn btn-primary btn-submit" id="join-btn">Join</button>
             </div>
@@ -492,9 +495,7 @@ async function loadMessages() {
                  
                               <button class='msg-btn like-btn' index="${
                                 message.id
-                              }" ${
-        loginStatusJson.hasOwnProperty("userId") ? "" : "disabled"
-      }>
+                              }" >
                                   <i class="bi bi-emoji-heart-eyes" index="${
                                     message.id
                                   }"></i>
@@ -578,6 +579,11 @@ async function loadMessages() {
       });
       if (messageEditRes.ok) {
         loadMessages();
+      } else {
+        likeBtn.innerHTML = "Please Login first";
+        setTimeout(() => {
+          loadMessages();
+        }, 1000);
       }
     });
   }
