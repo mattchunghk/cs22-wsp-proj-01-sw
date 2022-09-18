@@ -81,6 +81,36 @@
   padding: 0px 30px 0px 30px;
   margin: 0px;
 }
+.carousel-inner {
+  max-width: 100%;
+  max-height: 590px !important;
+}
+
+.carousel-inner > .carousel-item > img {
+  width: 100% !important;
+
+  height: 590px !important;
+  object-fit: cover;
+  border-radius: 15px;
+}
+@media only screen and (max-width: 959px) {
+}
+
+/* Tablet Portrait size to standard 960 (devices and browsers) */
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+}
+
+/* All Mobile Sizes (devices and browser) */
+@media only screen and (max-width: 767px) {
+}
+
+/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+}
+
+/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+@media only screen and (max-width: 479px) {
+}
 .create-button {
   position: fixed;
   bottom: 3%;
@@ -120,13 +150,6 @@
   color: #f86c7c;
 }
 
-.carousel-inner > .carousel-item > img {
-  /* width: 100% !important; */
-  /* height: 80vh; */
-  height: 590px !important;
-  object-fit: cover;
-  border-radius: 15px;
-}
 .search-bar {
   width: 200px;
   height: 40x;
@@ -169,7 +192,11 @@
   line-height: 1.5em; /* fallback */
   max-height: 4.5em; /* fallback */
 }
-
+.toast {
+  position: fixed;
+  top: 80%;
+  right: 40%;
+}
 .admin-corner {
   position: absolute;
   left: 195px;

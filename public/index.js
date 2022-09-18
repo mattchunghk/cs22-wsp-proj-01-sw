@@ -142,25 +142,37 @@ async function loadIndexEvents() {
       // console.log("===" + loveBtn);
 
       loveBtn.addEventListener("click", async (e) => {
-        const element = e.target;
+        const resLogin = await fetch("/user/loginStatus");
+        const userInfo = await resLogin.json();
+        if (resLogin.ok) {
+          if (!userInfo.hasOwnProperty("userId")) {
+            const toastLiveExample = document.querySelector(".toast");
 
-        const eventIndex = element.getAttribute("data_index");
-        console.log("clicked, index=" + eventIndex);
-        const res = await fetch("/detail/love", {
-          method: "POST",
-          body: JSON.stringify({
-            eventIndex: eventIndex,
-          }),
-          headers: {
-            "content-type": "application/json; charset=utf-8",
-          },
-        });
+            const toast = new bootstrap.Toast(toastLiveExample);
 
-        if (res.ok) {
-          let abc = res.json();
-          console.log("you get interested in this event!");
-          console.log(abc);
-          loadIndexEvents();
+            toast.show();
+          }
+        } else {
+          const element = e.target;
+
+          const eventIndex = element.getAttribute("data_index");
+          console.log("clicked, index=" + eventIndex);
+          const res = await fetch("/detail/love", {
+            method: "POST",
+            body: JSON.stringify({
+              eventIndex: eventIndex,
+            }),
+            headers: {
+              "content-type": "application/json; charset=utf-8",
+            },
+          });
+
+          if (res.ok) {
+            let abc = res.json();
+            console.log("you get interested in this event!");
+            console.log(abc);
+            loadIndexEvents();
+          }
         }
       });
 
@@ -213,5 +225,7 @@ async function logout() {
     //   loadLoginStatus();
     // }, 1000);
     loadLoginStatus();
+    loadIndexEvents();
   }
+  loadIndexEvents();
 }
