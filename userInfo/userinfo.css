@@ -1,0 +1,96 @@
+::placeholder {
+  color: #fa4a5e !important;
+}
+
+::selection {
+  background-color: #fa4a60 !important;
+}
+
+.userInfo-header {
+  background-color: #fa4a60;
+  height: 100px;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+}
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.function-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 10px 15px 10px;
+}
+.logo-container {
+  display: flex;
+  cursor: pointer;
+}
+.logo-title {
+  font-family: "Baloo 2", cursive;
+  font-size: 4rem;
+  color: white;
+  margin-top: 10px;
+}
+.fa-umbrella-beach {
+  color: white;
+  font-size: 4rem;
+  margin: 20px 10px 20px 20px;
+}
+@media screen and (max-width: 768px) {
+  .function-container,
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.function-div {
+  color: white;
+  font-size: 1.2rem;
+  display: flex;
+  margin-right: 15px;
+  cursor: pointer;
+}
+.function-div:hover {
+  color: #fca0ab;
+}
+.fa-umbrella-beach {
+  color: white;
+  font-size: 4rem;
+  margin: 20px 10px 20px 20px;
+}
+.whole-container {
+  background-color: white;
+  margin: 130px 10vw 100px 10vw;
+  box-shadow: 5px 10px 10px 5px rgba(54, 53, 53, 0.2);
+  border-radius: 15px;
+}
+.button-event-container {
+  display: flex;
+  flex-direction: row;
+}
+
+/* .container-center {
+  text-align: center;
+} */
+.button-container {
+  background-color: aliceblue;
+  width: 20vw;
+}
+.event-container {
+  font-size: large;
+}
+.event-btn {
+  height: 8vh;
+  cursor: pointer;
+  font-family: "Baloo 2", cursive;
+  margin-left: 15px;
+}
+.userinfo-container {
+  font-family: "Baloo 2", cursive;
+  font-size: larger;
+  padding-top: 20px;
+  margin-left: 30px;
+}

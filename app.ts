@@ -37,7 +37,7 @@ app.use("/user", userRoutes);
 app.use("/submit", eventsSubmitRoute);
 app.use("/detail", detailPageRoute);
 app.use("/index", indexRoute);
-app.use("/", adminPageRoutes)
+app.use("/", adminPageRoutes);
 
 fs.mkdirSync(uploadDir, { recursive: true });
 declare module "express-session" {
@@ -73,9 +73,9 @@ app.use("/submit", express.static("eventsForm"));
 app.use("/detail", express.static("detailPage"));
 app.use("/user", express.static("loginPage"));
 app.use("/user", express.static("register"));
+app.use("/userInfo", express.static("userInfo"));
 app.use(express.static("uploads"));
 app.use(express.static("error"));
-
 
 io.on("connection", function (socket) {
   console.log("new socket");
