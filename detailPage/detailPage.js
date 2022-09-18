@@ -8,6 +8,7 @@ function init() {
   loadEvents();
   loadMessages();
   getFunctionBar();
+
   document
     .querySelector(".log-out-container")
     .addEventListener("click", logout);
@@ -23,6 +24,9 @@ function init() {
   document
     .querySelector(".delete-confirm")
     .addEventListener("click", deleteEvent);
+  document
+    .querySelector(".admin-container")
+    .addEventListener("click", goAdminPage);
 
   // document.querySelector(".loadMore").addEventListener("submit", loadMore);
 }
@@ -207,8 +211,17 @@ ${
 </div>`
     : ""
 }
+
+<div class="event-participants">
+<div class="participants-title">Joined Participants</div>
+<div class="participants-content"></div>
+</div>
             </div>
         </div>
+
+
+
+
         <div class="col-lg-4 col-md-12 map">
             <iframe width="100%" height="400" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDgzJsIne7hMjjk8yGSPloiQ_FYdNr-g-&q=${event[0].city
               .trim()
@@ -249,6 +262,7 @@ ${
 
     joinCount();
     loadHeat();
+    loadEventParticipants();
 
     joinBtnDiv.addEventListener("click", async function (event) {
       const res = await fetch(`/detail/join/?eventId=${pageId}`, {
@@ -271,20 +285,15 @@ async function loadMessages() {
   const messagesResult = await fetch(`/messages/get/${pageId}`);
   const messagesJson = await messagesResult.json();
 
-  // const messagesLikeResult = await fetch('/message_like/get');
-  // const messagesLikeJson = await messagesLikeResult.json();
-  // console.log(messagesLikeJson);
-
   const messagesContainer = document.querySelector("#messages_container");
   messagesContainer.innerHTML = "";
-  // ${memo.image ? `<img src="http://localhost:8080/uploads/${memo.image}" alt="Image" /> ` : ""}
-  // for (let i = 0; i < 1 + loadMoreCount; i++) {
+
   for (let message of messagesJson) {
     let imageHtml = "";
-    // console.log(message.images);
+
     const loginStatusRes = await fetch(`/user/loginStatus`);
     const loginStatusJson = await loginStatusRes.json();
-    console.log(loginStatusJson);
+
     if (message.images != "") {
       for (let messagesImage of message.images) {
         // console.log(messagesImage);
@@ -574,7 +583,29 @@ async function loadMessages() {
   }
 }
 
+async function loadEventParticipants() {
+  const pathnames = window.location.pathname.split("/");
+  const pageId = pathnames[pathnames.length - 1];
+  const res = await fetch(`/detail/eventsParticipants/${pageId}`);
+  const eventParticipants = await res.json();
+  let participantsContent = document.querySelector(".participants-content");
+
+  if (res.ok) {
+    participantsContent.innerHTML = "";
+    for (let i = 0; i < eventParticipants.length; i++) {
+      if (i == eventParticipants.length - 1) {
+        participantsContent.innerHTML += `${eventParticipants[i].username}`;
+      } else {
+        participantsContent.innerHTML += `${eventParticipants[i].username}, `;
+      }
+    }
+  }
+}
+
 //? addEventListener function
+async function goAdminPage() {
+  window.location.href = "/adminPage.html";
+}
 async function goHomePage() {
   window.location.href = "/";
 }
@@ -604,9 +635,16 @@ async function detailLove() {
     },
     body: JSON.stringify({ eventIndex: pageId }),
   });
+  let heatBox = document.querySelector("#love-box");
   if (res.ok) {
     // loadEvents();
     loadHeat();
+  } else {
+    heatBox.innerHTML = '<i class="fa-solid fa-lock"></i>';
+    heatBox.innerHTML += "Please Login first";
+    setTimeout(() => {
+      loadHeat();
+    }, 1000);
   }
 }
 
@@ -673,6 +711,7 @@ async function joinCount() {
         }
       }
     }
+    loadEventParticipants();
   }
 }
 
@@ -692,14 +731,16 @@ async function loadHeat() {
 
   let heatBox = document.querySelector("#love-box");
 
-  if (eventLovedByUser == 1) {
-    heatBox.innerHTML = '<i class="fa-solid fa-heart"></i>';
-  } else {
-    heatBox.innerHTML = '<i class="fa-regular fa-heart"></i>';
-  }
-  heatBox.innerHTML += `<spain class="detail-like-text">${totalLoveResult.count} interested</spain>`;
+  if (eventLovedByRes.ok) {
+    if (eventLovedByUser == 1) {
+      heatBox.innerHTML = '<i class="fa-solid fa-heart"></i>';
+    } else {
+      heatBox.innerHTML = '<i class="fa-regular fa-heart"></i>';
+    }
+    heatBox.innerHTML += `<spain class="detail-like-text">${totalLoveResult.count} interested</spain>`;
 
-  document.querySelector("#love-box").addEventListener("click", detailLove);
+    document.querySelector("#love-box").addEventListener("click", detailLove);
+  }
 }
 
 // async function loadMore() {

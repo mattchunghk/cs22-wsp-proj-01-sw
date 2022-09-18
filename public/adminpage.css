@@ -1,0 +1,196 @@
+/* ? root */
+
+::placeholder {
+    color: #fa4a5e !important;
+}
+
+::selection {
+    background-color: #FA4A60 !important;
+}
+
+body {
+    padding-bottom: 30px;
+}
+
+hr {
+    color: #FA4A60;
+    border: none;
+    height: 3px;
+    background-color: #FA4A60;
+}
+
+/* ? header start */
+
+.createForm-header {
+    background-color: #fa4a5efe;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    z-index: 3 !important;
+}
+
+
+.logo-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 4rem;
+    color: white;
+    margin-top: 10px;
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.fa-solid.fa-umbrella-beach {
+    color: white;
+}
+
+.logo-container {
+    display: flex;
+    cursor: pointer;
+}
+
+.function-icon {
+    color: white !important;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.function-name {
+    margin-right: 10px;
+}
+
+.function-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 10px 15px 10px;
+}
+
+@media screen and (max-width: 768px) {
+
+    .function-container,
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.greeting-container {
+    cursor: default !important;
+}
+
+.greeting-container:hover {
+    color: white !important;
+}
+
+.fa-pen-to-square {
+    color: white;
+}
+
+.function-div {
+    color: white;
+    font-size: 1.2rem;
+    display: flex;
+    margin-right: 15px;
+    cursor: pointer
+}
+
+.function-div:hover {
+    color: #fca0ab;
+}
+
+.fa-umbrella-beach {
+    color: white;
+    font-size: 4rem;
+    margin: 20px 10px 20px 20px;
+}
+
+/* ? header end */
+
+/* ? main start */
+.main-container {
+    margin-top: 120px;
+}
+
+@media screen and (max-width: 768px) {
+    .main-container {
+        margin-top: 180px;
+    }
+}
+
+.main-row {
+    display: flex;
+    justify-content: center;
+}
+
+.admin-box,
+.user-box {
+    width: 400px;
+    margin: 20px;
+    border: 1px solid #FA4A60;
+    height: auto;
+    padding: 20px;
+
+    border-radius: 10px;
+}
+
+.user-main-text,
+.admin-main-text {
+    color: #FA4A60;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.userAllDivs {
+    margin-bottom: 30px;
+}
+
+.form-check-label {
+    color: #FA4A60;
+}
+
+.form-switch .form-check-input {
+    height: 24px;
+    width: 48px;
+    display: flex;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(250, 74, 96)'/></svg>");
+}
+
+.form-switch .form-check-input:focus {
+    border-color: #FA4A60;
+    display: flex;
+    outline: 0;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(250, 74, 96)'/></svg>");
+}
+
+.form-switch .form-check-input:checked {
+    background-color: #FA4A60;
+    border-color: #FA4A60;
+    border: none;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(255,255,255,1.0)'/></svg>");
+}
+
+.form-check-label {
+    margin-left: 10px;
+    font-size: 1.2rem;
+}
+
+.select-icons {
+    color: #FA4A60;
+    margin: 15px 20px 0 20px;
+    margin-left: 20px;
+}
+
+.user-name {
+    color: #FA4A60;
+}
+
+
+
+
+
+/* ? main end*/

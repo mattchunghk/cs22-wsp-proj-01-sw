@@ -18,6 +18,14 @@ body {
     z-index: 3 !important;
 }
 
+
+.logo-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 4rem;
+    color: white;
+    margin-top: 10px;
+}
+
 .header-row {
     display: flex;
     justify-content: space-between;
@@ -88,6 +96,16 @@ body {
     margin-top: 10px;
 }
 
+
+.fa-umbrella-beach {
+    color: white;
+    font-size: 4rem;
+    margin: 20px 10px 20px 20px;
+}
+
+
+/* ?detail part start */
+
 #googleMap {
     margin-top: 3000px;
     margin-bottom: 30px;
@@ -98,18 +116,7 @@ body {
     font-size: 1rem;
 }
 
-.fa-umbrella-beach {
-    color: white;
-    font-size: 4rem;
-    margin: 20px 10px 20px 20px;
-}
 
-.logo-title {
-    font-family: 'Baloo 2', cursive;
-    font-size: 4rem;
-    color: white;
-    margin-top: 10px;
-}
 
 .img-container {
     display: flex;
@@ -166,6 +173,7 @@ body {
 }
 
 .fa-sack-dollar,
+.fa-lock,
 .fa-users,
 .fa-heart,
 .bi-heart-fill .fa-plane-departure,
@@ -312,4 +320,25 @@ body {
 
 .message-input[disabled] {
     background-color: white;
+}
+
+.event-participants {
+    width: 90%;
+    border-radius: 10px;
+    margin: 40px 0px 0px 30px;
+    border: 1px solid #FA4A60;
+    height: 200px;
+
+}
+
+.participants-title {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #FA4A60;
+    border-bottom: 1px solid #FA4A60;
+}
+
+.participants-content {
+    margin-top: 10px;
+    font-size: 1.1rem;
 }

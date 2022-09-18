@@ -16,6 +16,8 @@ detailPageRoute.get("/event_id/:id", getDetail);
 detailPageRoute.get("/detailPage/id/:id", goDetailPage);
 detailPageRoute.post("/join", isLoggedIn, joinEvent);
 detailPageRoute.get("/joinCount", joinCount);
+detailPageRoute.get("/userPage/:table", userPage);
+detailPageRoute.get("/eventsParticipants/:id", eventsParticipants);
 detailPageRoute.get("/totalLoveCount/:id", totalLoveCount);
 detailPageRoute.delete("/delete/:id", isLoggedIn, deleteEvents);
 // Query
@@ -118,6 +120,34 @@ async function totalLoveCount(req: Request, res: Response) {
     SELECT count(*) FROM favorite_events WHERE event_id = ${id};
     `);
     res.status(200).json(totalLoveResult.rows[0]);
+  } catch (error) {
+    res.status(404).send(error);
+  }
+}
+
+async function userPage(req: Request, res: Response) {
+  const userId = req.session.userId;
+  const table = req.params.table;
+  try {
+    let userInfoResult = await client.query(`
+    select events.*, event_images.filename from events  
+    left join  event_images ON event_images.event_id  = events.id 
+    where user_id in (select user_id from ${table} where user_id = ${userId})
+    LIMIT 1
+    `);
+    res.status(200).json(userInfoResult.rows[0]);
+  } catch (error) {
+    res.status(404).send(error);
+  }
+}
+
+async function eventsParticipants(req: Request, res: Response) {
+  const eventsId = req.params.id;
+  try {
+    let userInfoResult = await client.query(`
+    select username from users where id in (select user_id from event_participants where event_id = ${eventsId});
+    `);
+    res.status(200).json(userInfoResult.rows);
   } catch (error) {
     res.status(404).send(error);
   }

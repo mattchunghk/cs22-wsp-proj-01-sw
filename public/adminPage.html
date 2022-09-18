@@ -18,46 +18,77 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="" />
+  <link rel="stylesheet" href="../../adminpage.css" />
   <title>Join ME GO!</title>
   <link rel="icon" href="assets/img/angry-panda.ico" type="image/x-icon" />
 </head>
 
 <body>
 
-  <Header class="createForm-header">
-    <div class="logo-container">
-      <i class="fa-solid fa-umbrella-beach"></i>
-      <div class="logo-title">JoinMeGo</div>
+  <header class="createForm-header">
+    <div class="row header-row">
+      <div class="col-lg-4 col-md-5 col-sm-12">
+        <div class="logo-container">
+          <i class="fa-solid fa-umbrella-beach"></i>
+          <div class="logo-title">JoinMeGo</div>
+        </div>
+      </div>
+
+      <div class="col-lg-8 col-md-7 col-sm-12">
+        <div class="function-container">
+          <div class="function-div greeting-container">
+            <div class="function-name" id="greeting-text"></div>
+          </div>
+
+          <div class="function-div log-in-container" id="log-in-container">
+            <i class="fa-solid fa-right-to-bracket function-icon"> </i>
+            <div class="function-name">Login</div>
+          </div>
+          <div class="function-div log-out-container" id="log-out-container">
+            <i class="fa-solid fa-right-from-bracket function-icon"></i>
+            <div class="function-name">Logout</div>
+          </div>
+          <div class="function-div home-container" id="home-container">
+            <i class="fa-solid fa-house function-icon"></i>
+            <div class="function-name">Homepage</div>
+          </div>
+        </div>
+      </div>
     </div>
+  </header>
+
   </Header>
   <section>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-5 admin-box">
-          <div class="row">
-            <div> Admin </div>
+    <div class="container main-container">
+      <div class="row main-row">
+
+        <div class="col-md-6 admin-box">
+          <div class="row admin-row">
+            <div class="admin-main-text">Admin</div>
+            <hr>
             <div id="admin_container">
 
 
 
-            </div>
-            <div class="col-md-5 user-box">
-              <div class="row">
-                <div>Member</div>
-                <div id="user_container">
+          </div>
+        </div>
 
-                </div>
-
-
-              </div>
+        </div>
+        <div class="col-md-6 user-box">
+          <div class="row user-row">
+            <div class="user-main-text">Member</div>
+            <hr>
+            <div id="user_container">
 
             </div>
           </div>
-        </div>
-      </div>
 
+        </div>
+
+
+      </div>
+    </div>
   </section>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
