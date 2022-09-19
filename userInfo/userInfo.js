@@ -46,8 +46,15 @@ async function getFunctionBar() {
 	}
 }
 async function loadUserInfo(){
-
+    const res = await fetch(`/user/loginStatus`)
+	const userInfo = await res.json()
+    if (res.ok) {
+		if (userInfo.hasOwnProperty('userId')) {
+            document.querySelector(".show-username")
+        
+        }}
 }
+
 
 async function loadLikeEvents(){
     // const event=req.params.table;
