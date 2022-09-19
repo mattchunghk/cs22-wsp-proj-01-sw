@@ -1,33 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,300;1,400;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 .header {
-  padding: 30px 30px 0px 30px;
+	padding: 30px 30px 0px 30px;
 }
 .header-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	border-bottom: solid 2px rgba(187, 186, 186, 0.651);
 }
 .login-search-section {
-  display: flex;
-  flex-direction: row;
+	display: flex;
+	flex-direction: row;
+}
+#fa-umbrella-beach-toplogo {
+	color: #fa4a60;
+	font-size: 3rem;
+	margin: 30px 10px 20px 20px;
 }
 .logo-container {
-  font-size: 30px;
-  color: #fa4a60;
-  display: flex;
-  flex-direction: row;
+	color: #fa4a60;
+
+	display: flex;
+	flex-direction: row;
+}
+.logo-title {
+	font-family: 'Baloo 2', cursive;
+	font-size: 3rem;
+	color: #fa4a60;
+	margin: 20px 10px 20px 0px;
 }
 .search-bar {
-  margin-right: 10px;
+	margin: 30px 10px 20px 20px;
+	margin-right: 10px;
 }
 .function-container {
-  display: flex;
-  flex-direction: row;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	margin: 30px 10px 20px 20px;
 }
 .function-div {
-  display: flex;
-  flex-direction: row;
-  font-size: 20px;
-  margin: 4px 8px 0px 0px;
+	display: flex;
+	flex-direction: row;
+	font-size: 20px;
+	margin: 20px 8px 0px 10px;
 }
 
 /* .logged-in-okay {
@@ -55,43 +72,80 @@
 }*/
 
 .greeting-container {
-  margin-right: 8px;
-  font-size: 20px;
-  color: #fa4a60;
+	margin-right: 8px;
+	font-size: 20px;
+	color: #fa4a60;
+}
+
+.user-container {
+	cursor: pointer;
 }
 .log-in-container,
 .log-out-container {
-  margin: 0px 5px 0px 5px;
-  cursor: pointer;
-  font-size: 20px;
-  color: #555555;
+	cursor: pointer;
+	color: #555555;
 }
 .admin-container {
-  display: none;
+	display: none;
 }
 .nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
 .nav-link {
-  margin-right: 20px;
+	margin-right: 20px;
 }
 #carouselExampleFade {
-  padding: 0px 30px 0px 30px;
-  margin: 0px;
+	padding: 0px 40px 0px 40px;
+	margin: 0px;
 }
 .carousel-inner {
-  max-width: 100%;
-  max-height: 590px !important;
+	max-width: 100%;
+	max-height: 590px !important;
 }
 
-.carousel-inner > .carousel-item > img {
-  width: 100% !important;
+.carousel-caption {
+	position: absolute;
+	font-size: 25px;
+	top: 45%;
+	text-align: left;
+	font-family: 'Neuton', Serif;
+	text-shadow: 1px 1px 1px rgba(54, 53, 53, 0.2);
+}
+.revealUp {
+	overflow: hidden; /* Ensures the content is not revealed until the animation */
+	border-right: 0.15em solid orange; /* The typwriter cursor */
+	white-space: nowrap; /* Keeps the content on a single line */
+	margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+	letter-spacing: 0.15em; /* Adjust as needed */
+	animation: typing 3.5s steps(40, end), blink-caret 2s step-end infinite;
+}
+@keyframes typing {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
+}
 
-  height: 590px !important;
-  object-fit: cover;
-  border-radius: 15px;
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+	from,
+	to {
+		border-color: transparent;
+	}
+	50% {
+		border-color: orange;
+	}
+}
+.carousel-inner > .carousel-item > img {
+	width: 100% !important;
+
+	height: 590px !important;
+	object-fit: cover;
+	border-radius: 15px;
 }
 @media only screen and (max-width: 959px) {
 }
@@ -112,146 +166,154 @@
 @media only screen and (max-width: 479px) {
 }
 .create-button {
-  position: fixed;
-  bottom: 3%;
-  right: 45%;
-  z-index: 10;
+	position: fixed;
+	bottom: 8%;
+	right: 45%;
+	z-index: 10;
 }
 #show-more {
-  /* position: fixed !important;
+	/* position: fixed !important;
   bottom: 3% !important;
   right: 10% !important; */
 
-  height: 40px;
-  width: 120px;
-  background-color: aquamarine;
+	height: 40px;
+	width: 120px;
+	background-color: aquamarine;
 }
 
 .roundedFixedBtn {
-  height: 40px;
-  /* line-height: 80px; */
-  width: 150px;
-  font-size: 1em;
-  padding-top: 8px;
-  /* font-weight: bold; */
-  border-radius: 10px;
-  background-color: #3d3d3dbf;
-  color: white;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transform-origin: top;
+	height: 40px;
+	/* line-height: 80px; */
+	width: 150px;
+	font-size: 1em;
+	padding-top: 8px;
+	/* font-weight: bold; */
+	border-radius: 10px;
+	background-color: #3d3d3dbf;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+	transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	transform-origin: top;
 }
 .roundedFixedBtn:hover {
-  background-color: #3d3d3d;
-  -webkit-transform: scale3d(1.1, 1.1, 1.1);
-  transform: scale3d(1.1);
-  box-shadow: 0px 7px 29px 0px rgba(243, 249, 190, 0.552);
-  color: #f86c7c;
+	background-color: #3d3d3d;
+	-webkit-transform: scale3d(1.1, 1.1, 1.1);
+	transform: scale3d(1.1);
+	box-shadow: 0px 7px 29px 0px rgba(243, 249, 190, 0.552);
+	color: #f86c7c;
 }
 
 .search-bar {
-  width: 200px;
-  height: 40x;
+	width: 200px;
+	height: 40x;
 }
 .event-container {
-  padding: 20px 30px 0px 30px;
+	padding: 20px 30px 0px 30px;
 
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: wrap;
-  justify-content: center;
+	display: flex !important;
+	flex-direction: row !important;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 .card {
-  border-color: #f86c7c;
-  margin: 10px 20px 10px 0px;
-  height: 380px;
-  transition: 0.5s all;
-  position: relative;
+	border-color: #f86c7c;
+	margin: 10px 20px 10px 0px;
+	height: 380px;
+	transition: 0.5s all;
+	position: relative;
 }
 .card-body > .card-text {
-  /* white-space: nowrap;
+	/* white-space: nowrap;
   overflow: hidden;
   text-overflow: "----"; */
-  /* display: block;
+	/* display: block;
   white-space: pre;
   overflow: hidden;
   text-overflow: ellipsis; */
-  /* line-height: 1.5em;
+	/* line-height: 1.5em;
   height: 4.5em; /* height is 2x line-height, so two lines will display */
-  /*overflow: hidden; prevents extra lines from being visible */
+	/*overflow: hidden; prevents extra lines from being visible */
 
-  /* white-space: nowrap;
+	/* white-space: nowrap;
   text-overflow: ellipsis; 
   width: 100%; */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* number of lines to show */
-  line-height: 1.5em; /* fallback */
-  max-height: 4.5em; /* fallback */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2; /* number of lines to show */
+	line-height: 1.5em; /* fallback */
+	max-height: 4.5em; /* fallback */
 }
 .toast {
-  position: fixed;
-  top: 80%;
-  right: 40%;
+	position: fixed;
+	top: 80%;
+	right: 40%;
 }
 .admin-corner {
-  position: absolute;
-  left: 195px;
-  top: 335px;
-  font-size: 20px;
-  display: none;
+	position: absolute;
+	left: 195px;
+	top: 335px;
+	font-size: 20px;
+	display: none;
 }
 .fa-heart-circle-plus {
-  position: absolute;
-  left: 240px;
-  top: 340px;
-  font-size: 20px;
-  color: black;
+	position: absolute;
+	left: 240px;
+	top: 340px;
+	font-size: 20px;
+	color: black;
+	cursor: pointer;
 }
 .heart-red-solid {
-  position: absolute;
-  left: 238px;
-  top: 340px;
-  font-size: 25px;
-  color: red;
+	position: absolute;
+	left: 238px;
+	top: 340px;
+	font-size: 25px;
+	color: red;
 }
 
 .fa-trash {
-  margin-right: 5px;
+	margin-right: 5px;
 }
 .card:hover {
-  box-shadow: 10px 10px 10px 5px rgba(54, 53, 53, 0.2);
-  margin-top: 5px !important;
+	box-shadow: 10px 10px 10px 5px rgba(54, 53, 53, 0.2);
+	margin-top: 5px !important;
 }
 .card > img {
-  height: 12rem;
+	height: 12rem;
 }
 .icon-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  position: absolute;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	position: absolute;
 
-  top: 300px;
+	top: 300px;
 }
 .icon-col {
-  margin-right: 7px;
-  color: #fa4a60;
+	margin-right: 7px;
+	color: #fa4a60;
 }
 .btn-primary {
-  background-color: #fa4a60;
-  border: none;
-  transition: 0.3s all;
-  position: absolute;
-  left: 10px;
-  top: 330px;
-  /* padding: px 1em 3px 1em; */
+	background-color: #fa4a60;
+	border: none;
+	transition: 0.3s all;
+	position: absolute;
+	padding-right: 20px;
+	padding-left: 20px;
+	left: 10px;
+	top: 330px;
+	/* padding: px 1em 3px 1em; */
 }
 .btn-primary:hover {
-  background-color: #f98c98;
-  border: none;
-  transform: scale(1.1);
+	background-color: #f98c98;
+	border: none;
+	transform: scale(1.1);
+}
+.pignation-holder {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
 }

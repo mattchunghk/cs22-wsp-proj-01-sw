@@ -195,7 +195,7 @@ detailPageRoute.post('/love', isLoggedIn, async (req, res) => {
 				[userID, eventID]
 			)
 		}
-		res.status(200).send('success')
+		res.status(200).json({ message: 'Success' })
 		return
 	} catch (err: any) {
 		logger.error(err)

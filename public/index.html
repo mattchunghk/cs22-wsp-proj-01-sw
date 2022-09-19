@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="theme-color" content="#FA4A60" />
+    <meta name="theme-color" content="#fa4a5ef0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
@@ -22,6 +22,14 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
@@ -32,6 +40,7 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
     />
+
     <link rel="stylesheet" href="001style.css" />
     <title>JoinMEGO! Meet your partner and travel together!</title>
     <link rel="icon" href="assets/img/angry-panda.ico" type="image/x-icon" />
@@ -42,53 +51,46 @@
     <div class="header">
         <div class="header-container">
           <div class="logo-container">
-            <i class="fa-solid fa-umbrella-beach"></i>
+            <i class="fa-solid fa-umbrella-beach" id="fa-umbrella-beach-toplogo"></i>
             <div class="logo-title">JoinMeGo! </div>
           </div>
-          <div class="login-search-section">
-            <form class="search-bar" action="search">
-              <input
-                type="search"
-                class="form-control"
-                placeholder="Search..."
-                aria-label="Search"
-              />
-            </form>
-            <!-- Login -->
-            <!-- <div class="login-in" style="display:block" onclick="window.location.href ='/user/login.html' ">Login <i class="fa-solid fa-fingerprint"></i></div>
-            <div class="function-div logged-in-okay"> <span class="show-username"></span></div>
+          <div class="col-lg-8 col-md-7 col-sm-12">
+            <div class="function-container">
+              <div class="function-div greeting-container">
+                <div class="function-name" id="greeting-text"></div>
+              </div>
+  
+              <!-- <div
+                class="function-div delete-container"
+                data-bs-toggle="modal"
+                data-bs-target="#deleteModal"
+              >
+                <i class="fa-solid fa-trash function-icon"></i>
+                <div class="function-name" id="edit-text">Delete</div>
+              </div> -->
+  
               <div class="function-div admin-container" id="admin-container">
                 <i class="fa-solid fa-unlock function-icon"></i>
                 <div class="function-name">admin</div>
               </div>
-              <div class="logout-section"><i class="fa-solid fa-right-from-bracket function-icon"></i> -->
-              <!-- Logout</div> -->
-              <div class="function-container">
-                <div class="function-div greeting-container">
-                    <div class="function-name" id="greeting-text"></div>
-                </div>
-                <!-- <div class="function-div delete-container">
-                    <i class="fa-solid fa-trash function-icon"></i>
-                    <div class="function-name" id="edit-text">Delete</div>
-                </div> -->
-
-                <div class="function-div admin-container" id="admin-container">
-                    <i class="fa-solid fa-unlock function-icon"></i>
-                    <div class="function-name">admin</div>
-                </div>
-                <div class="function-div log-in-container" id="log-in-container"  >
-                  <i class="fa-solid fa-fingerprint"> </i>
-                    <div class="function-name">Login</div>
-                </div>
-                <div class="function-div log-out-container" id="log-out-container" style=display:none>
-                    <i class="fa-solid fa-right-from-bracket function-icon"></i>
-                    <div class="function-name">Logout</div>
-                </div>
+              <div class="function-div log-in-container" id="log-in-container">
+                <i class="fa-solid fa-right-to-bracket function-icon"> </i>
+                <div class="function-name">Login</div>
+              </div>
+              <div class="function-div user-container" id="user-container">
+                <i class="fa-solid fa-user function-icon"></i>
+                <div class="function-name">UserInfo</div>
+              </div>
+              <div class="function-div log-out-container" id="log-out-container">
+                <i class="fa-solid fa-right-from-bracket function-icon"></i>
+                <div class="function-name">Logout</div>
+              </div>
             </div>
-            
-   
           </div>
-          </div>
+        </div>
+        
+         
+      </div>
         </div>
     </div>
     <!-- navigation bar -->
@@ -96,10 +98,7 @@
         <ul
           class="nav col-12 col-lg-aut  o me-lg-auto mb-2 justify-content-center mb-md-0"
         >
-          <li><a href="#" class="nav-link px-2 link-secondary">All Destination</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Europe</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Asia </a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">South America</a></li>
+          <div class="navbar-header">create your own journey and meet your travelmates! </div>
         </ul>
     </div>
     <div
@@ -110,12 +109,26 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <img src="../asset/peru.jpeg" class="d-block w-100" alt="..." />
+            <div class="carousel-caption d-none d-md-block">
+             
+              <p class="revealUp">Exploring the world by travelling together</p>
+            </div>
+      
           </div>
           <div class="carousel-item">
             <img src="../asset/shiraz.jpg" class="shiraz d-block w-100" alt="..." />
+            <div class="carousel-caption d-none d-md-block">
+             
+              <p class="revealUp">Stepping into the beautiful Islamic world </p>
+            </div>
+      
           </div>
           <div class="carousel-item">
             <img src="../asset/indonesia.jpg" class="d-block w-100" alt="..." />
+            <div class="carousel-caption d-none d-md-block">
+             
+              <p class="revealUp">Immersing into the amazing creatures by God</p>
+            </div>
           </div>
         </div>
         <button
@@ -161,10 +174,22 @@
           </div> -->
           
     </div>
+    <!-- pignation -->
+   <div class="pignation-holder">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+  </div>
     <!-- please Login -->
     <div class="toast justify-content-center align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="toast-header">
-        <img src="..." class="rounded me-2" alt="...">
+        
         <strong class="me-auto">JoinMeGo!</strong>
         <small></small>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -174,7 +199,9 @@
       </div>
     </div>
   </div>
-    
+  <footer>
+    <div class="footer-conatiner">HEllo</div>
+  </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
