@@ -325,7 +325,7 @@ async function loadMessages() {
 					message.username
 				}</span></div>
                 
-                <div class="col-md-4 col-6"> Date: <span> ${new Date(
+                <div class="col-md-4 col-6"> Create at: <span> ${new Date(
 					message.created_at
 				).toLocaleDateString()}</span></div>
             
@@ -367,7 +367,7 @@ async function loadMessages() {
 							} >${message.comment}</textarea>
                         <div class="row button-div">
                         
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-4">
                             
 
                                 <button class='msg-btn delete-btn ' index="${
@@ -389,7 +389,7 @@ async function loadMessages() {
 
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-4 edit-btn-div">
                                 <button class='msg-btn edit-btn' index="${
 									message.id
 								}"  ${
@@ -404,7 +404,7 @@ async function loadMessages() {
                                 </button>
                             </div>
   
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-4 like-btn-div">
                    
                                 <button class='msg-btn like-btn' index="${
 									message.id
@@ -442,7 +442,7 @@ async function loadMessages() {
 					message.username
 				}</span></div>
               
-              <div class="col-md-4 col-6"> Date: <span> ${new Date(
+              <div class="col-md-4 col-6"> Create at: <span> ${new Date(
 					message.created_at
 				).toLocaleDateString()}</span></div>
           
@@ -461,7 +461,7 @@ async function loadMessages() {
 							} >${message.comment}</textarea>
                       <div class="row button-div">
                       
-                          <div class="col-md-4">
+                          <div class="col-md-4 col-4">
                           
 
                               <button class='msg-btn delete-btn ' index="${
@@ -483,7 +483,7 @@ async function loadMessages() {
 
                           </div>
 
-                          <div class="col-md-4">
+                          <div class="col-md-4 col-4 edit-btn-div">
                               <button class='msg-btn edit-btn' index="${
 									message.id
 								}"  ${
@@ -498,7 +498,7 @@ async function loadMessages() {
                               </button>
                           </div>
 
-                          <div class="col-md-4">
+                          <div class="col-md-4 col-4 like-btn-div">
                  
                               <button class='msg-btn like-btn' index="${
 									message.id

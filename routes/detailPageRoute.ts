@@ -17,7 +17,11 @@ detailPageRoute.get('/event_id/:id', getDetail)
 detailPageRoute.get('/detailPage/id/:id', goDetailPage)
 detailPageRoute.post('/join', isLoggedIn, joinEvent)
 detailPageRoute.get('/joinCount', joinCount)
-detailPageRoute.get('/userPage/:table', userPage)
+
+detailPageRoute.get('/userPage/joined', userPageJoin)
+detailPageRoute.get('/userPage/loved', userPageLove)
+detailPageRoute.get('/userPage/created', userPageCreate)
+
 detailPageRoute.get('/eventsParticipants/:id', eventsParticipants)
 detailPageRoute.get('/totalLoveCount/:id', totalLoveCount)
 detailPageRoute.delete('/delete/:id', isLoggedIn, deleteEvents)
@@ -144,17 +148,60 @@ async function totalLoveCount(req: Request, res: Response) {
 	}
 }
 
-async function userPage(req: Request, res: Response) {
+async function userPageJoin(req: Request, res: Response) {
 	const userId = req.session.userId
-	const table = req.params.table
 	try {
 		let userInfoResult = await client.query(`
-    select events.*, event_images.filename from events  
-    left join  event_images ON event_images.event_id  = events.id 
-    where user_id in (select user_id from ${table} where user_id = ${userId})
-    LIMIT 1
+    with images as (
+      select * from event_images where id in (
+      select MIN(id) from event_images group by event_id
+      ))
+      select event_participants.id, events.*, users.id as user_id, images.filename as filename from events 
+      left join images on images.event_id = events.id
+      inner join event_participants on event_participants.event_id = events.id 
+      inner join users on users.id = event_participants.user_id
+      where users.id  = 1;
     `)
-		res.status(200).json(userInfoResult.rows[0])
+		res.status(200).json(userInfoResult.rows)
+	} catch (error) {
+		res.status(404).send(error)
+	}
+}
+
+async function userPageLove(req: Request, res: Response) {
+	const userId = req.session.userId
+	try {
+		let userInfoResult = await client.query(`
+    with images as (
+      select * from event_images where id in (
+      select MIN(id) from event_images group by event_id
+      ))
+      select favorite_events.id, events.*, users.id as user_id, images.filename as filename from events 
+      left join images on images.event_id = events.id
+      inner join favorite_events on favorite_events.event_id = events.id 
+      inner join users on users.id = favorite_events.user_id
+      where users.id  = 1;
+    `)
+		res.status(200).json(userInfoResult.rows)
+	} catch (error) {
+		res.status(404).send(error)
+	}
+}
+
+async function userPageCreate(req: Request, res: Response) {
+	const userId = req.session.userId
+	try {
+		let userInfoResult = await client.query(`
+    with images as (
+      select * from event_images where id in (
+      select MIN(id) from event_images group by event_id
+      ))
+      select events.*, users.id as user_id, images.filename as filename from events 
+      left join images on images.event_id = events.id
+      inner join users on users.id = events.user_id
+      where users.id  = 1;
+    `)
+		res.status(200).json(userInfoResult.rows)
 	} catch (error) {
 		res.status(404).send(error)
 	}
