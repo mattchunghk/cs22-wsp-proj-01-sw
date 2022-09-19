@@ -156,6 +156,7 @@
 					<option selected>Country</option>
 				</select>
 				<input
+					id="place"
 					name="place"
 					placeholder="Your place"
 					class="form-control form-control-text"
@@ -313,6 +314,11 @@
 			integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
 			crossorigin="anonymous"
 		></script>
+		<script
+			async
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgzJsIne7hMjjk8yGSPloiQ_FYdNr-g-g&libraries=places&callback=initMap"
+		></script>
+
 		<script src="eventsForm.js"></script>
 	</body>
 </html>
