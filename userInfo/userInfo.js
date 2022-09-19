@@ -47,9 +47,9 @@ async function getFunctionBar() {
 			document.querySelector(
 				'.show-username'
 			).innerHTML = `${userInfo.name}`
-			document.querySelector(
-				'.joined-date'
-			).innerHTML = `${userInfo.createAt}`
+			document.querySelector('.joined-date').innerHTML = `${new Date(
+				userInfo.createAt
+			).toLocaleDateString()}`
 
 			if (userInfo.isAdmin) {
 				document.querySelector('#admin-container').style.display =
@@ -75,7 +75,13 @@ async function loadCreateEvents() {
 	if (res.ok) {
 		const eventContainer = document.querySelector('.event-container')
 		eventContainer.innerHTML = ''
-		console.log(resUser)
+
+		document.querySelector('#eventCreated-con').style.backgroundColor =
+			'#f6818e'
+		document.querySelector('#eventJoined-con').style.backgroundColor =
+			'#fa576a'
+		document.querySelector('#eventLoved-con').style.backgroundColor =
+			'#fa576a'
 
 		for (let event of resUser) {
 			eventContainer.innerHTML += `
@@ -117,6 +123,11 @@ async function loadJoinedEvents() {
 	const res = await fetch('/detail/userPage/joined')
 	const resUser = await res.json()
 
+	document.querySelector('#eventCreated-con').style.backgroundColor =
+		'#fa576a'
+	document.querySelector('#eventJoined-con').style.backgroundColor = '#f6818e'
+	document.querySelector('#eventLoved-con').style.backgroundColor = '#fa576a'
+
 	if (res.ok) {
 		const eventContainer = document.querySelector('.event-container')
 		eventContainer.innerHTML = ''
@@ -125,28 +136,32 @@ async function loadJoinedEvents() {
 		for (let event of resUser) {
 			eventContainer.innerHTML += `
 			<div class="event-display">
-			<div class="row">
-				<div class="col-md-4 col-12 event-content-col">
-					<img class="event-photo-conatiner" src="../../../${event.filename}"></img> 
-				</div> 
-				<div class="col-md-8 col-12">
-					<div class="event-content">
-					  <h4 class="event-title">title <span id="event-title-p">${
-							event.title
-						}</span></h4> 
-					  <div class="event-country">Iceland <span id="event-title-country">${
-							event.country
-						} ${event.city}</span></div>
-					  <div class="event-date">go to Iceland <span id="event-title-date">${new Date(
-							event.start_date
-						).toLocaleDateString()}</span></div>
-					  <input type="button" class="go-btn" onclick="location.href='/detail/detailPage/id/${
-							event.id
-						}';" value="Go" />
-					</div>
-				</div>
-			</div> 		
+    <div class="row">
+	    <div class="col-md-4 col-12">
+            <img class="event-photo-conatiner" src="../../../${
+				event.filename
+			}"></img> 
+		</div> 
+		<div class="col-md-8 col-12 event-content-col">
+            <div class="event-content">
+              <h4 class="event-title"><span id="event-title-p">${
+					event.title
+				}</span></h4> 
+              <div class="event-country"><span id="event-title-country">${
+					event.country
+				} -  ${event.city}</span></div>
+              <div class="event-date">Trip Date: <span id="event-title-date">${new Date(
+					event.start_date
+				).toLocaleDateString()} - ${new Date(
+				event.end_date
+			).toLocaleDateString()}</span></div>
+			  <input type="button" class="go-btn" onclick="location.href='/detail/detailPage/id/${
+					event.id
+				}';" value="Go" />
+            </div>
 		</div>
+	</div> 		
+</div>
 `
 		}
 	}
@@ -155,6 +170,10 @@ async function loadLovedEvents() {
 	// const event=req.params.table;
 	const res = await fetch('/detail/userPage/loved')
 	const resUser = await res.json()
+	document.querySelector('#eventCreated-con').style.backgroundColor =
+		'#fa576a'
+	document.querySelector('#eventJoined-con').style.backgroundColor = '#fa576a'
+	document.querySelector('#eventLoved-con').style.backgroundColor = '#f6818e'
 
 	if (res.ok) {
 		const eventContainer = document.querySelector('.event-container')
@@ -164,28 +183,32 @@ async function loadLovedEvents() {
 		for (let event of resUser) {
 			eventContainer.innerHTML += `
 			<div class="event-display">
-			<div class="row">
-				<div class="col-md-4 col-12">
-					<img class="event-photo-conatiner" src="../../../${event.filename}"></img> 
-				</div> 
-				<div class="col-md-8 col-12 event-content-col">
-					<div class="event-content">
-					  <h4 class="event-title">title <span id="event-title-p">${
-							event.title
-						}</span></h4> 
-					  <div class="event-country">Iceland <span id="event-title-country">${
-							event.country
-						} ${event.city}</span></div>
-					  <div class="event-date">go to Iceland <span id="event-title-date">${new Date(
-							event.start_date
-						).toLocaleDateString()}</span></div>
-					  <input type="button" class="go-btn" onclick="location.href='/detail/detailPage/id/${
-							event.id
-						}';" value="Go" />
-					</div>
-				</div>
-			</div> 		
+    <div class="row">
+	    <div class="col-md-4 col-12">
+            <img class="event-photo-conatiner" src="../../../${
+				event.filename
+			}"></img> 
+		</div> 
+		<div class="col-md-8 col-12 event-content-col">
+            <div class="event-content">
+              <h4 class="event-title"><span id="event-title-p">${
+					event.title
+				}</span></h4> 
+              <div class="event-country"><span id="event-title-country">${
+					event.country
+				} -  ${event.city}</span></div>
+              <div class="event-date">Trip Date: <span id="event-title-date">${new Date(
+					event.start_date
+				).toLocaleDateString()} - ${new Date(
+				event.end_date
+			).toLocaleDateString()}</span></div>
+			  <input type="button" class="go-btn" onclick="location.href='/detail/detailPage/id/${
+					event.id
+				}';" value="Go" />
+            </div>
 		</div>
+	</div> 		
+</div>
 		  `
 		}
 	}
