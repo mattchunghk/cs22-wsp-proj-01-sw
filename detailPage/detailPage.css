@@ -57,7 +57,7 @@ body {
     margin: 0 10px 15px 10px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 991px) {
 
     .function-container,
     .logo-container {
@@ -107,7 +107,7 @@ body {
 /* ?detail part start */
 
 #googleMap {
-    margin-top: 3000px;
+
     margin-bottom: 30px;
 }
 
@@ -173,7 +173,7 @@ body {
 }
 
 .fa-sack-dollar,
-.fa-lock,
+.fa-user .fa-lock,
 .fa-users,
 .fa-heart,
 .bi-heart-fill .fa-plane-departure,
@@ -341,4 +341,9 @@ body {
 .participants-content {
     margin-top: 10px;
     font-size: 1.1rem;
+}
+
+.btn-primary,
+.btn-success {
+    --bs-btn-focus-shadow-rgb: #FA4A60 !important;
 }

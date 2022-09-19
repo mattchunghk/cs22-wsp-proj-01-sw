@@ -1,147 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="theme-color" content="#FA4A60" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
-      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="userInfo.css" />
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="theme-color" content="#FA4A60" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+			integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="userInfo.css" />
 
-    <link rel="icon" href="assets/img/angry-panda.ico" type="image/x-icon" />
+		<link
+			rel="icon"
+			href="assets/img/angry-panda.ico"
+			type="image/x-icon"
+		/>
 
-    <link
-      rel="stylesheet"
-      href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css"
-    />
-    <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-    <script>
-      $(function () {
-        $("#datepicker-start").datepicker({
-          dateFormat: "yy-mm-dd",
-        });
-        $("#datepicker-end").datepicker({
-          dateFormat: "yy-mm-dd",
-        });
-      });
-    </script>
-    <title>UserInfo</title>
-  </head>
+		<link
+			rel="stylesheet"
+			href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css"
+		/>
+		<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script>
+			$(function () {
+				$('#datepicker-start').datepicker({
+					dateFormat: 'yy-mm-dd'
+				})
+				$('#datepicker-end').datepicker({
+					dateFormat: 'yy-mm-dd'
+				})
+			})
+		</script>
+		<title>UserInfo</title>
+	</head>
 
-  <body>
-    <header class="userInfo-header">
-      <div class="row header-row">
-        <div class="col-lg-4 col-md-5 col-sm-12">
-          <div class="logo-container">
-            <i class="fa-solid fa-umbrella-beach"></i>
-            <div class="logo-title">JoinMeGo</div>
-          </div>
-        </div>
+	<body>
+		<header class="userInfo-header">
+			<div class="row header-row">
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<div class="logo-container">
+						<i class="fa-solid fa-umbrella-beach"></i>
+						<div class="logo-title">JoinMeGo</div>
+					</div>
+				</div>
 
-        <div class="col-lg-8 col-md-7 col-sm-12">
-          <div class="function-container">
-            <div class="function-div greeting-container">
-              <div class="function-name" id="greeting-text"></div>
-            </div>
+				<div class="col-lg-8 col-md-12 col-sm-12">
+					<div class="function-container">
+						<div class="function-div greeting-container">
+							<div class="function-name" id="greeting-text"></div>
+						</div>
 
-            <div
-              class="function-div delete-container"
-              data-bs-toggle="modal"
-              data-bs-target="#deleteModal"
-            >
-              <i class="fa-solid fa-trash function-icon"></i>
-              <div class="function-name" id="edit-text">Delete</div>
-            </div>
+						<div
+							class="function-div admin-container"
+							id="admin-container"
+						>
+							<i class="fa-solid fa-unlock function-icon"></i>
+							<div class="function-name">admin</div>
+						</div>
+						<div
+							class="function-div log-in-container"
+							id="log-in-container"
+						>
+							<i
+								class="fa-solid fa-right-to-bracket function-icon"
+							>
+							</i>
+							<div class="function-name">Login</div>
+						</div>
+						<div
+							class="function-div log-out-container"
+							id="log-out-container"
+						>
+							<i
+								class="fa-solid fa-right-from-bracket function-icon"
+							></i>
+							<div class="function-name">Logout</div>
+						</div>
+						<div
+							class="function-div home-container"
+							id="home-container"
+						>
+							<i class="fa-solid fa-house function-icon"></i>
+							<div class="function-name">Homepage</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
 
-            <div class="function-div admin-container" id="admin-container">
-              <i class="fa-solid fa-unlock function-icon"></i>
-              <div class="function-name">admin</div>
-            </div>
-            <div class="function-div log-in-container" id="log-in-container">
-              <i class="fa-solid fa-right-to-bracket function-icon"> </i>
-              <div class="function-name">Login</div>
-            </div>
-            <div class="function-div log-out-container" id="log-out-container">
-              <i class="fa-solid fa-right-from-bracket function-icon"></i>
-              <div class="function-name">Logout</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
+		<div class="container">
+			<div class="row">
+				<!-- <div class="whole-container container-center"> -->
+				<div class="col-md-12">
+					<div class="userinfo-container container-center">
+						<div>Name: <span class="show-username"></span></div>
+						<div>
+							Joined Date: <span class="joined-date"></span>
+						</div>
+					</div>
+				</div>
+				<!-- </div> -->
+			</div>
+			<div class="row">
+				<div class="col-md-3 col-12">
+					<div class="row button-row">
+						<div class="col-md-12 col-4">
+							<div
+								class="button-container container-center"
+								id="eventCreated-con"
+							>
+								<div class="eventCreated-btn event-btn">
+									Events Created
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12 col-4">
+							<div
+								class="button-container container-center"
+								id="eventJoined-con"
+							>
+								<div class="eventJoined-btn event-btn">
+									Events Joined
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12 col-4">
+							<div
+								class="button-container container-center"
+								id="eventLoved-con"
+							>
+								<div class="eventLoved-btn event-btn">
+									Events Loved
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-    <div class="whole-container container-center">
-      <div class="userinfo-container container-center">
-        <div>Name:<span class="show-username"></span></div>
-        <div>Joined Date:<span class="joined-date"></span></div>
-      </div>
-      <div class="button-event-container">
-        <div class="button-container container-center">
-          <div class="eventCreated-btn event-btn">events Created</div>
-          <div class="eventJoined-btn event-btn">events Joined</div>
-          <div class="eventLoved-btn event-btn">events Loved</div>
-        </div>
-        <div class="event-container container-center">
-          <div class="event-display">
-            <img class="event-photo-conatiner" src="../asset/04event.jpg"></img>
-            <div class="event-content">
-              <h4 class="event-title">title<span id="event-title-p"></span></h4> 
-              <div class="event-country">Iceland<span id="event-title-country"></span></div>
-              <div class="event-date">go to Iceland<span id="event-title-date"></span></div>
-            </div>
-          </div>
-          <div class="event-display">
-            <img class="event-photo-conatiner" src="../asset/04event.jpg"></img>
-            <div class="event-content">
-              <h4 class="event-title">title<span id="event-title-p"></span></h4> 
-              <div class="event-country">Iceland<span id="event-title-country"></span></div>
-              <div class="event-date">go to Iceland<span id="event-title-date"></span></div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-      crossorigin="anonymous"
-    ></script>
-    <script src="userInfo.js"></script>
-  </body>
+				<div class="col-md-9 col-12">
+					<div class="event-container container-center"></div>
+				</div>
+			</div>
+		</div>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+			crossorigin="anonymous"
+		></script>
+		<script src="userInfo.js"></script>
+	</body>
 </html>

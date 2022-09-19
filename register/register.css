@@ -2,6 +2,18 @@
     background-color: #FA4A60 !important;
 }
 
+.btn-primary,
+.btn-success {
+    --bs-btn-color: #FA4A60 !important;
+    --bs-btn-hover-color: #FA4A60 !important;
+    --bs-btn-hover-border-color: white !important;
+    --bs-btn-hover-bg: white !important;
+    --bs-btn-active-color: #FA4A60 !important;
+    --bs-btn-active-bg: white !important;
+    --bs-btn-active-border-color: white !important;
+    --bs-btn-focus-shadow-rgb: #FA4A60 !important;
+}
+
 .createForm-header {
     background-color: #FA4A60;
     height: 100px;

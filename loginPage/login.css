@@ -58,6 +58,7 @@
 
 .login-btn,
 .btn-success {
+    box-shadow: none;
     margin-top: 20px;
     background-color: white;
     color: #FA4A60;
@@ -70,7 +71,11 @@
 }
 
 .login-btn:hover,
+.login-btn:focus,
+.btn-success:focus,
 .btn-success:hover {
+    box-shadow: none;
+    outline: none !important;
     color: #FA4A60;
     background-color: #ffc6cd;
     border: 1px solid #FA4A60;
@@ -79,4 +84,16 @@
 .bi-google {
     position: absolute;
     left: 15px
+}
+
+.btn-primary,
+.btn-success {
+    --bs-btn-color: #FA4A60 !important;
+    --bs-btn-hover-color: #FA4A60 !important;
+    --bs-btn-hover-border-color: white !important;
+    --bs-btn-hover-bg: white !important;
+    --bs-btn-active-color: #FA4A60 !important;
+    --bs-btn-active-bg: white !important;
+    --bs-btn-active-border-color: white !important;
+    --bs-btn-focus-shadow-rgb: #FA4A60 !important;
 }

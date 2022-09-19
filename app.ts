@@ -47,7 +47,8 @@ declare module 'express-session' {
 		userId?: number | any
 		isAdmin?: boolean
 		grant?: any
-		user: any
+		user?: any
+		createAt?: any
 	}
 }
 

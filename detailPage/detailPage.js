@@ -27,6 +27,9 @@ function init() {
 	document
 		.querySelector('.admin-container')
 		.addEventListener('click', goAdminPage)
+	document
+		.querySelector('.userInfo-container')
+		.addEventListener('click', goUserPage)
 
 	// document.querySelector(".loadMore").addEventListener("submit", loadMore);
 }
@@ -64,6 +67,7 @@ async function getFunctionBar() {
 			).innerHTML = `Hi, ${userInfo.name}`
 			document.querySelector('#log-in-container').style.display = 'none'
 			document.querySelector('#log-out-container').style.display = 'flex'
+			document.querySelector('#userInfo-container').style.display = 'flex'
 
 			if (event[0].user_id == userInfo.userId) {
 				document.querySelector('.delete-container').style.display =
@@ -88,6 +92,7 @@ async function getFunctionBar() {
 			document.querySelector('.log-in-container').style.display = 'flex'
 			document.querySelector('.log-out-container').style.display = 'none'
 			document.querySelector('.messages-form-row').style.display = 'none'
+			document.querySelector('#userInfo-container').style.display = 'none'
 		}
 	}
 }
@@ -325,7 +330,7 @@ async function loadMessages() {
 					message.username
 				}</span></div>
                 
-                <div class="col-md-4 col-6"> Date: <span> ${new Date(
+                <div class="col-md-4 col-6"> Create at: <span> ${new Date(
 					message.created_at
 				).toLocaleDateString()}</span></div>
             
@@ -367,7 +372,7 @@ async function loadMessages() {
 							} >${message.comment}</textarea>
                         <div class="row button-div">
                         
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-4">
                             
 
                                 <button class='msg-btn delete-btn ' index="${
@@ -389,7 +394,7 @@ async function loadMessages() {
 
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-4 edit-btn-div">
                                 <button class='msg-btn edit-btn' index="${
 									message.id
 								}"  ${
@@ -404,7 +409,7 @@ async function loadMessages() {
                                 </button>
                             </div>
   
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-4 like-btn-div">
                    
                                 <button class='msg-btn like-btn' index="${
 									message.id
@@ -442,7 +447,7 @@ async function loadMessages() {
 					message.username
 				}</span></div>
               
-              <div class="col-md-4 col-6"> Date: <span> ${new Date(
+              <div class="col-md-4 col-6"> Create at: <span> ${new Date(
 					message.created_at
 				).toLocaleDateString()}</span></div>
           
@@ -461,7 +466,7 @@ async function loadMessages() {
 							} >${message.comment}</textarea>
                       <div class="row button-div">
                       
-                          <div class="col-md-4">
+                          <div class="col-md-4 col-4">
                           
 
                               <button class='msg-btn delete-btn ' index="${
@@ -483,7 +488,7 @@ async function loadMessages() {
 
                           </div>
 
-                          <div class="col-md-4">
+                          <div class="col-md-4 col-4 edit-btn-div">
                               <button class='msg-btn edit-btn' index="${
 									message.id
 								}"  ${
@@ -498,7 +503,7 @@ async function loadMessages() {
                               </button>
                           </div>
 
-                          <div class="col-md-4">
+                          <div class="col-md-4 col-4 like-btn-div">
                  
                               <button class='msg-btn like-btn' index="${
 									message.id
@@ -619,6 +624,9 @@ async function loadEventParticipants() {
 //? addEventListener function
 async function goAdminPage() {
 	window.location.href = '/adminPage.html'
+}
+async function goUserPage() {
+	window.location.href = '/user/userinfo.html'
 }
 async function goHomePage() {
 	window.location.href = '/'

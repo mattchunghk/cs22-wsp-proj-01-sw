@@ -181,7 +181,7 @@
     color: white;
     border-radius: 10px;
     background-color: #FA4A60;
-    width: 100%;
+    width: 100px;
 }
 
 .setting-input {
@@ -209,4 +209,14 @@
 
 .messages_file {
     color: #FA4A60;
+}
+
+.like-btn-div {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.edit-btn-div {
+    display: flex;
+    justify-content: center;
 }
