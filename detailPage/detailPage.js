@@ -27,6 +27,9 @@ function init() {
 	document
 		.querySelector('.admin-container')
 		.addEventListener('click', goAdminPage)
+	document
+		.querySelector('.userInfo-container')
+		.addEventListener('click', goUserPage)
 
 	// document.querySelector(".loadMore").addEventListener("submit", loadMore);
 }
@@ -64,6 +67,7 @@ async function getFunctionBar() {
 			).innerHTML = `Hi, ${userInfo.name}`
 			document.querySelector('#log-in-container').style.display = 'none'
 			document.querySelector('#log-out-container').style.display = 'flex'
+			document.querySelector('#userInfo-container').style.display = 'flex'
 
 			if (event[0].user_id == userInfo.userId) {
 				document.querySelector('.delete-container').style.display =
@@ -88,6 +92,7 @@ async function getFunctionBar() {
 			document.querySelector('.log-in-container').style.display = 'flex'
 			document.querySelector('.log-out-container').style.display = 'none'
 			document.querySelector('.messages-form-row').style.display = 'none'
+			document.querySelector('#userInfo-container').style.display = 'none'
 		}
 	}
 }
@@ -619,6 +624,9 @@ async function loadEventParticipants() {
 //? addEventListener function
 async function goAdminPage() {
 	window.location.href = '/adminPage.html'
+}
+async function goUserPage() {
+	window.location.href = '/user/userinfo.html'
 }
 async function goHomePage() {
 	window.location.href = '/'

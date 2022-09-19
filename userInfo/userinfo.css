@@ -7,38 +7,53 @@
 }
 
 .userInfo-header {
-  background-color: #fa4a60;
-  height: 100px;
+  background-color: #fa4a5efe;
   width: 100vw;
   position: fixed;
   top: 0;
+  z-index: 3 !important;
 }
+
+.logo-title {
+  font-family: 'Baloo 2', cursive;
+  font-size: 4rem;
+  color: white;
+  margin-top: 10px;
+}
+
 .header-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
 }
+
+.fa-solid.fa-umbrella-beach {
+  color: white;
+}
+
+.logo-container {
+  display: flex;
+  cursor: pointer;
+}
+
+.function-icon {
+  color: white !important;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.function-name {
+  margin-right: 10px;
+}
+
 .function-container {
   display: flex;
   justify-content: flex-end;
   margin: 0 10px 15px 10px;
 }
-.logo-container {
-  display: flex;
-  cursor: pointer;
-}
-.logo-title {
-  font-family: "Baloo 2", cursive;
-  font-size: 4rem;
-  color: white;
-  margin-top: 10px;
-}
-.fa-umbrella-beach {
-  color: white;
-  font-size: 4rem;
-  margin: 20px 10px 20px 20px;
-}
-@media screen and (max-width: 768px) {
+
+@media screen and (max-width: 991px) {
+
   .function-container,
   .logo-container {
     display: flex;
@@ -46,77 +61,145 @@
     align-items: center;
   }
 }
+
+.greeting-container {
+  cursor: default !important;
+}
+
+.greeting-container:hover {
+  color: white !important;
+}
+
+.fa-pen-to-square {
+  color: white;
+}
+
 .function-div {
   color: white;
   font-size: 1.2rem;
   display: flex;
   margin-right: 15px;
-  cursor: pointer;
+  cursor: pointer
 }
+
 .function-div:hover {
   color: #fca0ab;
 }
+
 .fa-umbrella-beach {
   color: white;
   font-size: 4rem;
   margin: 20px 10px 20px 20px;
 }
-.whole-container {
+
+/* ? header end */
+
+
+
+.container {
+  min-height: 85vh;
+  margin-top: 120px;
   background-color: white;
-  margin: 130px 10vw 100px 10vw;
+  padding: 10px 20px 30px 20px;
   box-shadow: 5px 10px 10px 5px rgba(54, 53, 53, 0.2);
   border-radius: 15px;
 }
-.button-event-container {
-  display: flex;
-  flex-direction: row;
+
+@media screen and (max-width: 991px) {
+  .container {
+    margin-top: 180px;
+  }
 }
 
-/* .container-center {
-  text-align: center;
-} */
+
+
+.userinfo-container {
+  font-family: "Baloo 2", cursive;
+  font-size: larger;
+
+  padding: 20px 20px 10px 20px;
+  margin: 0px 0px 20px 0px;
+  border-bottom: 2px solid #fa4a60;
+}
+
+.event-photo-conatiner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  padding: 3px;
+  border-radius: 7px;
+}
+
+.event-display {
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #fa576a;
+  margin: 10px 0px 20px 15px;
+  box-shadow: 5px 5px 10px 1px rgba(54, 53, 53, 0.2);
+}
+
+.button-row {
+  margin-top: 15px;
+}
+
 .button-container {
-  background-color: aliceblue;
-  width: 20vw;
+  font-size: 1.4rem;
+  background-color: #fa576a;
+  border-radius: 7px;
+  margin: 0px 0px 20px 0px;
+  padding: 5px;
+  box-shadow: 5px 5px 10px 1px rgba(54, 53, 53, 0.2);
+
+
 }
-.event-container {
-  font-size: large;
+
+.button-row {
+  margin-left: 10px;
+  margin-left: 5px;
 }
+
 .event-btn {
-  height: 8vh;
+  text-align: center;
+}
+
+.button-container:hover {
+  background-color: #f6818e
+}
+
+.event-btn {
+  color: white;
+  height: 10vh;
   cursor: pointer;
   font-family: "Baloo 2", cursive;
   margin-left: 15px;
   text-align: left;
-  padding-top: 10px;
+
 }
-.userinfo-container {
-  font-family: "Baloo 2", cursive;
-  font-size: larger;
-  padding-top: 20px;
-  margin-left: 30px;
-  margin-bottom: 20px;
-}
-.event-display{
-  width:55vw;
-  height: 110px;
-  background-color: #fca0ab;
-  border-radius: 5px;
-  margin: 10px 0px 0px 15px;
-  box-shadow: 5px 5px 10px 1px rgba(54, 53, 53, 0.2);
-  display: flex;
-  flex-direction: row;
-}
-.event-content{
+
+
+
+.event-content {
+
   padding: 10px;
-  color: white;
+  color: #fa576a;
   text-shadow: 1px 2px 1px rgba(54, 53, 53, 0.2);
   font-family: "Baloo 2", cursive;
+  padding-bottom: 40px;
 }
-.event-display > img{
-  height: 106px;
-  width: 106px;
-  object-fit: cover;
-  padding: 3px
 
+.event-content-col {
+  position: relative;
+}
+
+.go-btn {
+  height: 35px;
+  width: 60px;
+  background-color: #fa576a;
+  border: none;
+  color: white;
+  position: absolute;
+  bottom: 5px;
+  right: 20px;
+  border-radius: 7px;
+  box-shadow: 5px 5px 10px 1px rgba(54, 53, 53, 0.2);
 }

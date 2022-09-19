@@ -68,7 +68,7 @@ hr {
     margin: 0 10px 15px 10px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 991px) {
 
     .function-container,
     .logo-container {
@@ -115,7 +115,7 @@ hr {
     margin-top: 120px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 991px) {
     .main-container {
         margin-top: 180px;
     }

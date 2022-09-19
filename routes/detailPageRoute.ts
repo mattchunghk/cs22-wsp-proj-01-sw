@@ -18,9 +18,9 @@ detailPageRoute.get('/detailPage/id/:id', goDetailPage)
 detailPageRoute.post('/join', isLoggedIn, joinEvent)
 detailPageRoute.get('/joinCount', joinCount)
 
-detailPageRoute.get('/userPage/joined', userPageJoin)
-detailPageRoute.get('/userPage/loved', userPageLove)
-detailPageRoute.get('/userPage/created', userPageCreate)
+detailPageRoute.get('/userPage/joined', isLoggedIn, userPageJoin)
+detailPageRoute.get('/userPage/loved', isLoggedIn, userPageLove)
+detailPageRoute.get('/userPage/created', isLoggedIn, userPageCreate)
 
 detailPageRoute.get('/eventsParticipants/:id', eventsParticipants)
 detailPageRoute.get('/totalLoveCount/:id', totalLoveCount)
@@ -160,7 +160,7 @@ async function userPageJoin(req: Request, res: Response) {
       left join images on images.event_id = events.id
       inner join event_participants on event_participants.event_id = events.id 
       inner join users on users.id = event_participants.user_id
-      where users.id  = 1;
+      where users.id  = ${userId};
     `)
 		res.status(200).json(userInfoResult.rows)
 	} catch (error) {
@@ -180,7 +180,7 @@ async function userPageLove(req: Request, res: Response) {
       left join images on images.event_id = events.id
       inner join favorite_events on favorite_events.event_id = events.id 
       inner join users on users.id = favorite_events.user_id
-      where users.id  = 1;
+      where users.id  = ${userId};
     `)
 		res.status(200).json(userInfoResult.rows)
 	} catch (error) {
@@ -199,7 +199,7 @@ async function userPageCreate(req: Request, res: Response) {
       select events.*, users.id as user_id, images.filename as filename from events 
       left join images on images.event_id = events.id
       inner join users on users.id = events.user_id
-      where users.id  = 1;
+      where users.id  = ${userId};
     `)
 		res.status(200).json(userInfoResult.rows)
 	} catch (error) {

@@ -1,197 +1,201 @@
-import express from "express";
-import { client } from "../utils/db";
-import { checkPassword, hashPassword } from "../utils/hash";
-import path from "path";
+import express from 'express'
+import { client } from '../utils/db'
+import { checkPassword, hashPassword } from '../utils/hash'
+import path from 'path'
 
-export const userRoutes = express.Router();
+export const userRoutes = express.Router()
 
 //! /user
-userRoutes.get("/", goLoginPage);
-userRoutes.post("/login", login);
-userRoutes.get("/logout", logout);
-userRoutes.get("/login/google", loginGoogle);
-userRoutes.get("/registerPage", registerPage);
-userRoutes.post("/register", register);
-userRoutes.get("/loginStatus", loginStatus);
+userRoutes.get('/', goLoginPage)
+userRoutes.post('/login', login)
+userRoutes.get('/logout', logout)
+userRoutes.get('/login/google', loginGoogle)
+userRoutes.get('/registerPage', registerPage)
+userRoutes.post('/register', register)
+userRoutes.get('/loginStatus', loginStatus)
 
 async function goLoginPage(req: express.Request, res: express.Response) {
-  // res.json(userResult.rows);
-  const dir = path.resolve("./loginPage/login.html");
-  res.sendFile(dir);
+	// res.json(userResult.rows);
+	const dir = path.resolve('./loginPage/login.html')
+	res.sendFile(dir)
 }
 
 async function registerPage(req: express.Request, res: express.Response) {
-  const dir = path.resolve("./registerPage/register.html");
-  res.sendFile(dir);
+	const dir = path.resolve('./registerPage/register.html')
+	res.sendFile(dir)
 }
 
 async function register(req: express.Request, res: express.Response) {
-  console.log(req.body);
-  try {
-    const username = req.body.username;
-    const password = req.body.password;
-    const checkPassword = req.body.checkPassword;
+	console.log(req.body)
+	try {
+		const username = req.body.username
+		const password = req.body.password
+		const checkPassword = req.body.checkPassword
 
-    if (!username || !password) {
-      res.status(400).json({
-        message: "Invalid username or password",
-      });
-      return;
-    }
+		if (!username || !password) {
+			res.status(400).json({
+				message: 'Invalid username or password'
+			})
+			return
+		}
 
-    if (password !== checkPassword) {
-      res.status(400).json({
-        message: "password check failed",
-      });
-      return;
-    }
+		if (password !== checkPassword) {
+			res.status(400).json({
+				message: 'password check failed'
+			})
+			return
+		}
 
-    let userResult = await client.query(
-      `select * from users where username = $1`,
-      [username]
-    );
-    let dbuser = userResult.rows[0];
-    console.log("dbuser =", dbuser);
+		let userResult = await client.query(
+			`select * from users where username = $1`,
+			[username]
+		)
+		let dbuser = userResult.rows[0]
+		console.log('dbuser =', dbuser)
 
-    if (dbuser) {
-      res.status(400).json({
-        message: "Duplicate username",
-      });
-      return;
-    }
+		if (dbuser) {
+			res.status(400).json({
+				message: 'Duplicate username'
+			})
+			return
+		}
 
-    //check duplicates
-    //let xxx = await xxx
-    //use dbeaver to check
+		//check duplicates
+		//let xxx = await xxx
+		//use dbeaver to check
 
-    let hashedPassword = await hashPassword(password);
-    await client.query(
-      `insert into users (username,password,is_admin) values ($1, $2, $3)`,
-      [username, hashedPassword, false]
-    );
-    res.json({ message: "User created" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
+		let hashedPassword = await hashPassword(password)
+		await client.query(
+			`insert into users (username,password,is_admin) values ($1, $2, $3)`,
+			[username, hashedPassword, false]
+		)
+		res.json({ message: 'User created' })
+	} catch (error) {
+		console.log(error)
+		res.status(500).json({ message: 'Internal Server Error' })
+	}
 }
 
 async function login(req: express.Request, res: express.Response) {
-  console.log("userRoutes - [/login]");
-  const username = req.body.username;
-  const password = req.body.password;
+	console.log('userRoutes - [/login]')
+	const username = req.body.username
+	const password = req.body.password
 
-  if (!username || !password) {
-    res.status(400).json({
-      message: "Invalid username or password",
-    });
-    return;
-  }
+	if (!username || !password) {
+		res.status(400).json({
+			message: 'Invalid username or password'
+		})
+		return
+	}
 
-  let userResult = await client.query(
-    `select * from users where username = $1`,
-    [username]
-  );
-  let dbuser = userResult.rows[0];
-  console.log("dbuser =", dbuser);
+	let userResult = await client.query(
+		`select * from users where username = $1`,
+		[username]
+	)
+	let dbuser = userResult.rows[0]
+	console.log('dbuser =', dbuser)
 
-  if (!dbuser) {
-    res.status(400).json({
-      message: "Invalid username or password",
-    });
-    return;
-  }
+	if (!dbuser) {
+		res.status(400).json({
+			message: 'Invalid username or password'
+		})
+		return
+	}
 
-  //compare password
-  let isMatched = await checkPassword(password, dbuser.password);
-  if (!isMatched) {
-    res.status(400).json({
-      message: "Invalid username or password",
-    });
-    return;
-  }
+	//compare password
+	let isMatched = await checkPassword(password, dbuser.password)
+	if (!isMatched) {
+		res.status(400).json({
+			message: 'Invalid username or password'
+		})
+		return
+	}
 
-  req.session["isloggedin"] = true;
-  req.session["name"] = username;
-  req.session["userId"] = dbuser.id;
-  req.session["isAdmin"] = dbuser.is_admin;
-  console.log("Login successful");
-  res.status(200).json({
-    message: "Success login",
-  });
+	req.session['isloggedin'] = true
+	req.session['name'] = username
+	req.session['userId'] = dbuser.id
+	req.session['isAdmin'] = dbuser.is_admin
+	req.session['createAt'] = dbuser.created_at
+	console.log('Login successful')
+	res.status(200).json({
+		message: 'Success login'
+	})
 }
 
 async function loginGoogle(req: express.Request, res: express.Response) {
-  try {
-    const accessToken = (req.session?.grant as any).response.access_token;
-    const fetchRes = await fetch(
-      "https://www.googleapis.com/oauth2/v2/userinfo",
-      {
-        method: "get",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
+	try {
+		const accessToken = (req.session?.grant as any).response.access_token
+		const fetchRes = await fetch(
+			'https://www.googleapis.com/oauth2/v2/userinfo',
+			{
+				method: 'get',
+				headers: {
+					Authorization: `Bearer ${accessToken}`
+				}
+			}
+		)
 
-    const result = await fetchRes.json();
+		const result = await fetchRes.json()
 
-    const users = (
-      await client.query(`SELECT * FROM users WHERE users.username = $1`, [
-        result.email,
-      ])
-    ).rows;
-    let user = users[0];
-    if (!user) {
-      //create a 32bit crypto password
+		const users = (
+			await client.query(
+				`SELECT * FROM users WHERE users.username = $1`,
+				[result.email]
+			)
+		).rows
+		let user = users[0]
+		if (!user) {
+			//create a 32bit crypto password
 
-      console.log(user);
-      let password = await hashPassword(result.email);
-      console.log(password);
-      user = (
-        await client.query(
-          `INSERT INTO users (username,password,is_admin)
+			console.log(user)
+			let password = await hashPassword(result.email)
+			console.log(password)
+			user = (
+				await client.query(
+					`INSERT INTO users (username,password,is_admin)
 	            VALUES ($1,$2,$3) RETURNING *`,
-          [result.email, password, false]
-        )
-      ).rows[0];
-    }
-    if (req.session) {
-      req.session["user"] = result;
-      req.session.name = result.name;
-      req.session.isloggedin = true;
-      req.session.userId = user.id;
-    }
-    return res.redirect("back");
-  } catch (error) {
-    res.status(401).send("Invalid credentials");
-  }
+					[result.email, password, false]
+				)
+			).rows[0]
+		}
+		if (req.session) {
+			req.session['user'] = result
+			req.session.name = result.name
+			req.session.isloggedin = true
+			req.session.userId = user.id
+			req.session['isAdmin'] = user.is_admin
+			req.session['createAt'] = user.created_at
+		}
+		return res.redirect('back')
+	} catch (error) {
+		res.status(401).send('Invalid credentials')
+	}
 }
 
 async function logout(req: express.Request, res: express.Response) {
-  try {
-    req.session.destroy(() => {
-      console.log("user logged out");
-    });
+	try {
+		req.session.destroy(() => {
+			console.log('user logged out')
+		})
 
-    res.status(200).json({
-      message: "Success logout",
-    });
-  } catch (error) {
-    res.status(400).json({
-      message: "logout error",
-    });
-  }
+		res.status(200).json({
+			message: 'Success logout'
+		})
+	} catch (error) {
+		res.status(400).json({
+			message: 'logout error'
+		})
+	}
 }
 
 async function loginStatus(req: express.Request, res: express.Response) {
-  try {
-    console.log(req.session);
+	try {
+		console.log(req.session)
 
-    res.status(200).json(req.session);
-  } catch (error) {
-    res.status(400).json({
-      message: "get status error",
-    });
-  }
+		res.status(200).json(req.session)
+	} catch (error) {
+		res.status(400).json({
+			message: 'get status error'
+		})
+	}
 }
