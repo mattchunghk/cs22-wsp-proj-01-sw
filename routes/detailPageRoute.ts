@@ -113,14 +113,14 @@ async function deleteEvents(req: Request, res: Response) {
 		// 		)
 		// 	}
 
-		// 	let eventImgs: any = await client.query(`
+		// let eventImgs: any = await client.query(`
 		// select filename from event_images where event_id = ${id}
 		// `)
-		// 	for (let eventImg of eventImgs.rows) {
-		// 		fs.unlinkSync(
-		// 			`/Users/mattchung/Desktop/c22/WSP/cs22-wsp-proj-01-sw/uploads/${eventImg.filename}`
-		// 		)
-		// 	}
+		// for (let eventImg of eventImgs.rows) {
+		// 	fs.unlink(`../uploads/${eventImg.filename}`, () => {
+		// 		console.log('events img deleted')
+		// 	})
+		// }
 
 		await client.query(`
     DELETE FROM user_favorite_messages WHERE message_id in (select id from messages WHERE event_id = ${id});
