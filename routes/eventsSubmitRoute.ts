@@ -45,23 +45,15 @@ async function getSubmitData(req: Request, res: Response) {
 			// fromSocketId
 		} = await formParse(req)
 
-		console.log(
-			images1,
-			images2,
-			images3,
-			title,
-			startDate,
-			endDate,
-			country,
-			place,
-			ppl,
-			budget,
-			intro,
-			sporty,
-			luxury,
-			relaxed,
-			countrySide
-		)
+		let startDateISO = new Date(startDate).toISOString()
+		let endDateISO = new Date(endDate).toISOString()
+
+		if (startDateISO > endDateISO) {
+			res.status(400).json({
+				message: 'DATE check failed'
+			})
+			return
+		}
 
 		let eventId = await client.query(
 			'INSERT INTO events (user_id,title,country,city,introduction,budget,start_date,end_date,people_quota,is_sporty,is_luxury,is_relax,is_countryside) VALUES  ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING ID',

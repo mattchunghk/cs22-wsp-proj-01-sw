@@ -234,7 +234,7 @@ ${
 
 
         <div class="col-lg-4 col-md-12 map">
-            <iframe width="100%" height="400" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDgzJsIne7hMjjk8yGSPloiQ_FYdNr-g-&q=${event[0].city
+            <iframe width="100%" height="400" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDgzJsIne7hMjjk8yGSPloiQ_FYdNr-g-g&q=${event[0].city
 				.trim()
 				.split(' ')
 				.join('+')},${event[0].country
@@ -313,7 +313,7 @@ async function loadMessages() {
 				// console.log(messagesImage);
 				imageHtml += `
             <div class="carousel-item active msg-item-div">
-                    <img src="http://localhost:8080/${messagesImage}" class=" d-block w-100 msg-img" alt="..."> 
+                    <img src="../../../${messagesImage}" class=" d-block w-100 msg-img" alt="..."> 
             </div>`
 			}
 
@@ -774,7 +774,12 @@ async function loadHeat() {
 // }
 
 async function loadRegion() {
-	let region = 'Africa'
+	// let region = 'Africa'
+	// let region = 'Americas'
+	let region = 'Asia'
+	// let region = 'Europe'
+	// let region = 'Oceania'
+
 	let regionArray = []
 	let result = []
 	const dbRes = await fetch(`/index`)

@@ -29,16 +29,23 @@ function init() {
 async function loadCountryFunction() {
 	let countrySelectDiv = document.querySelector('#country-selection')
 	const res = await fetch(`https://restcountries.com/v3.1/all`) // Fetch from the correct url
-	const countries = await res.json()
+	const countriesJSON = await res.json()
+	let countriesArray = []
+	for (let countrieJSON of countriesJSON) {
+		countriesArray.push(countrieJSON.name.common)
+	}
+
+	let countries = countriesArray.sort()
 	// countrySelectDiv.innerHTML += `<option selected>Country</option>`
 	for (let country of countries) {
-		countrySelectDiv.innerHTML += `<option value="${country.name.common}">${country.name.common}</option> `
+		countrySelectDiv.innerHTML += `<option value="${country}">${country}</option> `
 	}
 }
 
 async function createEvents(e) {
 	console.log('createEvents called')
 	e.preventDefault()
+
 	const form = e.target
 	const title = form.tripTitle.value
 	const startDate = form.datepickerStart.value
@@ -57,6 +64,17 @@ async function createEvents(e) {
 	const file1 = form.eventFile.files[0]
 	const file2 = form.eventFile.files[1]
 	const file3 = form.eventFile.files[2]
+
+	// let startDateISO = new Date(startDate).toISOString()
+	// let endDateISO = new Date(endDate).toISOString()
+
+	// if (endDateISO < startDateISO) {
+	// 	document.getElementById('datepicker-end').placeholder =
+	// 		'Please check your date'
+	// } else {
+	// 	return
+	// }
+
 	const formData = new FormData()
 	formData.append('title', title)
 	formData.append('startDate', startDate)
@@ -89,6 +107,11 @@ async function createEvents(e) {
 	if (res.ok) {
 		form.reset()
 		document.location.href = '/'
+	} else {
+		document.querySelector('#btn-submit').innerHTML = 'Trip data incorrect'
+		setTimeout(() => {
+			document.querySelector('#btn-submit').innerHTML = 'Submit'
+		}, 1000)
 	}
 }
 

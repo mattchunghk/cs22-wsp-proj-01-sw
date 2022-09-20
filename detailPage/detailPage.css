@@ -106,6 +106,16 @@ body {
 
 /* ?detail part start */
 
+.main-container {
+    margin-top: 120px;
+}
+
+@media screen and (max-width: 991px) {
+    .main-container {
+        margin-top: 180px;
+    }
+}
+
 #googleMap {
 
     margin-bottom: 30px;
@@ -137,11 +147,11 @@ body {
     border-radius: 10px;
 }
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
     .detail-carousel {
         margin-top: 160px;
     }
-}
+} */
 
 #detail-photo,
 #detail-photo-main {
