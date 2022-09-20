@@ -22,6 +22,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="https://pagination.js.org/dist/2.1.4/pagination.css"/>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -171,6 +173,7 @@
    <!-- event container -->
    <div class="event-top-holder">
     <div class="event-container">
+      <div id="list"><div class="wrapper"></div></div>
         <!-- <div class="card" style="width: 18rem;" data_index="${memo.id}">
             <img src="../asset/isfahan.jpg" class="card-img-top" alt="...">
             <div class="card-body">
@@ -187,17 +190,17 @@
           
     </div>
     <!-- pignation -->
-   <div class="pignation-holder">
+   <!-- <div class="pignation-holder">
     <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-      </ul>
+      <div class="pagination">
+        <div class="page-item"><a class="page-link" href="#">Previous</a></div>
+        <div class="page-item"><a class="page-link" href="#">1</a></div>
+        <div class="page-item"><a class="page-link" href="#">2</a></div>
+        <div class="page-item"><a class="page-link" href="#">3</a></div>
+        <div class="page-item"><a class="page-link" href="#">Next</a></div>
+      </div>
     </nav>
-  </div>
+  </div> -->
     <!-- please Login -->
     <div class="toast justify-content-center align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="toast-header">
@@ -220,6 +223,8 @@
       crossorigin="anonymous"
     >
   </script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://pagination.js.org/dist/2.1.4/pagination.min.js"></script>
   <script src="index.js"></script>
   </body>
 </html>
