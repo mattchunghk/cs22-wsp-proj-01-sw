@@ -101,16 +101,22 @@
           class="nav col-12 col-lg-aut  o me-lg-auto mb-2 justify-content-center mb-md-0"
         >
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">All</a>
+          <a class="nav-link active" onclick="loadDataJson()" >All</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Europe</a>
+          <a class="nav-link" onclick="loadRegion('Europe')">Europe</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">South America</a>
+          <a class="nav-link" onclick="loadRegion('America')">America</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Asia</a>
+          <a class="nav-link" onclick="loadRegion('Asia')">Asia</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" onclick="loadRegion('Oceania')">Oceania</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" onclick="loadRegion('Africa')">Africa</a>
         </li>
           <!-- <div class="navbar-header">create your own journey and meet your travelmates! </div> -->
         </ul>

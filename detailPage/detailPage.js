@@ -8,7 +8,7 @@ function init() {
 	loadEvents()
 	loadMessages()
 	getFunctionBar()
-	loadRegion()
+	loadRegion('Asia')
 
 	document
 		.querySelector('.log-out-container')
@@ -773,10 +773,10 @@ async function loadHeat() {
 //   loadMessages();
 // }
 
-async function loadRegion() {
+async function loadRegion(region) {
 	// let region = 'Africa'
 	// let region = 'Americas'
-	let region = 'Asia'
+	// let region = 'Asia'
 	// let region = 'Europe'
 	// let region = 'Oceania'
 
@@ -794,11 +794,11 @@ async function loadRegion() {
 	}
 
 	for (let dbJson of dbJsons) {
-		if (regionArray.indexOf(dbJson.country)) {
+		if (regionArray.includes(dbJson.country)) {
 			result.push(dbJson)
 		}
 	}
-
 	console.log(regionArray)
 	console.log(result)
+	return result
 }
