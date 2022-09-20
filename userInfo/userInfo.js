@@ -39,6 +39,7 @@ async function getFunctionBar() {
 
 	if (res.ok) {
 		if (userInfo.hasOwnProperty('userId')) {
+			document.title = `${userInfo.name}'s Personal`
 			document.querySelector(
 				'#greeting-text'
 			).innerHTML = `Hi, ${userInfo.name}`
@@ -82,6 +83,12 @@ async function loadCreateEvents() {
 			'#fa576a'
 		document.querySelector('#eventLoved-con').style.backgroundColor =
 			'#fa576a'
+
+		if (resUser.length == 0) {
+			eventContainer.innerHTML =
+				'<div class="no-event">No event created yet</div>'
+			return
+		}
 
 		for (let event of resUser) {
 			eventContainer.innerHTML += `
@@ -133,6 +140,12 @@ async function loadJoinedEvents() {
 		eventContainer.innerHTML = ''
 		console.log(resUser)
 
+		if (resUser.length == 0) {
+			eventContainer.innerHTML =
+				'<div class="no-event">No event joined yet</div>'
+			return
+		}
+
 		for (let event of resUser) {
 			eventContainer.innerHTML += `
 			<div class="event-display">
@@ -179,6 +192,12 @@ async function loadLovedEvents() {
 		const eventContainer = document.querySelector('.event-container')
 		eventContainer.innerHTML = ''
 		console.log(resUser)
+
+		if (resUser.length == 0) {
+			eventContainer.innerHTML =
+				'<div class="no-event">No event loved yet</div>'
+			return
+		}
 
 		for (let event of resUser) {
 			eventContainer.innerHTML += `

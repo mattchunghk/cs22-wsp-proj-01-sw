@@ -104,15 +104,15 @@ async function loadEvents() {
 	const eventsRes = await fetch(`/detail/event_id/${pageId}`)
 	const event = (await eventsRes.json()).data
 
-	const totalLoveRes = await fetch(`/detail/totalLoveCount/${pageId}`)
-	const totalLoveResult = await totalLoveRes.json()
+	// const totalLoveRes = await fetch(`/detail/totalLoveCount/${pageId}`)
+	// const totalLoveResult = await totalLoveRes.json()
 
-	const eventLovedByRes = await fetch(`/detail/event_id/${pageId}/count`)
-	const eventLovedByUser = (await eventLovedByRes.json()).data
+	// const eventLovedByRes = await fetch(`/detail/event_id/${pageId}/count`)
+	// const eventLovedByUser = (await eventLovedByRes.json()).data
 
 	if (eventsRes.ok) {
 		let detailContainer = document.querySelector('#main-container')
-
+		document.title = event[0].title
 		detailContainer.innerHTML = `
         <div id="carouselExampleIndicators" class="carousel slide detail-slide" data-bs-ride="true">
         <div class="carousel-indicators">

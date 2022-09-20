@@ -6,6 +6,8 @@
   background-color: #fa4a60 !important;
 }
 
+
+
 .userInfo-header {
   background-color: #fa4a5efe;
   width: 100vw;
@@ -177,6 +179,14 @@
 
 }
 
+.no-event {
+  font-family: "Baloo 2", cursive;
+  margin-top: 30px;
+  color: #fa4a5e;
+  text-shadow: 1px 2px 1px rgba(54, 53, 53, 0.2);
+  text-align: center;
+  font-size: 2rem;
+}
 
 
 .event-content {

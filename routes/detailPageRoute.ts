@@ -56,6 +56,23 @@ async function getDetail(req: Request, res: Response) {
 async function joinEvent(req: Request, res: Response) {
 	const eventId: any = req.query.eventId
 	try {
+		const joinedCounts = await client.query(
+			// `SELECT count(*) FROM event_participants WHERE event_id=${eventId} and user_id = ${req.session.useId};`
+			`select count(*)  from event_participants where event_id = ${eventId}`
+		)
+		const peopleQuota = await client.query(
+			// `SELECT count(*) FROM event_participants WHERE event_id=${eventId} and user_id = ${req.session.useId};`
+			`select people_quota from events where id =${eventId}`
+		)
+		if (
+			Number(joinedCounts.rows[0].count) >=
+			Number(peopleQuota.rows[0].people_quota)
+		) {
+			res.status(400).json({
+				message: 'password check failed'
+			})
+			return
+		}
 		const eventCounts = await client.query(
 			// `SELECT count(*) FROM event_participants WHERE event_id=${eventId} and user_id = ${req.session.useId};`
 			`SELECT count(*) FROM event_participants WHERE event_id=${eventId} and user_id = ${req.session.userId};`

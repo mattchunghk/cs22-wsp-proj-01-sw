@@ -182,6 +182,10 @@ body {
     cursor: pointer;
 }
 
+.fa-lock {
+    margin-right: 10px;
+}
+
 .fa-sack-dollar,
 .fa-user .fa-lock,
 .fa-users,
