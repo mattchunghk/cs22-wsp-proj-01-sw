@@ -1,10 +1,6 @@
 window.onload = () => {
 	init()
 }
-socket.on('cards-updated', (data) => {
-	console.log(data)
-	loadDataJson()
-})
 
 function init() {
 	loadDataJson()
@@ -19,6 +15,11 @@ function init() {
 		.querySelector('.user-container')
 		.addEventListener('click', userInfo)
 }
+const socket = io.connect()
+socket.on('cards-updated', (data) => {
+	console.log(data)
+	loadDataJson()
+})
 async function loadLoginStatus() {
 	const userRes = await fetch(`/user/loginStatus`)
 
