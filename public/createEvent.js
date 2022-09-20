@@ -250,8 +250,8 @@ async function loadMessages() {
 
 loadMessages()
 
-let modal = document.querySelector('#modal');
-let bgImg = document.querySelector('#bgImg');
+var modal = document.getElementById('modal');
+var bgImg = document.getElementById('bgImg');
 function showBgImg(e) {
 	modal.style.display = 'block';
 	bgImg.src = e.src;
