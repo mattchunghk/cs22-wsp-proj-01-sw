@@ -6,6 +6,7 @@ import crypto from 'crypto'
 import { logger } from '../utils/logger'
 import { formParse } from '../utils/upload'
 import { isLoggedIn } from '../utils/isLoggedIn'
+import { io } from '../app'
 
 //! "/submit"
 export const eventsSubmitRoute = express.Router()
@@ -96,6 +97,7 @@ async function getSubmitData(req: Request, res: Response) {
 		res.json({
 			message: 'Upload successful'
 		})
+		io.emit('cards-updated', { message: 'cards updated' })
 	} catch (error) {
 		res.status(404).send(error)
 	}

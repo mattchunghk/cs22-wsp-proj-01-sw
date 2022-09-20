@@ -1,10 +1,19 @@
 window.onload = () => {
 	init()
 }
+const socket = io.connect()
+
+socket.on('cards-updated', (data) => {
+	console.log(data)
+	loadDataJson()
+})
 
 function init() {
 	loadDataJson()
 	loadLoginStatus()
+	document
+		.querySelector('.admin-container')
+		.addEventListener('click', goAdminPage)
 	document
 		.querySelector('.log-out-container')
 		.addEventListener('click', logout)
@@ -15,11 +24,7 @@ function init() {
 		.querySelector('.user-container')
 		.addEventListener('click', userInfo)
 }
-const socket = io.connect()
-socket.on('cards-updated', (data) => {
-	console.log(data)
-	loadDataJson()
-})
+
 async function loadLoginStatus() {
 	const userRes = await fetch(`/user/loginStatus`)
 
@@ -176,9 +181,9 @@ async function like(eventIndex) {
 function goDetailPage(eventIndex) {
 	document.location.href = `/detail/detailPage/id/${eventIndex}`
 }
-function goDetailPage(eventIndex) {
-	document.location.href = `/detail/detailPage/id/${eventIndex}`
-}
+// function goDetailPage(eventIndex) {
+// 	document.location.href = `/detail/detailPage/id/${eventIndex}`
+// }
 async function loginPage() {
 	window.location.href = '/user/login.html'
 }
@@ -254,7 +259,7 @@ async function loadRegion(region) {
 				<div class="card-body">
 					<h5 class="card-title">${event.title}</h5>
 					<p class="card-text">${event.introduction} </p>
-				
+
 					<div class="icon-container">
 					${
 						event.is_sporty
@@ -290,7 +295,7 @@ async function loadRegion(region) {
 							: ''
 					}
 					</div>
-				
+
 					<a onclick="goDetailPage(${event.id})" id="go-${
 					event.id
 				}" class="btn btn-primary" data_index="${event.id}">GO!</a>
@@ -305,7 +310,7 @@ async function loadRegion(region) {
 				</div>`
 						: `<div class="love-container" data_index="${event.id}" >
 					<i onclick="like(${event.id})" id="love-${event.id}" class="fa-solid fa-heart heart-red-solid" data_index="${event.id}"></i>
-				
+
 				</div>`
 				}
 				</div>`
@@ -313,4 +318,8 @@ async function loadRegion(region) {
 			$('#list .wrapper').html(indexHtml)
 		}
 	})
+}
+
+async function goAdminPage() {
+	window.location.href = '/adminPage.html'
 }
