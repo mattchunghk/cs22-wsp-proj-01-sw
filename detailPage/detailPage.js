@@ -8,7 +8,6 @@ function init() {
 	loadEvents()
 	loadMessages()
 	getFunctionBar()
-	loadRegion('Asia')
 
 	document
 		.querySelector('.log-out-container')
@@ -557,9 +556,9 @@ async function loadMessages() {
 				}), //記得JSON出寫返headers
 				headers: { 'Content-Type': 'application/json' }
 			})
-			if (messageEditRes.ok) {
-				loadMessages()
-			}
+			// if (messageEditRes.ok) {
+			// 	loadMessages()
+			// }
 		})
 
 		//Call Delete
@@ -574,9 +573,9 @@ async function loadMessages() {
 				}), //記得JSON出寫返headers
 				headers: { 'Content-Type': 'application/json' }
 			})
-			if (messageEditRes.ok) {
-				loadMessages()
-			}
+			// if (messageEditRes.ok) {
+			// 	loadMessages()
+			// }
 		})
 
 		// let likePattern = true;
@@ -772,33 +771,3 @@ async function loadHeat() {
 //   loadMoreCount += 1;
 //   loadMessages();
 // }
-
-async function loadRegion(region) {
-	// let region = 'Africa'
-	// let region = 'Americas'
-	// let region = 'Asia'
-	// let region = 'Europe'
-	// let region = 'Oceania'
-
-	let regionArray = []
-	let result = []
-	const dbRes = await fetch(`/index`)
-	const dbJsons = await dbRes.json()
-	const regionRes = await fetch(
-		`https://restcountries.com/v3.1/region/${region}`
-	)
-	const regions = await regionRes.json()
-
-	for (let region of regions) {
-		regionArray.push(region.name.common)
-	}
-
-	for (let dbJson of dbJsons) {
-		if (regionArray.includes(dbJson.country)) {
-			result.push(dbJson)
-		}
-	}
-	console.log(regionArray)
-	console.log(result)
-	return result
-}
