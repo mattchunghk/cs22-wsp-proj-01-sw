@@ -44,7 +44,7 @@ async function loadMessages() {
 			for (let messagesImage of message.images) {
 				// console.log(messagesImage);
 				imageHtml += `
-            <div class="carousel-item active">
+            <div onclick='showBgImg(this)' class="carousel-item active thum-img">
                     <img src="http://localhost:8080/${messagesImage}" class=" d-block w-100 " alt="..."> 
             </div>`
 			}
@@ -85,6 +85,13 @@ async function loadMessages() {
                         </div>
 
                     </div>
+
+					<div style='position:fixed;width:100%;height:100%;background-color:rgb(0,0,0,0.65)' id='modal'>
+      				    <div class='modal' id='modalw'>
+       				    	<img id='bgImg' />
+  				        </div>
+            		</div>
+
         
                     
                     <div class="col-md-6 images-setting">
@@ -107,14 +114,11 @@ async function loadMessages() {
 			messagesContainer.innerHTML += `
         <div class="messageAllDivs" >
             <div class="row heading-setting">
-                <div for="exampleFormControlTextarea1" class="form-label col-md-3" >${
-					message.heading
+                <div for="exampleFormControlTextarea1" class="form-label col-md-3" >${message.heading
 				}</div>
-                <div class="col-md-3"> Name: <span>  ${
-					message.user_id
+                <div class="col-md-3"> Name: <span>  ${message.user_id
 				}</span></div>
-                <div class="col-md-4"> Date: <span> ${
-					message.created_at
+                <div class="col-md-4"> Date: <span> ${message.created_at
 				}1</span></div>
             </div>
                 <div class="row">
@@ -123,39 +127,32 @@ async function loadMessages() {
                             cols="110" rows="6">${message.comment}</textarea>
                         <div class="row button-div">
                             <div class="col-md-3">
-                                <button class='delete-btn ' index="${
-									message.id
-								}">
-                                    <i class="bi bi-trash3-fill" index="${
-										message.id
-									}"></i>
+                                <button class='delete-btn ' index="${message.id
+				}">
+                                    <i class="bi bi-trash3-fill" index="${message.id
+				}"></i>
                                 </button>
                             </div>
                             <div class="col-md-3">
                                 <button class='edit-btn' index="${message.id}">
-                                    <i class="bi bi-pencil-square" index="${
-										message.id
-									}"></i>
+                                    <i class="bi bi-pencil-square" index="${message.id
+				}"></i>
                                 </button>
                             </div>
                             <div class="col-md-3">
                                 <button class='angry-btn' index="${message.id}">
-                                    <i class="bi bi-emoji-angry index="${
-										message.id
-									}"></i>
-                                    <span class="angryview" id="angry_value" index="${
-										message.id
-									}">0</span>
+                                    <i class="bi bi-emoji-angry index="${message.id
+				}"></i>
+                                    <span class="angryview" id="angry_value" index="${message.id
+				}">0</span>
                                 </button>
                             </div>
                             <div class="col-md-3">
                                 <button class='like-btn' index="${message.id}">
-                                    <i class="bi bi-emoji-heart-eyes" index="${
-										message.id
-									}"></i>
-                                    <span class="likeview" id="like_value" index="${
-										message.id
-									}">${message.favorite_count - 1}</span>
+                                    <i class="bi bi-emoji-heart-eyes" index="${message.id
+				}"></i>
+                                    <span class="likeview" id="like_value" index="${message.id
+				}">${message.favorite_count - 1}</span>
                                 </button>
                             </div>
                         </div>
@@ -252,3 +249,13 @@ async function loadMessages() {
 }
 
 loadMessages()
+
+let modal = document.querySelector('#modal');
+let bgImg = document.querySelector('#bgImg');
+function showBgImg(e) {
+	modal.style.display = 'block';
+	bgImg.src = e.src;
+}
+bgImg.onclick = function () {
+	modal.style.display = 'none';
+}
