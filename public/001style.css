@@ -85,6 +85,7 @@
 	cursor: pointer;
 }
 .log-in-container,
+.admin-container,
 .log-out-container {
 	cursor: pointer;
 	color: #555555;
@@ -92,14 +93,20 @@
 .admin-container {
 	display: none;
 }
+.navbar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
 .nav {
 	position: relative;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	padding: 0px 30px 0px 30px;
 }
 .nav-link {
-	margin-right: 20px;
+	margin-right: 1px;
 	font-size: 18px;
 	color: #555555;
 	cursor: pointer;
@@ -109,6 +116,35 @@
 .nav-link:hover {
 	color: rgb(239, 237, 237);
 	text-shadow: 1px 2px 3px rgb(46, 46, 46);
+}
+.empty-box {
+	width: 5vw;
+}
+.create-button {
+	margin-right: 35px;
+	margin-left: 15px;
+}
+.roundedFixedBtn {
+	height: 40px;
+	/* line-height: 80px; */
+	width: 170px;
+	font-size: 18px;
+	padding-top: 5px;
+	/* font-weight: bold; */
+	border-radius: 10px;
+	background-color: #656464bf;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+	transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	transform-origin: top;
+}
+.roundedFixedBtn:hover {
+	background-color: #3d3d3d;
+	-webkit-transform: scale3d(1.05, 1.05, 1.05);
+	transform: scale3d(1.05);
+	box-shadow: 0px 7px 10px 0px rgb(250, 222, 219);
+	color: #f98996;
 }
 #carouselExampleFade {
 	padding: 0px 40px 0px 40px;
@@ -188,33 +224,6 @@
 	height: 40px;
 	width: 120px;
 	background-color: aquamarine;
-}
-.create-button {
-	position: fixed;
-	right: 5%;
-	margin-left: 10px;
-}
-.roundedFixedBtn {
-	height: 40px;
-	/* line-height: 80px; */
-	width: 170px;
-	font-size: 18px;
-	padding-top: 7px;
-	/* font-weight: bold; */
-	border-radius: 10px;
-	background-color: #656464bf;
-	color: white;
-	text-align: center;
-	cursor: pointer;
-	transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-	transform-origin: top;
-}
-.roundedFixedBtn:hover {
-	background-color: #3d3d3d;
-	-webkit-transform: scale3d(1.05, 1.05, 1.05);
-	transform: scale3d(1.05);
-	box-shadow: 0px 7px 10px 0px rgb(250, 222, 219);
-	color: #f98996;
 }
 
 .search-bar {
