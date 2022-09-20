@@ -8,6 +8,7 @@ function init() {
 	loadEvents()
 	loadMessages()
 	getFunctionBar()
+	loadRegion()
 
 	document
 		.querySelector('.log-out-container')
@@ -771,3 +772,28 @@ async function loadHeat() {
 //   loadMoreCount += 1;
 //   loadMessages();
 // }
+
+async function loadRegion() {
+	let region = 'Africa'
+	let regionArray = []
+	let result = []
+	const dbRes = await fetch(`/index`)
+	const dbJsons = await dbRes.json()
+	const regionRes = await fetch(
+		`https://restcountries.com/v3.1/region/${region}`
+	)
+	const regions = await regionRes.json()
+
+	for (let region of regions) {
+		regionArray.push(region.name.common)
+	}
+
+	for (let dbJson of dbJsons) {
+		if (regionArray.indexOf(dbJson.country)) {
+			result.push(dbJson)
+		}
+	}
+
+	console.log(regionArray)
+	console.log(result)
+}

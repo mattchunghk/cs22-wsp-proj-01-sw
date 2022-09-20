@@ -256,3 +256,17 @@ input[type="file"] {
     box-shadow: 1px 1px 12px 1px#FA4A60;
 
 }
+
+.pac-container {
+    border: solid 2px #FA4A60;
+    border-radius: 10px;
+
+}
+
+.pac-icon {
+    color: #FA4A60 !important;
+}
+
+.pac-matched {
+    color: #FA4A60;
+}
