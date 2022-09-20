@@ -34,7 +34,7 @@ async function loadLoginStatus() {
 			if (userInfo.isAdmin) {
 				document.querySelector('.admin-container').style.display =
 					'flex'
-				document.querySelector('.user-container').style.display = 'none'
+				document.querySelector('.user-container').style.display = 'flex'
 			} else if (userInfo.isAdmin == null || userInfo.isAdmin == false) {
 				document.querySelector('.admin-container').style.display =
 					'none'
