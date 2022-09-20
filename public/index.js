@@ -1,6 +1,10 @@
 window.onload = () => {
 	init()
 }
+socket.on('cards-updated', (data) => {
+	console.log(data)
+	loadDataJson()
+})
 
 function init() {
 	loadDataJson()
