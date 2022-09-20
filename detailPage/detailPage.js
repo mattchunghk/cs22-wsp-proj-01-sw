@@ -234,7 +234,7 @@ ${
 
 
         <div class="col-lg-4 col-md-12 map">
-            <iframe width="100%" height="400" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDgzJsIne7hMjjk8yGSPloiQ_FYdNr-g-g&q=${event[0].city
+            <iframe width="100%" height="400" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDgzJsIne7hMjjk8yGSPloiQ_FYdNr-g-&q=${event[0].city
 				.trim()
 				.split(' ')
 				.join('+')},${event[0].country

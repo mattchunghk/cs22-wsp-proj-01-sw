@@ -58,7 +58,7 @@ async function loadDataJson() {
 		// you call the plugin
 		// dataSource: hihiJson, // pass all the data
 		dataSource: data,
-		pageSize: 2, // put how many items per page you want
+		pageSize: 6, // put how many items per page you want
 		callback: async function (data, pagination) {
 			// data will be chunk of your data (json.Product) per page
 			// that you need to display'
