@@ -44,8 +44,13 @@
     align-items: center;
 }
 
+.login-form-div {
+    box-shadow: 5px 5px 10px 1px rgba(54, 53, 53, 0.2);
+}
+
 .admin-form-div {
-    background-color: #FA4A60;
+    background-color: #100e0e;
+
     width: 300px;
     height: 350px;
     margin-top: 120px;

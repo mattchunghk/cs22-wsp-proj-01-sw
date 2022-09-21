@@ -11,7 +11,8 @@ body {
 }
 
 .createForm-header {
-    background-color: #fa4a5efe;
+    background-color: #f64a5ef5;
+    /* background-color: #fa4a5ef5; */
     width: 100vw;
     position: fixed;
     top: 0;
@@ -190,10 +191,15 @@ body {
 .fa-user .fa-lock,
 .fa-users,
 .fa-heart,
-.bi-heart-fill .fa-plane-departure,
+.bi-heart-fill,
+.fa-plane-departure,
 .fa-plane-arrival,
 .fa-location-dot {
     margin-right: 20px;
+}
+
+.icon-text {
+    margin-right: 30px;
 }
 
 .detail-like-text {
@@ -360,4 +366,16 @@ body {
 .btn-primary,
 .btn-success {
     --bs-btn-focus-shadow-rgb: #FA4A60 !important;
+}
+
+#deleteModal {
+    /* margin-left: 200px; */
+    left: 28%;
+    top: 28%
+}
+
+#deleteModal,
+.modal-dialog {
+
+    z-index: 99999999 !important;
 }
