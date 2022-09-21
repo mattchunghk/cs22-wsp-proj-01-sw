@@ -263,7 +263,7 @@ async function loadRegion(region) {
 					<div class="icon-container">
 					${
 						event.is_sporty
-							? `<div class="col-xl-2 icon-col">
+							? `<div class="col-xl-2 col-sm-2 col-lg-6 col-md-4 icon-col">
 					<div><i class="fa-solid fa-person-skiing
 								select-icons"></i>
 					</div>
@@ -272,7 +272,7 @@ async function loadRegion(region) {
 					}
 					${
 						event.is_luxury
-							? `<div class="col-xl-2  icon-col">
+							? `<div class="col-xl-2 col-sm-2 col-lg-6 col-md-4 icon-col">
 				<div><i class="fa-solid fa-dollar-sign
 							select-icons"></i></div>
 				</div>`
@@ -281,14 +281,14 @@ async function loadRegion(region) {
 					${
 						event.is_relax
 							? `
-					<div class="col-xl-2 icon-col">
+					<div class="col-xl-2 col-sm-2 col-lg-6 col-md-4 icon-col">
 						<div><i class="fa-solid fa-spa select-icons"></i></div>
 					</div>`
 							: ''
 					}
 					${
 						event.is_countryside
-							? `<div class="col-xl-2 icon-col">
+							? `<div class="col-xl-2 col-sm-2 col-lg-6 col-md-4 icon-col">
 				<div><i class="fa-solid fa-mountain-sun
 					select-icons"></i></div>
 				</div>`

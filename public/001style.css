@@ -26,7 +26,7 @@
 }
 .logo-title {
 	font-family: 'Baloo 2', cursive;
-	font-size: 3rem;
+	font-size: 4rem;
 	color: #fa4a60;
 	margin: 20px 10px 20px 0px;
 }
@@ -96,7 +96,7 @@
 .navbar {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: center;
 }
 .nav {
 	position: relative;
@@ -121,8 +121,8 @@
 	width: 5vw;
 }
 .create-button {
-	margin-right: 35px;
-	margin-left: 15px;
+	margin-right: 2vw;
+	margin-left: 5vw;
 }
 .roundedFixedBtn {
 	height: 40px;
@@ -283,16 +283,16 @@
 .fa-heart-circle-plus {
 	position: absolute;
 	left: 240px;
-	top: 340px;
-	font-size: 20px;
+	top: 335px;
+	font-size: 22px;
 	color: black;
 	cursor: pointer;
 }
 .heart-red-solid {
 	position: absolute;
 	left: 238px;
-	top: 340px;
-	font-size: 25px;
+	top: 335px;
+	font-size: 27px;
 	color: red;
 }
 
@@ -314,8 +314,18 @@
 
 	top: 300px;
 }
-.icon-col {
-	margin-right: 7px;
+@media (min-width: 1200px) {
+	.icon-col {
+		flex: 0 0 auto;
+		width: 25%;
+	}
+}
+
+.col-xl-2,
+.icon-col,
+.col-sm-6,
+.col-lg-2 .col-md-4 {
+	margin: 0px 4px 0px 4px;
 	color: #fa4a60;
 }
 .btn-primary {
