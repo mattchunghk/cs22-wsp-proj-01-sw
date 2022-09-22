@@ -15,6 +15,8 @@ import { format, fromUnixTime } from 'date-fns'
 import { Server } from 'http'
 import { messageRoutes } from './routes/messageRoute'
 import { adminPageRoutes } from './routes/adminPage'
+
+import { client } from './utils/db'
 dotenv.config()
 
 const app = express()
@@ -40,6 +42,7 @@ app.use('/index', indexRoute)
 app.use('/', adminPageRoutes)
 
 fs.mkdirSync(uploadDir, { recursive: true })
+deletedImg() // delete Images not found in database
 declare module 'express-session' {
 	interface SessionData {
 		name?: string
@@ -65,6 +68,37 @@ const grantExpress = grant.express({
 		callback: '/user/login/google'
 	}
 })
+
+async function deletedImg() {
+	let dbFileNames: any = []
+
+	let eventImages = await client.query(`
+		select filename from event_images;
+    `)
+	let messageImages = await client.query(`
+	select filename from message_images;
+`)
+
+	for (let eventImage of eventImages.rows) {
+		dbFileNames.push(eventImage.filename)
+	}
+	for (let messageImage of messageImages.rows) {
+		dbFileNames.push(messageImage.filename)
+	}
+
+	let files = fs.readdirSync('./uploads')
+
+	for (let file of files) {
+		if (fs.existsSync(`./uploads/${file}`)) {
+			if (!dbFileNames.includes(file)) {
+				fs.unlink(`./uploads/${file}`, (err) => {
+					if (err) throw err
+					console.log(`./uploads/${file} was deleted`)
+				})
+			}
+		}
+	}
+}
 
 app.use(grantExpress as express.RequestHandler)
 
