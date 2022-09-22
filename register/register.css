@@ -22,8 +22,14 @@
     top: 0;
 }
 
+.tidio-chat-iframe {
+    text-shadow: 2px 3px 4px rgb(46, 46, 46);
+}
+
+
 .logo-container {
     display: flex;
+    cursor: pointer;
 }
 
 .fa-umbrella-beach {

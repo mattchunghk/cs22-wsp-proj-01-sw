@@ -2,6 +2,11 @@
     color: #fa4a5e !important;
 }
 
+.tidio-chat-iframe {
+    text-shadow: 2px 3px 4px rgb(46, 46, 46);
+}
+
+
 ::selection {
     background-color: #FA4A60 !important;
 }
@@ -369,13 +374,19 @@ body {
 }
 
 #deleteModal {
-    /* margin-left: 200px; */
-    left: 28%;
-    top: 28%
+    width: 100vw;
+    height: 100vh
 }
 
+#pop-up-img,
+#imgshow,
+#imgModal,
 #deleteModal,
 .modal-dialog {
-
     z-index: 99999999 !important;
+}
+
+#imgModal {
+    width: 100vw;
+    height: 100vh
 }

@@ -49,6 +49,20 @@ socket.on('message-delete', (data) => {
 	loadMessages()
 })
 
+window.showMaxImg = (obj) => {
+	var src = $(obj).attr('src')
+	$('#imgModal')
+		.find('#imgshow')
+		.html(
+			"<img src='" +
+				src +
+				"' class='carousel-inner img-responsive img-rounded' id=`pop-up-img` data-dismiss='modal'>"
+		)
+	$('#imgModal').modal('show')
+	console.log(obj)
+	console.log(src)
+}
+
 //? init function
 async function getFunctionBar() {
 	const pathnames = window.location.pathname.split('/')
@@ -233,13 +247,13 @@ ${
 
 
         <div class="col-lg-4 col-md-12 map">
-            <iframe width="100%" height="400" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDgzJsIne7hMjjk8yGSPloiQ_FYdNr-g-&q=${event[0].city
+            <iframe width="100%" height="400" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDgzJsIne7hMjjk8yGSPloiQ_FYdNr-g-g&q=${event[0].city
 				.trim()
 				.split(' ')
 				.join('+')},${event[0].country
 			.trim()
 			.split(' ')
-			.join('+')}"></iframe>
+			.join('+')}&zoom=10"></iframe>
             <div class="d-grid gap-2 ">
                 <button class="btn btn-primary btn-submit" id="join-btn">Join</button>
             </div>
@@ -301,23 +315,32 @@ async function loadMessages() {
 	const messagesContainer = document.querySelector('#messages_container')
 	messagesContainer.innerHTML = ''
 
+	if (messagesJson.length == 0) {
+		document.querySelector('#messages_container').style.backgroundColor =
+			'#FFFFFF'
+	}
+
 	for (let message of messagesJson) {
 		let imageHtml = ''
 
 		const loginStatusRes = await fetch(`/user/loginStatus`)
 		const loginStatusJson = await loginStatusRes.json()
 
+		document.querySelector('#messages_container').style.backgroundColor =
+			'#FA4A60'
+
 		if (message.images != '') {
 			for (let messagesImage of message.images) {
 				// console.log(messagesImage);
+
 				imageHtml += `
-            <div class="carousel-item active msg-item-div">
-                    <img src="../../../${messagesImage}" class=" d-block w-100 msg-img" alt="..."> 
+            <div  class="carousel-item active msg-item-div">
+                    <img onclick="showMaxImg(this)" src="../../../${messagesImage}" class=" d-block w-100 msg-img" alt="..."> 
             </div>`
 			}
 
 			messagesContainer.innerHTML += `
-        <div class="messageAllDivs" >
+           <div class="messageAllDivs" >
 
                 <div class="row msg-row">
                 <div class="row heading-setting">
@@ -767,7 +790,16 @@ async function loadHeat() {
 	}
 }
 
-// async function loadMore() {
-//   loadMoreCount += 1;
-//   loadMessages();
-// }
+window.showMaxImg = (obj) => {
+	var src = $(obj).attr('src')
+	$('#imgModal')
+		.find('#imgshow')
+		.html(
+			"<img src='" +
+				src +
+				"' class='carousel-inner img-responsive img-rounded' id=`pop-up-img` data-dismiss='modal'>"
+		)
+	$('#imgModal').modal('show')
+	console.log(obj)
+	console.log(src)
+}

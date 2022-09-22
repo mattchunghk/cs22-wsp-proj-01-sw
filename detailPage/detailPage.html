@@ -42,11 +42,6 @@
 		/>
 
 		<title>Events detail</title>
-		<link
-			rel="icon"
-			href="assets/img/angry-panda.ico"
-			type="image/x-icon"
-		/>
 
 		<link
 			rel="stylesheet"
@@ -56,6 +51,11 @@
 		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 		<link rel="stylesheet" href="../../detailPage.css" />
 		<link rel="stylesheet" href="/createEvent.css" />
+		<link
+			rel="icon"
+			href="../asset/joinmego-icon.png"
+			type="image/x-icon"
+		/>
 	</head>
 
 	<body>
@@ -131,6 +131,24 @@
 		<!--? events messages-form part -->
 		<div class="container messages-form-container">
 			<div class="row messages-form-row">
+				<div
+					class="modal fade bs-example-modal-lg text-center"
+					id="imgModal"
+					tabindex="-1"
+					role="dialog"
+					data-toggle="modal"
+					aria-labelledby="myLargeModalLabel"
+					aria-hidden="true"
+				>
+					<div
+						class="modal-dialog modal-lg"
+						style="display: inline-block; width: auto"
+					>
+						<div class="modal-content">
+							<div id="imgshow"></div>
+						</div>
+					</div>
+				</div>
 				<form id="messages-form">
 					<div class="input-group mb-3">
 						<span

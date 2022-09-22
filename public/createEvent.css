@@ -138,18 +138,30 @@
     ;
 }
 
+.tidio-chat-iframe {
+    text-shadow: 2px 3px 4px rgb(46, 46, 46);
+}
+
+
 .setting-input {
     margin-top: -15px !important;
 }
 
-.messages-container {
-    margin-bottom: 20px;
+#messages_container {
+    border-radius: 5px;
+    /* background-color: #FA4A60; */
+    /* background-color: #cbcbcb; */
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin: 0 10px 20px 10px;
 }
 
 .msg-row {
-    border: 2px solid #FA4A60;
-    border-radius: 10px;
-    margin-bottom: 5px;
+    margin: 10px 60px 10px 60px;
+    background-color: white;
+    box-shadow: 2px 3px 4px rgb(46, 46, 46);
+    border-radius: 5px;
+
     padding: 15px;
 }
 

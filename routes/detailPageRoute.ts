@@ -45,9 +45,8 @@ async function getDetail(req: Request, res: Response) {
 		const events = await client.query(
 			`select * from event_images INNER JOIN events ON event_images.event_id = events.id where events.id = ${id};`
 		)
-		// console.log("events= ", events.rows);
+
 		res.status(200).json({ data: events.rows })
-		// res.status(200).json(events.rows);
 	} catch (error) {
 		res.status(404).send(error)
 	}
@@ -64,19 +63,22 @@ async function joinEvent(req: Request, res: Response) {
 			// `SELECT count(*) FROM event_participants WHERE event_id=${eventId} and user_id = ${req.session.useId};`
 			`select people_quota from events where id =${eventId}`
 		)
-		if (
-			Number(joinedCounts.rows[0].count) >=
-			Number(peopleQuota.rows[0].people_quota)
-		) {
-			res.status(400).json({
-				message: 'password check failed'
-			})
-			return
-		}
+
 		const eventCounts = await client.query(
 			// `SELECT count(*) FROM event_participants WHERE event_id=${eventId} and user_id = ${req.session.useId};`
 			`SELECT count(*) FROM event_participants WHERE event_id=${eventId} and user_id = ${req.session.userId};`
 		)
+
+		if (
+			Number(joinedCounts.rows[0].count) >=
+				Number(peopleQuota.rows[0].people_quota) &&
+			eventCounts.rows[0].count == 0
+		) {
+			res.status(400).json({
+				message: 'Joined check failed'
+			})
+			return
+		}
 
 		if (parseInt(eventCounts.rows[0].count) == 0) {
 			await client.query(
@@ -241,14 +243,14 @@ async function eventsParticipants(req: Request, res: Response) {
 detailPageRoute.post('/love', isLoggedIn, async (req, res) => {
 	const userID = req.session['userId'] || ''
 	const eventID = req.body.eventIndex
-	console.log('EventIndex= ' + eventID)
+
 	try {
 		let userLIkeStatus = await client.query(
 			`Select * FROM favorite_events
       where user_id =($1) and event_id=($2)`,
 			[userID, eventID]
 		)
-		console.log(userLIkeStatus)
+
 		if (userLIkeStatus.rowCount > 0) {
 			await client.query(
 				/*sql*/ `DELETE FROM favorite_events
@@ -273,8 +275,6 @@ detailPageRoute.post('/love', isLoggedIn, async (req, res) => {
 detailPageRoute.get('/event_id/:eventId/count', async (req, res) => {
 	const userId = req.session?.userId || '1'
 	const eventId = req.params.eventId
-	console.log({ userId })
-	console.log({ eventId })
 
 	try {
 		let eventLovedbyUser = await client.query(
@@ -285,7 +285,6 @@ detailPageRoute.get('/event_id/:eventId/count', async (req, res) => {
 		//   /*sql*/ `Update favorite_events set count=($1) WHERE id=($2)`,
 		//   [eventLikeStatus.rowCount, eventID]
 		// );
-		console.log(eventLovedbyUser)
 
 		res.status(200).json({
 			data: count

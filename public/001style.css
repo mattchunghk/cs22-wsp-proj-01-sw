@@ -1,51 +1,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,300;1,400;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+.btn-primary,
+.btn-success {
+	--bs-btn-color: white !important;
+	--bs-btn-hover-color: white !important;
+	--bs-btn-hover-border-color: white !important;
+	--bs-btn-hover-bg: white !important;
+	--bs-btn-active-color: white !important;
+	--bs-btn-active-bg: #FA4A60 !important;
+	--bs-btn-active-border-color: white !important;
+	--bs-btn-focus-shadow-rgb: #FA4A60 !important;
+}
+
 .header {
 	padding: 30px 30px 0px 30px;
 }
+
+body {
+	margin-bottom: 50px
+}
+
 .header-container {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	border-bottom: solid 2px rgba(187, 186, 186, 0.651);
 }
+
 .login-search-section {
 	display: flex;
 	flex-direction: row;
 }
+
 #fa-umbrella-beach-toplogo {
 	color: #fa4a60;
 	font-size: 3rem;
 	margin: 30px 10px 20px 20px;
 }
+
 .logo-container {
 	color: #fa4a60;
-
+	cursor: pointer;
 	display: flex;
 	flex-direction: row;
 }
+
 .logo-title {
 	font-family: 'Baloo 2', cursive;
 	font-size: 4rem;
 	color: #fa4a60;
 	margin: 20px 10px 20px 0px;
 }
+
 .search-bar {
 	margin: 30px 10px 20px 20px;
 	margin-right: 10px;
 }
+
 .function-container {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
 	margin: 30px 10px 20px 20px;
 }
+
+
 .function-div {
 	display: flex;
 	flex-direction: row;
 	font-size: 20px;
 	margin: 20px 8px 0px 10px;
 }
+
 #header-icon {
 	margin-top: 5px;
 	margin-right: 3px;
@@ -84,20 +110,25 @@
 .user-container {
 	cursor: pointer;
 }
+
+.user-container,
 .log-in-container,
 .admin-container,
 .log-out-container {
 	cursor: pointer;
 	color: #555555;
 }
+
 .admin-container {
 	display: none;
 }
+
 .navbar {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 }
+
 .nav {
 	position: relative;
 	display: flex;
@@ -105,6 +136,7 @@
 	justify-content: center;
 	padding: 0px 30px 0px 30px;
 }
+
 .nav-link {
 	margin-right: 1px;
 	font-size: 18px;
@@ -113,46 +145,61 @@
 	transition: 0.3s;
 	text-decoration: solid;
 }
+
 .nav-link:hover {
 	color: rgb(239, 237, 237);
 	text-shadow: 1px 2px 3px rgb(46, 46, 46);
 }
+
+
 .empty-box {
 	width: 5vw;
 }
+
 .create-button {
 	margin-right: 2vw;
 	margin-left: 5vw;
 }
+
 .roundedFixedBtn {
 	height: 40px;
 	/* line-height: 80px; */
 	width: 170px;
 	font-size: 18px;
-	padding-top: 5px;
+	padding-top: 2px;
 	/* font-weight: bold; */
 	border-radius: 10px;
-	background-color: #656464bf;
+	border-style: none;
+	background-color: #fa4a60;
 	color: white;
 	text-align: center;
 	cursor: pointer;
 	transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 	transform-origin: top;
 }
+
+.roundedFixedBtn:disabled {
+	background-color: #fb6a7b;
+	box-shadow: 0px 7px 10px 0px rgb(250, 222, 219);
+	color: white
+}
+
 .roundedFixedBtn:hover {
-	background-color: #3d3d3d;
+	background-color: #fb6a7b;
 	-webkit-transform: scale3d(1.05, 1.05, 1.05);
 	transform: scale3d(1.05);
 	box-shadow: 0px 7px 10px 0px rgb(250, 222, 219);
-	color: #f98996;
+	color: white
 }
+
 #carouselExampleFade {
-	padding: 0px 40px 0px 40px;
+	/* padding: 0px 40px 0px 40px; */
 	margin: 0px;
 }
+
 .carousel-inner {
 	max-width: 100%;
-	max-height: 590px !important;
+	max-height: 570px !important;
 }
 
 .carousel-caption {
@@ -163,18 +210,26 @@
 	font-family: 'Neuton', Serif;
 	text-shadow: 1px 1px 1px rgba(54, 53, 53, 0.2);
 }
+
 .revealUp {
-	overflow: hidden; /* Ensures the content is not revealed until the animation */
-	border-right: 0.15em solid orange; /* The typwriter cursor */
-	white-space: nowrap; /* Keeps the content on a single line */
-	margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-	letter-spacing: 0.15em; /* Adjust as needed */
+	overflow: hidden;
+	/* Ensures the content is not revealed until the animation */
+	border-right: 0.15em solid orange;
+	/* The typwriter cursor */
+	white-space: nowrap;
+	/* Keeps the content on a single line */
+	margin: 0 auto;
+	/* Gives that scrolling effect as the typing happens */
+	letter-spacing: 0.15em;
+	/* Adjust as needed */
 	animation: typing 3.5s steps(40, end), blink-caret 2s step-end infinite;
 }
+
 @keyframes typing {
 	from {
 		width: 0;
 	}
+
 	to {
 		width: 100%;
 	}
@@ -182,39 +237,38 @@
 
 /* The typewriter cursor effect */
 @keyframes blink-caret {
+
 	from,
 	to {
 		border-color: transparent;
 	}
+
 	40% {
 		border-color: orange;
 	}
 }
-.carousel-inner > .carousel-item > img {
+
+.carousel-inner>.carousel-item>img {
 	width: 100% !important;
 
 	height: 590px !important;
 	object-fit: cover;
 	border-radius: 15px;
 }
-@media only screen and (max-width: 959px) {
-}
+
+@media only screen and (max-width: 959px) {}
 
 /* Tablet Portrait size to standard 960 (devices and browsers) */
-@media only screen and (min-width: 768px) and (max-width: 959px) {
-}
+@media only screen and (min-width: 768px) and (max-width: 959px) {}
 
 /* All Mobile Sizes (devices and browser) */
-@media only screen and (max-width: 767px) {
-}
+@media only screen and (max-width: 767px) {}
 
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
-@media only screen and (min-width: 480px) and (max-width: 767px) {
-}
+@media only screen and (min-width: 480px) and (max-width: 767px) {}
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
-@media only screen and (max-width: 479px) {
-}
+@media only screen and (max-width: 479px) {}
 
 #show-more {
 	/* position: fixed !important;
@@ -230,14 +284,16 @@
 	width: 200px;
 	height: 40x;
 }
-.wrapper {
-	padding: 20px 30px 0px 30px;
 
+.wrapper {
+	padding: 20px 0px 0px 0px;
+	min-height: 410px;
 	display: flex !important;
 	flex-direction: row !important;
 	flex-wrap: wrap;
 	justify-content: center;
 }
+
 .card {
 	border-color: #f86c7c;
 	margin: 10px 20px 10px 0px;
@@ -245,7 +301,25 @@
 	transition: 0.5s all;
 	position: relative;
 }
-.card-body > .card-text {
+
+.tidio-chat-iframe {
+	text-shadow: 2px 3px 4px rgb(46, 46, 46);
+}
+
+.card-body>.card-title {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	/* number of lines to show */
+	line-height: 1.5em;
+	/* fallback */
+	max-height: 4.5em;
+	/* fallback */
+}
+
+.card-body>.card-text {
 	/* white-space: nowrap;
   overflow: hidden;
   text-overflow: "----"; */
@@ -264,15 +338,28 @@
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 2; /* number of lines to show */
-	line-height: 1.5em; /* fallback */
-	max-height: 4.5em; /* fallback */
+	-webkit-line-clamp: 2;
+	/* number of lines to show */
+	line-height: 1.5em;
+	/* fallback */
+	max-height: 4.5em;
+	/* fallback */
 }
+
+.toast-header {
+	color: white;
+	background-color: #fa4a60;
+}
+
+
+
 .toast {
+	z-index: 99999 !important;
 	position: fixed;
-	top: 80%;
+	top: 40%;
 	right: 40%;
 }
+
 .admin-corner {
 	position: absolute;
 	left: 195px;
@@ -280,14 +367,16 @@
 	font-size: 20px;
 	display: none;
 }
+
 .fa-heart-circle-plus {
 	position: absolute;
 	left: 240px;
 	top: 335px;
 	font-size: 22px;
-	color: black;
+	color: rgb(69, 69, 69);
 	cursor: pointer;
 }
+
 .heart-red-solid {
 	position: absolute;
 	left: 238px;
@@ -299,13 +388,16 @@
 .fa-trash {
 	margin-right: 5px;
 }
+
 .card:hover {
 	box-shadow: 10px 10px 10px 5px rgba(54, 53, 53, 0.2);
 	margin-top: 5px !important;
 }
-.card > img {
+
+.card>img {
 	height: 12rem;
 }
+
 .icon-container {
 	display: flex;
 	flex-direction: row;
@@ -314,6 +406,7 @@
 
 	top: 300px;
 }
+
 @media (min-width: 1200px) {
 	.icon-col {
 		flex: 0 0 auto;
@@ -328,6 +421,7 @@
 	margin: 0px 4px 0px 4px;
 	color: #fa4a60;
 }
+
 .btn-primary {
 	background-color: #fa4a60;
 	border: none;
@@ -339,11 +433,13 @@
 	top: 330px;
 	/* padding: px 1em 3px 1em; */
 }
+
 .btn-primary:hover {
 	background-color: #f98c98;
 	border: none;
 	transform: scale(1.1);
 }
+
 .pignation-holder {
 	margin-top: 20px;
 	display: flex;

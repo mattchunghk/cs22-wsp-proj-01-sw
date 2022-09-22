@@ -12,6 +12,7 @@
 
 .logo-container {
     display: flex;
+    cursor: pointer;
 }
 
 .fa-umbrella-beach {
@@ -97,4 +98,8 @@
     --bs-btn-active-bg: white !important;
     --bs-btn-active-border-color: white !important;
     --bs-btn-focus-shadow-rgb: #FA4A60 !important;
+}
+
+.tidio-chat-iframe {
+    text-shadow: 2px 3px 4px rgb(46, 46, 46);
 }

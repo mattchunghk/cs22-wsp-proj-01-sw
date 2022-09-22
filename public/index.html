@@ -45,7 +45,7 @@
 
     <link rel="stylesheet" href="001style.css" />
     <title>JoinMEGO! Meet your partner and travel together!</title>
-    <link rel="icon" href="assets/img/angry-panda.ico" type="image/x-icon" />
+    <link rel="icon" href="../asset/joinmego-icon.png" type="image/x-icon" />
   </head>
   
   <body>
@@ -109,28 +109,31 @@
           <a class="nav-link active" onclick="loadDataJson()" >All</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" onclick="loadRegion('Europe')">Europe</a>
+          <a class="nav-link" onclick="loadRegion(europe)">Europe</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" onclick="loadRegion('America')">America</a>
+          <a class="nav-link" onclick="loadRegion(americas)">America</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" onclick="loadRegion('Asia')">Asia</a>
+          <a class="nav-link" onclick="loadRegion(asia)">Asia</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" onclick="loadRegion('Oceania')">Oceania</a>
+          <a class="nav-link" onclick="loadRegion(oceania)">Oceania</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" onclick="loadRegion('Africa')">Africa</a>
+          <a class="nav-link" onclick="loadRegion(africa)">Africa</a>
         </li>
         <!-- create event button -->
-        <div class="create-button" onclick="window.location.href ='/submit/eventsForm.html'">
-          <div class="roundedFixedBtn">Create your trip<i class="fa-solid fa-umbrella-beach"></i></div>
+        <div class="create-button" >
+          <button class="roundedFixedBtn">Create your trip<i class="fa-solid fa-umbrella-beach"></i></>
         </div>
           <!-- <div class="navbar-header">create your own journey and meet your travelmates! </div> -->
         </ul>
+
+
         
     </div>
+  <div class="container-fluid">
     <div
         id="carouselExampleFade"
         class="carousel slide carousel-fade"
@@ -141,7 +144,7 @@
             <img src="../asset/peru.jpeg" class="d-block w-100" alt="..." />
             <div class="carousel-caption d-none d-md-block">
              
-              <p class="revealUp">Paring together and exploring the world </p>
+              <p class="revealUp">Pairing together and exploring the world </p>
             </div>
       
           </div>
@@ -219,9 +222,12 @@
       </div>
     </div>
   </div>
-  <footer>
+
+
+</div>
+  <!-- <footer>
     <div class="footer-conatiner"></div>
-  </footer>
+  </footer> -->
   <script
   src="//code.tidio.co/rdr3y4m92cphc48b9jsybj2oexvzpi8u.js"
   async

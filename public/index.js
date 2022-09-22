@@ -1,7 +1,14 @@
 window.onload = () => {
 	init()
+	fetchRegion()
 }
 const socket = io.connect()
+
+let africa = []
+let americas = []
+let asia = []
+let europe = []
+let oceania = []
 
 socket.on('cards-updated', (data) => {
 	console.log(data)
@@ -23,6 +30,12 @@ function init() {
 	document
 		.querySelector('.user-container')
 		.addEventListener('click', userInfo)
+	document
+		.querySelector('.logo-container')
+		.addEventListener('click', goHomePage)
+	document
+		.querySelector('.roundedFixedBtn')
+		.addEventListener('click', goCreateEvent)
 }
 
 async function loadLoginStatus() {
@@ -36,6 +49,7 @@ async function loadLoginStatus() {
 				'#greeting-text'
 			).innerHTML = `Hi, ${userInfo.name}`
 			// console.log(userInfo.name);
+
 			document.querySelector('.log-in-container').style.display = 'none'
 			document.querySelector('.log-out-container').style.display = 'flex'
 			document.querySelector('.user-container').style.display = 'flex'
@@ -51,6 +65,7 @@ async function loadLoginStatus() {
 			}
 		} else {
 			document.querySelector('#greeting-text').innerHTML = ''
+			// document.querySelector('.roundedFixedBtn').disabled = true
 			document.querySelector('#admin-container').style.display = 'none'
 			document.querySelector('.log-in-container').style.display = 'flex'
 			document.querySelector('.log-out-container').style.display = 'none'
@@ -58,6 +73,21 @@ async function loadLoginStatus() {
 		}
 	}
 }
+
+async function goCreateEvent() {
+	const resLogin = await fetch('/user/loginStatus')
+	const userInfo = await resLogin.json()
+	if (resLogin.ok) {
+		if (!userInfo.hasOwnProperty('userId')) {
+			const toastLiveExample = document.querySelector('.toast')
+			const toast = new bootstrap.Toast(toastLiveExample)
+			toast.show()
+		} else {
+			window.location.href = '/submit/eventsForm.html'
+		}
+	}
+}
+
 async function loadDataJson() {
 	const res = await fetch('/index')
 	const data = await res.json()
@@ -68,7 +98,7 @@ async function loadDataJson() {
 		// you call the plugin
 		// dataSource: hihiJson, // pass all the data
 		dataSource: data,
-		pageSize: 6, // put how many items per page you want
+		pageSize: 7, // put how many items per page you want
 		callback: async function (data, pagination) {
 			// data will be chunk of your data (json.Product) per page
 			// that you need to display'
@@ -201,43 +231,56 @@ async function logout() {
 		//   loadLoginStatus();
 		// }, 1000);
 		loadLoginStatus()
-		loadIndexEvents()
+		// loadIndexEvents()
 	}
-	loadIndexEvents()
+	// loadIndexEvents()
+}
+
+async function fetchRegion() {
+	const allRes = await fetch(`https://restcountries.com/v3.1/all`)
+	const countries = await allRes.json()
+
+	for (let country of countries) {
+		if (country.region == 'Africa') {
+			africa.push(country.name.common)
+		} else if (country.region == 'Americas') {
+			americas.push(country.name.common)
+		} else if (country.region == 'Asia') {
+			asia.push(country.name.common)
+		} else if (country.region == 'Europe') {
+			europe.push(country.name.common)
+		} else if (country.region == 'Oceania') {
+			oceania.push(country.name.common)
+		}
+	}
 }
 
 async function loadRegion(region) {
-	// let region = 'Africa'
-	// let region = 'Americas'
-	// let region = 'Asia'
-	// let region = 'Europe'
-	// let region = 'Oceania'
-	let regionArray = []
 	let result = []
 	const dbRes = await fetch(`/index`)
 	const dbJsons = await dbRes.json()
-	const regionRes = await fetch(
-		`https://restcountries.com/v3.1/region/${region}`
-	)
-	const regions = await regionRes.json()
+	// const regionRes = await fetch(
+	// 	`https://restcountries.com/v3.1/region/${region}`
+	// )
+	// const regions = await regionRes.json()
 
-	for (let region of regions) {
-		regionArray.push(region.name.common)
-	}
+	// for (let region of regions) {
+	// 	regionArray.push(region.name.common)
+	// }
 
 	for (let dbJson of dbJsons) {
-		if (regionArray.includes(dbJson.country)) {
+		if (region.includes(dbJson.country)) {
 			result.push(dbJson)
 		}
 	}
-	console.log(result)
+
 	const data = result
 	$('#list .wrapper').empty()
 	$('#list').pagination({
 		// you call the plugin
 		// dataSource: hihiJson, // pass all the data
 		dataSource: data,
-		pageSize: 6, // put how many items per page you want
+		pageSize: 7, // put how many items per page you want
 		callback: async function (data, pagination) {
 			// data will be chunk of your data (json.Product) per page
 			// that you need to display'
@@ -322,4 +365,8 @@ async function loadRegion(region) {
 
 async function goAdminPage() {
 	window.location.href = '/adminPage.html'
+}
+
+async function goHomePage() {
+	window.location.href = '/'
 }
