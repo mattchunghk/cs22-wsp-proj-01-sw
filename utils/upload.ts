@@ -21,7 +21,6 @@ export const formParse = (req: express.Request) => {
 				reject(err)
 			}
 			try {
-				console.log(fields)
 				const title = fields.title
 				const startDate = fields.startDate
 				const endDate = fields.endDate
@@ -50,11 +49,6 @@ export const formParse = (req: express.Request) => {
 				const filename2 = file2 ? file2.newFilename : null
 				const filename3 = file3 ? file3.newFilename : null
 
-				// console.log({
-				//   filename,
-				//   title,
-				// });
-				// Get File Name
 				resolve({
 					filename1,
 					filename2,

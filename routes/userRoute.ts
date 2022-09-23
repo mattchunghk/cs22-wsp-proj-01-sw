@@ -26,7 +26,6 @@ async function registerPage(req: express.Request, res: express.Response) {
 }
 
 async function register(req: express.Request, res: express.Response) {
-	console.log(req.body)
 	try {
 		const username = req.body.username
 		const password = req.body.password
@@ -147,9 +146,8 @@ async function loginGoogle(req: express.Request, res: express.Response) {
 		if (!user) {
 			//create a 32bit crypto password
 
-			console.log(user)
 			let password = await hashPassword(result.email)
-			console.log(password)
+
 			user = (
 				await client.query(
 					`INSERT INTO users (username,password,is_admin)
@@ -190,8 +188,6 @@ async function logout(req: express.Request, res: express.Response) {
 
 async function loginStatus(req: express.Request, res: express.Response) {
 	try {
-		console.log(req.session)
-
 		res.status(200).json(req.session)
 	} catch (error) {
 		res.status(400).json({

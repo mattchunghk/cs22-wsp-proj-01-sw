@@ -9,7 +9,7 @@ import path, { resolve } from 'path'
 import { isLoggedIn } from '../utils/isLoggedIn'
 import { request } from 'http'
 import fs from 'fs'
-import { io } from '../app'
+import { deletedImg, io } from '../app'
 
 export const detailPageRoute = express.Router()
 
@@ -123,24 +123,6 @@ async function deleteEvents(req: Request, res: Response) {
 	const id = req.params.id
 	console.log(`deleting ${id}`)
 	try {
-		// 	let msgImgs: any = await client.query(`
-		// select filename from message_images where message_id in (select id from messages where event_id = ${id});
-		// `)
-		// 	for (let msgImg of msgImgs.rows) {
-		// 		fs.unlinkSync(
-		// 			`/Users/mattchung/Desktop/c22/WSP/cs22-wsp-proj-01-sw/uploads/${msgImg.filename}`
-		// 		)
-		// 	}
-
-		// let eventImgs: any = await client.query(`
-		// select filename from event_images where event_id = ${id}
-		// `)
-		// for (let eventImg of eventImgs.rows) {
-		// 	fs.unlink(`../uploads/${eventImg.filename}`, () => {
-		// 		console.log('events img deleted')
-		// 	})
-		// }
-
 		await client.query(`
     DELETE FROM user_favorite_messages WHERE message_id in (select id from messages WHERE event_id = ${id});
     DELETE FROM message_images WHERE message_id in (select id from messages WHERE event_id = ${id});
@@ -150,6 +132,7 @@ async function deleteEvents(req: Request, res: Response) {
     DELETE FROM favorite_events WHERE event_id = ${id};
     DELETE FROM events WHERE id = ${id};
     `)
+		deletedImg()
 		res.status(200).json({ message: 'Delete Events successfully' })
 		io.emit('cards-updated', { message: 'cards updated' })
 	} catch (error) {

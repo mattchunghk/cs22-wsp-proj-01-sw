@@ -42,7 +42,7 @@ app.use('/index', indexRoute)
 app.use('/', adminPageRoutes)
 
 fs.mkdirSync(uploadDir, { recursive: true })
-deletedImg() // delete Images not found in database
+// deletedImg() // delete Images not found in database
 declare module 'express-session' {
 	interface SessionData {
 		name?: string
@@ -69,7 +69,7 @@ const grantExpress = grant.express({
 	}
 })
 
-async function deletedImg() {
+export async function deletedImg() {
 	let dbFileNames: any = []
 
 	let eventImages = await client.query(`

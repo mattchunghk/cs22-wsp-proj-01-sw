@@ -1,6 +1,6 @@
 import express from 'express'
 import { Request, Response } from 'express'
-import { io } from '../app'
+import { deletedImg, io } from '../app'
 import { form } from '../utils/upload'
 import { client } from '../utils/db'
 import fs from 'fs'
@@ -9,7 +9,7 @@ export const messageRoutes = express.Router()
 //寫留言
 messageRoutes.post('/create/:id', (req: Request, res: Response) => {
 	const id = req.params.id
-	console.log(id)
+
 	try {
 		form.parse(req, async (err, fields, files) => {
 			let imageName: any = null
@@ -19,7 +19,7 @@ messageRoutes.post('/create/:id', (req: Request, res: Response) => {
 				/*sql*/ `INSERT INTO messages (heading,comment,user_id,event_id) VALUES ($1,$2,$3,$4) RETURNING id`,
 				[messageHeading, messageContent, req.session.userId, id]
 			)
-			console.log(messages_comment_result)
+
 			const messagesId = messages_comment_result.rows[0].id
 			// let file = Array.isArray(files.images_upload) ? files.images_upload[0] : files.images_upload;
 			let messages_images_result
@@ -41,17 +41,9 @@ messageRoutes.post('/create/:id', (req: Request, res: Response) => {
 					[imageName, messagesId]
 				)
 			}
-
-			console.log({
-				messagesId,
-				imageName,
-				messageHeading,
-				messageContent
-			})
+			console.log('Upload message success, MESSAGES_ID: ' + messagesId)
 			io.emit('new-message', { message: 'New Memo Added' })
 			// io.broadcast.emit('message', "this is a test");
-
-			console.log(messages_images_result?.rows)
 
 			res.status(200).send('Upload message success')
 			return
@@ -75,11 +67,7 @@ messageRoutes.get('/get/:id', async (req, res) => {
       where event_id = ${id}
       order by id desc;`)
 		const messages = messages_comment_result.rows
-		console.log(messages_comment_result.rows)
-		// console.log(messages_comment_result);
-		//拎 messages 加photos 兩個table合併
-		// const messages_comment_result = await client.query(/*sql*/'SELECT messages.*, message_images.filename from messages left join message_images on messages.id = message_images.message_id ORDER BY messages.id desc');
-		// const messages = messages_comment_result.rows
+
 		let targetId = 0
 		let newMessages = messages.map((msg, index) => {
 			if (targetId == msg.id) {
@@ -100,7 +88,7 @@ messageRoutes.get('/get/:id', async (req, res) => {
 		newMessages = newMessages.filter((msgObj) => {
 			return msgObj
 		})
-		// console.log(newMessages)
+
 		res.status(200).json(newMessages)
 		return
 	} catch (err) {
@@ -122,32 +110,14 @@ messageRoutes.get('/message_images/get', async (req, res) => {
 		return
 	}
 })
-//拎 like數
-messageRoutes.get('/message_like/get', async (req, res) => {
-	try {
-		let index = req.body.index
-		const messages_like_result = await client.query(
-			/*sql*/ `SELECT count(*) from user_favorite_messages WHERE message_id = 56`
-		)
-		console.log(messages_like_result)
-
-		res.status(200).send(messages_like_result.rows)
-		return
-	} catch (err) {
-		console.log(err)
-		res.status(404).send('Get Messages Like Fall')
-		return
-	}
-})
 
 //update message
 messageRoutes.put('/update', async (req, res) => {
 	try {
 		const messageCommentUpdata = req.body.messages_comment
-		// console.log(messageCommentUpdata);
+
 		let index = req.body.index
-		// console.log(index);
-		//check index 有冇野
+
 		if (!index || !Number(index)) {
 			res.status(400).json({ message: 'index is not a number' })
 			return
@@ -157,6 +127,7 @@ messageRoutes.put('/update', async (req, res) => {
 			messageCommentUpdata,
 			Number(index)
 		])
+		console.log('Update message success, MESSAGES_ID: ' + index)
 		res.status(200).send('success')
 
 		io.emit('new-message-update', { message: 'New message update' })
@@ -198,7 +169,7 @@ messageRoutes.delete('/delete', async (req, res) => {
 		await client.query('delete from messages where id = $1', [
 			Number(index)
 		])
-
+		deletedImg()
 		res.status(200).send('success')
 		io.emit('message-delete', { message: 'Message delete' })
 		return
@@ -230,10 +201,6 @@ messageRoutes.post('/like', async (req, res) => {
 			/*sql*/ `SELECT * FROM user_favorite_messages WHERE message_id=($1) and user_id=($2)`,
 			[Number(index), userId]
 		)
-
-		// let like_result = await client.query(/*sql*/`INSERT INTO user_favorite_messages (user_id,message_id) VALUES ($1,$2) RETURNING id`, [null, Number(index)]);
-		// // console.log(like_result.rowCount);
-		// let delete_like = await client.query('delete from user_favorite_messages where message_id = $1', [Number(index)]);
 
 		if (checkLikeResult.rowCount > 0) {
 			await client.query(
