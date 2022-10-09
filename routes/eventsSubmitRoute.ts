@@ -81,14 +81,20 @@ async function getSubmitData(req: Request, res: Response) {
 			'INSERT INTO event_images (filename,event_id) VALUES ($1,$2)',
 			[images1, eventId.rows[0].id]
 		)
-		await client.query(
-			'INSERT INTO event_images (filename,event_id) VALUES ($1,$2)',
-			[images2, eventId.rows[0].id]
-		)
-		await client.query(
-			'INSERT INTO event_images (filename,event_id) VALUES ($1,$2)',
-			[images3, eventId.rows[0].id]
-		)
+		if (images2) {
+			await client.query(
+				'INSERT INTO event_images (filename,event_id) VALUES ($1,$2)',
+				[images2, eventId.rows[0].id]
+			)
+		}
+
+		if (images3) {
+			await client.query(
+				'INSERT INTO event_images (filename,event_id) VALUES ($1,$2)',
+				[images3, eventId.rows[0].id]
+			)
+		}
+
 		await client.query(
 			'insert into event_participants (user_id, event_id) values ($1,$2)',
 			[req.session.userId, eventId.rows[0].id]
@@ -98,7 +104,9 @@ async function getSubmitData(req: Request, res: Response) {
 			message: 'Upload successful'
 		})
 		io.emit('cards-updated', { message: 'cards updated' })
+		return
 	} catch (error) {
 		res.status(404).send(error)
+		return
 	}
 }

@@ -22,25 +22,26 @@ messageRoutes.post('/create/:id', (req: Request, res: Response) => {
 
 			const messagesId = messages_comment_result.rows[0].id
 			// let file = Array.isArray(files.images_upload) ? files.images_upload[0] : files.images_upload;
-			let messages_images_result
-			if (Array.isArray(files.images_upload)) {
-				for (let i = 0; i < files.images_upload.length; i++) {
-					let file: any = files.images_upload[i].newFilename
+			if (files && files.images_upload) {
+				let images_upload: any[] = []
+
+				if (!Array.isArray(files.images_upload)) {
+					images_upload.push(files.images_upload)
+				} else {
+					images_upload = files.images_upload
+				}
+
+				for (let i = 0; i < images_upload.length; i++) {
+					let file: any = images_upload[i].newFilename
 					// console.log(files.images_upload[i].newFilename);
 					imageName = file ? file : null
-					messages_images_result = await client.query(
+					await client.query(
 						/*sql*/ `INSERT INTO message_images (filename,message_id) VALUES ($1,$2) RETURNING id`,
 						[imageName, messagesId]
 					)
 				}
-			} else if (files.images_upload) {
-				let file: any = files.images_upload.newFilename
-				imageName = file ? file : null
-				messages_images_result = await client.query(
-					/*sql*/ `INSERT INTO message_images (filename,message_id) VALUES ($1,$2) RETURNING id`,
-					[imageName, messagesId]
-				)
 			}
+
 			console.log('Upload message success, MESSAGES_ID: ' + messagesId)
 			io.emit('new-message', { message: 'New Memo Added' })
 			// io.broadcast.emit('message', "this is a test");

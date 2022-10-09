@@ -215,7 +215,8 @@ function goDetailPage(eventIndex) {
 // 	document.location.href = `/detail/detailPage/id/${eventIndex}`
 // }
 async function loginPage() {
-	window.location.href = '/user/login.html'
+	// window.location.href = '/loginPage/login.html'
+	window.location.href = '/loginPage/login.html'
 }
 
 async function userInfo() {
@@ -359,6 +360,12 @@ async function loadRegion(region) {
 				</div>`
 			}
 			$('#list .wrapper').html(indexHtml)
+		},
+		onclick: async () => {
+			console.log('onclick')
+			var messageBody = document.querySelector('#body')
+			messageBody.scrollTop =
+				messageBody.scrollHeight - messageBody.clientHeight
 		}
 	})
 }

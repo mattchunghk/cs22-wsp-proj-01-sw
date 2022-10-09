@@ -136,7 +136,7 @@ async function logout() {
 }
 
 async function loginPage() {
-	window.location.href = '/user/login.html'
+	window.location.href = '/loginPage/login.html'
 }
 async function goUserPage() {
 	window.location.href = '/user/userinfo.html'

@@ -11,7 +11,7 @@ export const adminPageRoutes = express.Router()
 adminPageRoutes.get('/user/admin', isAdmin, async (req, res) => {
 	try {
 		const admin_result = await client.query(
-			/*sql*/ 'select * from users order by username ;'
+			/*sql*/ `select * from users where id != ${req.session.userId} order by username;`
 		)
 		res.status(200).json(admin_result.rows)
 
@@ -26,7 +26,7 @@ adminPageRoutes.get('/user/admin', isAdmin, async (req, res) => {
 //改 user
 adminPageRoutes.put('/user/update', isAdmin, async (req, res) => {
 	try {
-		const userUpdata = req.body.isAdmin
+		const userUpdate = req.body.isAdmin
 		let index = req.body.index
 		// console.log(index);
 		//check index 有冇野
@@ -36,7 +36,7 @@ adminPageRoutes.put('/user/update', isAdmin, async (req, res) => {
 		}
 
 		await client.query(`update users set is_admin = $1 where id = $2`, [
-			userUpdata,
+			userUpdate,
 			Number(index)
 		])
 		res.status(200).send('success')

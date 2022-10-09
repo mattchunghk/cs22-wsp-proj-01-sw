@@ -16,13 +16,36 @@ userRoutes.get('/loginStatus', loginStatus)
 
 async function goLoginPage(req: express.Request, res: express.Response) {
 	// res.json(userResult.rows);
-	const dir = path.resolve('./loginPage/login.html')
+	const dir = path.join(__dirname, '../public/loginPage/login.html')
 	res.sendFile(dir)
 }
 
 async function registerPage(req: express.Request, res: express.Response) {
-	const dir = path.resolve('./registerPage/register.html')
+	const dir = path.resolve('./public/register/register.html')
+	console.log(dir)
 	res.sendFile(dir)
+}
+
+class MyError {
+	private message
+	constructor(message: string) {
+		this.message = message
+	}
+	getMessage(): string {
+		return this.message
+	}
+}
+
+class InternalError {
+	private message
+	constructor(message: string) {
+		// super(message)
+		this.message = message
+	}
+
+	getMessage(): string {
+		return this.message
+	}
 }
 
 async function register(req: express.Request, res: express.Response) {
@@ -32,17 +55,11 @@ async function register(req: express.Request, res: express.Response) {
 		const checkPassword = req.body.checkPassword
 
 		if (!username || !password) {
-			res.status(400).json({
-				message: 'Invalid username or password'
-			})
-			return
+			throw new InternalError('Invalid username or password')
 		}
 
 		if (password !== checkPassword) {
-			res.status(400).json({
-				message: 'password check failed'
-			})
-			return
+			throw new InternalError('password check not matching')
 		}
 
 		let userResult = await client.query(
@@ -50,20 +67,18 @@ async function register(req: express.Request, res: express.Response) {
 			[username]
 		)
 		let dbuser = userResult.rows[0]
-		console.log('dbuser =', dbuser)
 
 		if (dbuser) {
-			res.status(400).json({
-				message: 'Duplicate username'
-			})
-			return
+			throw new MyError('Duplicate username')
 		}
 
 		//check duplicates
 		//let xxx = await xxx
 		//use dbeaver to check
+		console.log(password)
 
-		let hashedPassword = await hashPassword(password)
+		let hashedPassword = await hashPassword(password.toString())
+
 		await client.query(
 			`insert into users (username,password,is_admin) values ($1, $2, $3)`,
 			[username, hashedPassword, false]
@@ -71,7 +86,14 @@ async function register(req: express.Request, res: express.Response) {
 		res.json({ message: 'User created' })
 	} catch (error) {
 		console.log(error)
-		res.status(500).json({ message: 'Internal Server Error' })
+
+		if (error instanceof InternalError) {
+			console.log(error.getMessage())
+			res.status(400).json({ message: 'InternalError' })
+		}
+		if (error instanceof MyError) {
+			res.status(500).json({ message: error.getMessage() })
+		}
 	}
 }
 
@@ -96,7 +118,7 @@ async function login(req: express.Request, res: express.Response) {
 
 	if (!dbuser) {
 		res.status(400).json({
-			message: 'Invalid username or password'
+			message: 'Account is not found.'
 		})
 		return
 	}
@@ -170,15 +192,28 @@ async function loginGoogle(req: express.Request, res: express.Response) {
 	}
 }
 
+// Option
+const logoutPromise = (req: express.Request) =>
+	new Promise((resolve, reject) => {
+		req.session.destroy(() => {
+			console.log(2)
+			resolve(true)
+		})
+	})
+
 async function logout(req: express.Request, res: express.Response) {
 	try {
-		req.session.destroy(() => {
-			console.log('user logged out')
-		})
-
+		// Option 1
+		await logoutPromise(req)
 		res.status(200).json({
 			message: 'Success logout'
 		})
+		// // Option 2
+		// req.session.destroy(() => {
+		// 	res.status(200).json({
+		// 		message: 'Success logout'
+		// 	})
+		// })
 	} catch (error) {
 		res.status(400).json({
 			message: 'logout error'
