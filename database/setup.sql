@@ -4,7 +4,7 @@ create TABLE users(
     password varchar(30) not null,
     is_admin boolean,
     created_at timestamp with time zone DEFAULT Now(),
-    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    updated_at timestamp with time zone DEFAULT current_timestamp
 );
 create TABLE events(
     id SERIAL PRIMARY KEY,
@@ -21,9 +21,6 @@ create TABLE events(
     is_luxury boolean,
     is_relax boolean,
     is_countryside boolean,
-    status text,
-    / / 'active',
-    'inactive' Foreign Key (user_id) references users(id),
     created_at timestamp with time zone DEFAULT Now(),
     updated_at timestamp with time zone DEFAULT Now()
 );
