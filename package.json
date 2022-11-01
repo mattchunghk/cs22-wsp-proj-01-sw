@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev app.ts",
+    "start": "ts-node-dev app.ts --downlevelIteration",
     "excel": "ts-node ./database/importExcel.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --progress --color --config  webpack.config.js --watch"

@@ -104,11 +104,11 @@ app.use(grantExpress as express.RequestHandler)
 
 app.use('/', express.static('public'))
 app.use('/asset', express.static('asset'))
-app.use('/submit', express.static('eventsForm'))
+app.use('/submit', express.static('ev`entsForm'))
 app.use('/detail', express.static('detailPage'))
 app.use('/user', express.static('loginPage'))
-app.use('/user', express.static('register'))
-app.use('/user', express.static('userInfo'))
+// app.use('/user', express.static('register'))
+// app.use('/user', express.static('userInfo'))
 app.use(express.static('uploads'))
 app.use(express.static('error'))
 
@@ -116,7 +116,7 @@ io.on('connection', function (socket) {
 	console.log('new socket')
 })
 
-const PORT = 8080
+const PORT = 8081
 server.listen(PORT, () => {
 	console.log(`Listening at http://localhost:${PORT}/`)
 })

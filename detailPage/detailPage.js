@@ -711,6 +711,7 @@ async function createMessages(event) {
 	const pathnames = window.location.pathname.split('/')
 	const pageId = pathnames[pathnames.length - 1]
 	const messageData = new FormData(event.currentTarget)
+	console.log(event.currentTarget)
 	console.log(messageData)
 
 	const res = await fetch(`/messages/create/${pageId}`, {
@@ -762,7 +763,7 @@ async function joinCount() {
 
 //? general function
 async function loginPage() {
-	window.location.href = '/user/login.html'
+	window.location.href = '/loginPage/login.html'
 }
 async function loadHeat() {
 	const pathnames = window.location.pathname.split('/')

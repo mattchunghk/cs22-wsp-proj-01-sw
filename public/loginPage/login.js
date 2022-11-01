@@ -45,7 +45,7 @@ async function login(event) {
 }
 
 function goSignUp() {
-	window.location.href = '/user/register.html'
+	window.location.href = '../register/register.html'
 }
 
 function backHome() {

@@ -1,20 +1,17 @@
 create TABLE users(
     id SERIAL PRIMARY key,
-    username varchar(255) not null,
-    password varchar(255) not null,
+    username varchar(50) not null,
+    password varchar(30) not null,
     is_admin boolean,
     created_at timestamp with time zone DEFAULT Now(),
-    updated_at timestamp with time zone DEFAULT Now()
+    updated_at timestamp with time zone DEFAULT current_timestamp
 );
 create TABLE events(
     id SERIAL PRIMARY KEY,
     user_id integer not null,
-    Foreign Key (user_id) references users(id),
     title text,
     country text,
     city text,
-    created_at timestamp with time zone DEFAULT Now(),
-    updated_at timestamp with time zone DEFAULT Now(),
     introduction text,
     budget integer,
     start_date date,
@@ -23,15 +20,17 @@ create TABLE events(
     is_sporty boolean,
     is_luxury boolean,
     is_relax boolean,
-    is_countryside boolean
+    is_countryside boolean,
+    created_at timestamp with time zone DEFAULT Now(),
+    updated_at timestamp with time zone DEFAULT Now()
 );
 create TABLE messages(
     id SERIAL PRIMARY KEY,
     heading text not null,
     comment text not null,
     user_id integer,
-    Foreign Key (user_id) references users(id),
     event_id integer,
+    Foreign Key (user_id) references users(id),
     Foreign Key (event_id) references events(id),
     created_at timestamp with time zone DEFAULT Now(),
     updated_at timestamp with time zone DEFAULT Now()

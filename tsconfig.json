@@ -15,5 +15,5 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": false
   },
-  "exclude": ["node_modules", "build", "scripts", "index.js"]
+  "exclude": ["node_modules", "build", "scripts", "index.js","*.js"]
 }
