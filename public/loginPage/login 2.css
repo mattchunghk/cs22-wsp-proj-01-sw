@@ -1,0 +1,105 @@
+::selection {
+    background-color: #FA4A60 !important;
+}
+
+.createForm-header {
+    background-color: #FA4A60;
+    height: 100px;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+}
+
+.logo-container {
+    display: flex;
+    cursor: pointer;
+}
+
+.fa-umbrella-beach {
+    color: white;
+    font-size: 4rem;
+    margin: 20px 10px 20px 20px;
+}
+
+.form-control {
+    border: 1px solid #FA4A60;
+    margin-bottom: 10px;
+}
+
+.logo-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 4rem;
+    color: white;
+    margin-top: 10px;
+}
+
+.login-text {
+    color: white;
+    text-align: center;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form-div {
+    background-color: #FA4A60;
+    width: 320px;
+    height: 500px;
+    margin-top: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #FA4A60;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px 1px rgba(54, 53, 53, 0.2);
+}
+
+.login-btn,
+.btn-success {
+    box-shadow: none;
+    margin-top: 20px;
+    background-color: white;
+    color: #FA4A60;
+    border: 1px solid #FA4A60;
+    width: 300px;
+}
+
+.btn-success {
+    position: relative;
+}
+
+.login-btn:hover,
+.login-btn:focus,
+.btn-success:focus,
+.btn-success:hover {
+    box-shadow: none;
+    outline: none !important;
+    color: #FA4A60;
+    background-color: #ffc6cd;
+    border: 1px solid #FA4A60;
+}
+
+.bi-google {
+    position: absolute;
+    left: 15px
+}
+
+.btn-primary,
+.btn-success {
+    --bs-btn-color: #FA4A60 !important;
+    --bs-btn-hover-color: #FA4A60 !important;
+    --bs-btn-hover-border-color: white !important;
+    --bs-btn-hover-bg: white !important;
+    --bs-btn-active-color: #FA4A60 !important;
+    --bs-btn-active-bg: white !important;
+    --bs-btn-active-border-color: white !important;
+    --bs-btn-focus-shadow-rgb: #FA4A60 !important;
+}
+
+.tidio-chat-iframe {
+    text-shadow: 2px 3px 4px rgb(46, 46, 46);
+}
