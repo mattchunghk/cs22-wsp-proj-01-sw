@@ -57,7 +57,7 @@ declare module 'express-session' {
 
 const grantExpress = grant.express({
 	defaults: {
-		origin: 'http://localhost:8080',
+		origin: 'http://localhost:8081',
 		transport: 'session',
 		state: true
 	},
@@ -104,7 +104,7 @@ app.use(grantExpress as express.RequestHandler)
 
 app.use('/', express.static('public'))
 app.use('/asset', express.static('asset'))
-app.use('/submit', express.static('ev`entsForm'))
+app.use('/submit', express.static('eventsForm'))
 app.use('/detail', express.static('detailPage'))
 app.use('/user', express.static('loginPage'))
 app.use('/user', express.static('register'))
