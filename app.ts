@@ -57,7 +57,7 @@ declare module 'express-session' {
 
 const grantExpress = grant.express({
 	defaults: {
-		origin: 'https://joinmego.mattchung.one',
+		origin: 'http://localhost:8081/user',
 		transport: 'session',
 		state: true
 	},
