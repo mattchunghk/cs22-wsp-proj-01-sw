@@ -1,7 +1,7 @@
 create TABLE users(
     id SERIAL PRIMARY key,
     username varchar(50) not null,
-    password varchar(30) not null,
+    password varchar(100) not null,
     is_admin boolean,
     created_at timestamp with time zone DEFAULT Now(),
     updated_at timestamp with time zone DEFAULT current_timestamp

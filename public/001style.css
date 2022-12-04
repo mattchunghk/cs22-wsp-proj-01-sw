@@ -12,9 +12,9 @@
 	--bs-btn-focus-shadow-rgb: #FA4A60 !important;
 }
 
-.header {
+/* .header {
 	padding: 30px 30px 0px 30px;
-}
+} */
 
 body {
 	margin-bottom: 50px
@@ -35,7 +35,8 @@ body {
 #fa-umbrella-beach-toplogo {
 	color: #fa4a60;
 	font-size: 3rem;
-	margin: 30px 10px 20px 20px;
+	padding-bottom: 10px;
+	/* margin: 30px 10px 20px 20px; */
 }
 
 .logo-container {
@@ -43,13 +44,21 @@ body {
 	cursor: pointer;
 	display: flex;
 	flex-direction: row;
+
+	align-items: center
 }
 
 .logo-title {
 	font-family: 'Baloo 2', cursive;
 	font-size: 4rem;
 	color: #fa4a60;
-	margin: 20px 10px 20px 0px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: flex-end;
+
+
+	/* margin: 20px 10px 20px 0px; */
 }
 
 .search-bar {
@@ -61,9 +70,18 @@ body {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
-	margin: 30px 10px 20px 20px;
+	align-items: flex-end;
+	/* margin: 30px 10px 20px 20px; */
 }
 
+
+
+.function-col {
+	display: flex;
+	padding-top: 20px;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
 
 .function-div {
 	display: flex;
@@ -71,6 +89,17 @@ body {
 	font-size: 20px;
 	margin: 20px 8px 0px 10px;
 }
+
+@media only screen and (max-width: 767px) {
+	.function-col {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		/* margin: 30px 10px 20px 20px; */
+	}
+}
+
 
 #header-icon {
 	margin-top: 5px;
